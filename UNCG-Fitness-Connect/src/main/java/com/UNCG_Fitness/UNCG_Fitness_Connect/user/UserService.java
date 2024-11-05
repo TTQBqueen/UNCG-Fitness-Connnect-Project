@@ -20,7 +20,6 @@ public class UserService {
         return repo.findAll();
     }
 
-
     /**
      * Save user entry.
      *
@@ -30,8 +29,31 @@ public class UserService {
         repo.save(user);
     }
 
-
+    /**
+     * Get user by Id.
+     *
+     * @return used fetched
+     */
     public Object getUserById(long id) {
         return repo.getReferenceById(id);
     }
+
+    /**
+     * Add a new User to the database.
+     *
+     * @param user
+     */
+
+    /**
+     * Update an existing User.
+     *
+     * @param user
+     */
+
+    /**
+     * Delete a unique User.
+     *
+     * @param user
+     */
+
 }
