@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class AppController {
 
-    @GetMapping({"", "/", "/home", "/index"})
+    @GetMapping({"", "/", "/home"})
     public String home() {
-        return "redirect:/class/all";
+        return "redirect:/classes/all";
     }
 
 }

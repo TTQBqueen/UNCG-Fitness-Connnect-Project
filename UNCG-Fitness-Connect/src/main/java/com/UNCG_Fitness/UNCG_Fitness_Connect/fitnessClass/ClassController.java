@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/class")
+@RequestMapping("/classes")
 public class ClassController {
 
     @Autowired
@@ -29,14 +29,14 @@ public String getAllClasses(Model model) {
 public String getClassesByUser(@PathVariable long userId,Model model) {
     model.addAttribute("classList", classService.getAllUserClasses(userId));
     model.addAttribute("title", "Your Classes: "+userId);
-    return "/Class/class-list";
+    return "/Class/inst_view";
 }
 //Class by ID
-    @GetMapping("/{id}")
-    public String getClassesById(@PathVariable int id, Model model) {
-        model.addAttribute("class", classService.getClassById(id));
-        model.addAttribute("title", "Class # "+id+" Details");
-        return "/Class/class-detail";
+    @GetMapping("/{classId}")
+    public String getClassesById(@PathVariable int classId, Model model) {
+        model.addAttribute("class", classService.getClassById(classId));
+        model.addAttribute("title", "Class # "+classId+" Details");
+        return "/Class/class-details";
     }
 
 //    Create Class

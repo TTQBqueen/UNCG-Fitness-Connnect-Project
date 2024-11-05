@@ -1,0 +1,112 @@
+
+.container {
+    padding: 20px;
+}
+
+
+.create-class {
+    display: block;
+    text-align: center;
+    background-color: #869de9;
+    color: white;
+    padding: 12px;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-bottom: 30px;
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    height: fit-content;
+    width: fit-content;
+}
+
+.create-class:hover {
+    background-color: #272855;
+}
+
+.class-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.class-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 30%;
+    margin-bottom: 20px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: auto;
+    min-width: 300px;
+}
+
+.class-card:hover {
+    transform: translateY(-5px);
+}
+
+.class-header {
+    padding: 15px;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    margin: 2%;
+}
+
+.class-header h3 {
+    margin: 0;
+    color: #333;
+}
+
+.toggle-info {
+    background-color: #f399a2;
+    font-size: large;
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 5%;
+}
+.toggle-info:hover {
+    background-color: #c8c5c5;
+
+}
+.class-details {
+    /* display: none; */
+    padding: 15px;
+}
+
+.class-details p {
+    margin: 10px 0;
+    color: #666;
+}
+
+.class-details span {
+    font-weight: bold;
+}
+
+/* New sections for reviews and signups */
+.reviews {
+    margin-top: 10px;
+}
+
+.reviews .rating {
+    color: gold;
+}
+
+.signups {
+    margin-top: 10px;
+}
+
+.expanded .class-details {
+    display: block;
+}

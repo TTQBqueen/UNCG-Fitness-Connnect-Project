@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link data-th-href="@{/Styles/template.css}" type="text/css" rel="stylesheet">
+    <link data-th-href="@{/Class/card.css}" type="text/css" rel="stylesheet">
+    <title>View Class</title>
+</head>
+<body>
+
+
+<!-- Header -->
+<div class="header">
+    <!-- Profile & Login Section -->
+    <div class="user-options">
+        <div id="profile-container"><a href="/Instructor/html_insc/profile_inc.html">Profile</a></div>
+        <div id="login-container"><a href="/index.html">Sign Out</a></div>
+    </div>
+    <!-- Logo Section -->
+    <h2 class="logo">Spartan Motion</h2>
+
+    <!-- Search Section -->
+    <div class="search-container">
+        <form >
+            <input type="text" placeholder="Search.." name="search">
+            <button type="submit"><i class="fa fa-search">Search</i></button>
+        </form>
+    </div>
+</div>
+
+
+
+
+<!-- All the column sections -->
+<div class="row">
+
+
+    <!-- Navigation column -->
+
+    <div id="nav" class="column_side">
+
+
+
+        <!-- Navigation Menu -->
+        <ul id="links">
+            <li><a href="/Instructor/html_insc/instructor_home.html">Home</a></li>
+            <li><a href="/Instructor/html_insc/overview.html">Classes</a></li>
+            <li><a href="/Instructor/html_insc/create_class.html">Create</a></li>
+        </ul>
+    </div>
+
+
+
+    <!-- Middle Section -->
+    <div class="column_middle">
+        <h1> Class Editor</h1>
+        <div id = "text">
+
+            <!-- CONTENT -->
+            <!--Bottom  Section  -->
+            <h1 data-th-text="${class.title}"> Swimming</h1>
+            <p data-th-text="${class.details}">fun and free swimming group lessons</p>
+            <div class="the_class-details">
+                <p data-th-text="${class.instructorName}"><span>Instructor:</span> Emily Davis</p>
+                <p><span>Duration:</span> 50 minutes</p>
+                <p data-th-text="${class.level}"><span>Level:</span> Beginner</p>
+
+
+                <div class="signups">
+                    <p><span>People Signed Up:</span> 18</p>
+
+                </div>
+
+                <div class="reviews">
+                    <p><span>Reviews:</span></p>
+                    <p><span class="rating">★★★★★</span> - "Loved the intensity!"</p>
+                    <p><span class="rating">★★★★☆</span> - "Really pushed me, great class."</p>
+                </div>
+                <div class ="class_buttton">
+                    <button id = "edit" >save</button>
+                    <button id = "delete" >delete</button>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!-- Footer -->
+
+<footer>
+    <div class="footer">
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h3>About Us</h3>
+                <p>We are dedicated to providing the best services and products for our customers. Stay connected for updates and special offers.</p>
+            </div>
+
+            <div class="footer-section links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section contact">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-phone"></i> +1 (234) 567-890</p>
+                <p><i class="fas fa-envelope"></i> info@example.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> 1234 Street Name, City, Country</p>
+            </div>
+
+            <div class="footer-section social">
+                <h3>Follow Us</h3>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 Your Website Name. All Rights Reserved.</p>
+        </div>
+    </div>
+</footer>
+
+</body>
+<style>
+    .column_middle{
+        width: 100%;
+      margin-right: 5%;
+    }
+</style>
+</html>
