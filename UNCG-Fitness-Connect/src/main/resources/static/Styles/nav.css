@@ -1,0 +1,290 @@
+
+
+    /* FOOTER */
+  footer {
+    /* background-image: linear-gradient(to bottom, #272855 , #5054B9); */
+    background-color: #333;
+    color: white;
+    padding: 20px 0;
+    margin-top: 2%;
+    height: fit-content;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.footer-section {
+    flex: 1;
+    padding: 20px;
+}
+
+.footer-section h3 {
+    margin-bottom: 15px;
+    color: #5054B9;
+}
+
+.footer-section p, .footer-section ul, .footer-section a {
+    color: white;
+    line-height: 1.6;
+}
+
+.footer-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+    text-decoration: none;
+    color: white;
+    transition: color 0.3s;
+}
+
+.footer-section ul li a:hover {
+    color: #f7c5cf;
+}
+
+.social a {
+    margin-right: 10px;
+    color: white;
+    font-size: 1.5em;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.social a:hover {
+    color: #5054B9;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding: 10px;
+    background-color: #5054B9;
+}
+
+.footer-bottom p {
+    margin: 0;
+}
+
+footer{
+    margin: 1%;
+}
+
+
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color:#F5F7FA;
+  }
+
+
+/* HEADER SECTION */
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 40px;
+        background-image: linear-gradient(to right, #272855 , #5054B9);
+        color: #F5F7FA;
+        font-family: 'Corben', Georgia, Times, serif;
+        box-shadow: 5px 10px 18px #888;
+        margin: 1%;
+    }
+
+    /* Logo Section */
+    .logo {
+        flex: 1;
+        font-size: 40px;
+        text-align: center;
+        color: #F5F7FA;
+    }
+
+    /* User Options (Profile & Signout) */
+    .user-options {
+        display: flex;
+        gap: 15px;
+    }
+
+    #profile-container, #login-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #profile-container a, #login-container a {
+        color: #F5F7FA;
+        text-decoration: none;
+        font-size: 18px;
+        padding: 10px;
+        background-color: #5e6098;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    #profile-container a:hover, #login-container a:hover{
+        background-color: #869De9;
+        transform: translateY(-3px);
+    }
+
+    /* Search Container */
+    .search-container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+    }
+
+    .search-container input[type="text"] {
+        padding: 8px;
+        border-radius: 5px;
+        border: none;
+        width: 200px;
+    }
+
+    .search-container button {
+        padding: 8px 15px;
+        border: none;
+        color: #272855;
+        font-size: 16px;
+        border-radius: 5px;
+        margin-left: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .search-container button:hover {
+        transform: translateY(-3px);
+        background-color: #869De9;
+    }
+
+/* COLUMNS */
+
+    /* Container for flexboxes */
+    .row {
+        display: -webkit-flex;
+        display: flex;
+    }
+
+    /* Create three unequal columns that sits next to each other */
+    .column {
+        padding: 10px;
+        margin-top: 2%;
+
+    }
+
+    .column.side.middle {
+        height: fit-content;
+        width: 100%;
+
+    }
+
+    /* Left column */
+    .column.side {
+
+        margin-left: 2%;
+        -webkit-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+    }
+
+    /* Middle column */
+    .column.middle {
+        border-radius: 50%;
+        -webkit-flex: 2;
+        -ms-flex: 2;
+        flex: 2;
+        margin-left: 2%;
+        margin-right: 5%;
+
+    }
+
+#text{
+    font-family: 'Corben', Georgia, Times, serif;
+    width: 100%;
+    font-size: 20px;
+    padding: 10px;
+    text-align: center;
+    border-radius: 10px;
+    margin: 10px;
+    box-shadow: 0 4px 8px 0 #272855;
+    background-image: none;
+}
+
+h1{
+
+    text-align: center;
+    margin-top: 20px;
+    color: #272855;
+    font-family: 'Corben', Georgia, Times, serif;
+}
+
+/* CONTENT */
+
+  /* Bottom column */
+  .column.bottom
+    {
+
+        padding: 20px;
+        text-align: left;
+        font-size: 20px;
+        background-size: cover;
+        margin-left: 2%;
+        margin-right: 2%;
+        height: 500px;  /* Change this to get more height */
+    }
+
+/* Navigation */
+
+    #nav{
+        font-size: larger;
+        padding: 10px;
+        width: 10%;
+        height: fit-content;
+        padding: 15px;
+
+
+    }
+   #nav_button{
+        font-family: 'Corben', Georgia, Times, serif;
+        color: white;
+        padding: 15px;
+        margin: 5px;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    #nav ul {
+    list-style-type: none;
+    margin: 5%;
+    padding: 0;
+    text-align: center;
+    }
+
+    #links li a {
+        color: white;
+        text-decoration: none;
+        padding: 10px;
+        display: block;
+        background-color: #272855;
+        border-radius: 5px;
+        position: center;
+        margin: 10%;
+        width: 100px;
+    }
+
+    /* Change the link color on hover */
+    #links li a:hover {
+        transform: translateY(-3px);
+        background-color: #869De9;
+        color: white;
+    }
+.column_middle{
+    margin: 5%;
+}

@@ -1,0 +1,201 @@
+<!--Landing page for all users-->
+<!DOCTYPE html>
+<!--need this to get the java-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+
+    <link rel="stylesheet" type="text/css" href="../../style/nav.css">
+    <link data-th-href="@{/Styles/template.css}" type="text/css" rel="stylesheet">
+    <link data-th-href="@{/Class/card.css}" type="text/css" rel="stylesheet">
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Spartan Motion Instructor</title>
+
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+    <!-- Profile & Login Section -->
+    <div class="user-options">
+        <div id="profile-container"><a href="/Instructor/html_insc/profile_inc.html">Profile</a></div>
+        <div id="login-container"><a href="/index.html">Sign Out</a></div>
+    </div>
+    <!-- Logo Section -->
+    <h2 class="logo">Spartan Motion</h2>
+
+    <!-- Search Section -->
+    <div class="search-container">
+        <form >
+            <input type="text" placeholder="Search.." name="search">
+            <button type="submit"><i class="fa fa-search">Search</i></button>
+        </form>
+    </div>
+</div>
+
+
+
+
+<!-- All the column sections -->
+<div class="row">
+
+
+    <!-- Navigation column -->
+
+    <div id="nav" class="column_side">
+
+        <!-- Navigation Menu -->
+        <ul id="links">
+            <li><a href="/Class/class-list">Home</a></li>
+            <li><a href="/Class/">Classes</a></li>
+<!--            <li th:each="class : ${classList}">-->
+<!--                <a th:href="@{/classes/{id}(id=${class.userid})}" th:text="${class.title}">Class Title</a>-->
+<!--            </li>-->
+
+            <li><a href="/Instructor/html_insc/create_class.html">Create</a></li>
+        </ul>
+    </div>
+
+
+
+    <!-- Middle Section -->
+    <div class="column middle">
+
+        <h1> Welcome to Spartan Motion INSTRUCTOR</h1>
+        <div id = "text">
+            <p>Here you can view and create classes for UNCG students. </p>
+            <p>Click on the "Classes" tab to view all the classes available for students to sign up for.</p>
+            <p>Click on the "Create" tab to create a new class for students to sign up for.</p>
+        </div>
+        <h1>Newly Added UNCG Group Fitness Classes</h1>
+    </div>
+</div>
+
+<!-- CONTENT -->
+<!--Bottom  Section  -->
+
+<div class="container">
+
+    <div class="class-card">
+        <img src="/Instructor/img_insc/yoga_1.jpeg" alt="Yoga Class" class="class-img">
+        <div class="class-details">
+            <h3>Yoga</h3>
+            <p>Date: 10/10/2024</p>
+            <p>Duration: 60 mins</p>
+            <p>Level: Beginner</p>
+            <p class="instructor">Instructor: Sarah Johnson</p>
+            <a href="#" class="btn-signup">Sign Up</a>
+        </div>
+    </div>
+
+    <div class="class-card">
+        <img src="/Instructor/img_insc/gym_guy.jpg" alt="Spin Class" class="class-img">
+        <div class="class-details">
+            <h3>Spin Class</h3>
+            <p>Date: 10/10/2024</p>
+            <p>Duration: 45 mins</p>
+            <p>Level: Intermediate</p>
+            <p class="instructor">Instructor: James Wilson</p>
+            <a href="#" class="btn-signup">Sign Up</a>
+        </div>
+    </div>
+
+    <div class="class-card">
+        <img src="/Instructor/img_insc/kickbox_1.jpeg" alt="Kickboxing Class" class="class-img">
+        <div class="class-details">
+            <h3>Kickboxing</h3>
+            <p>Date: 10/10/2024</p>
+            <p>Duration: 50 mins</p>
+            <p>Level: Advanced</p>
+            <p class="instructor">Instructor: Emily Davis</p>
+            <a href="#" class="btn-signup">Sign Up</a>
+        </div>
+    </div>
+
+    <div class="class-card">
+        <img src="/Instructor/img_insc/kickbox_1.jpeg" alt="Kickboxing Class" class="class-img">
+        <div class="class-details">
+            <h3>Kickboxing</h3>
+            <p>Date: 10/10/2024</p>
+            <p>Duration: 50 mins</p>
+            <p>Level: Advanced</p>
+            <p class="instructor">Instructor: Emily Davis</p>
+            <a href="#" class="btn-signup">Sign Up</a>
+        </div>
+    </div>
+
+    <div th:each="class: ${classList}" class="class-card">
+        <img th:src="@{class.imagePath}" alt="Class Image" class="class-img">
+        <div class="class-details">
+            <h3 th:text="${class.title}"></h3>
+            <p th:text="'Date: ' + ${class.date}"></p>
+            <p th:text="'Time : ' + ${class.startTime} +'-'+ ${class.endTime} "></p>
+            <p th:text="'Level: ' + ${class.level}"></p>
+            <p class="instructor" th:text="'Instructor: ' + ${class.instructorName}"></p>
+            <a href="#" class="btn-signup">Sign Up</a>
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+<!-- Footer -->
+
+<footer>
+    <div class="footer">
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h3>About Us</h3>
+                <p>We are dedicated to providing the best services and products for our customers. Stay connected for updates and special offers.</p>
+            </div>
+
+            <div class="footer-section links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section contact">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-phone"></i> +1 (234) 567-890</p>
+                <p><i class="fas fa-envelope"></i> info@example.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> 1234 Street Name, City, Country</p>
+            </div>
+
+            <div class="footer-section social">
+                <h3>Follow Us</h3>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 Your Website Name. All Rights Reserved.</p>
+        </div>
+    </div>
+</footer>
+
+
+</body>
+</html>

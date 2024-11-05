@@ -1,0 +1,156 @@
+<!--Landing page for all users-->
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+xmlns:form="http://www.w3.org/1999/xhtml">
+<head>
+
+<!--    <link rel="stylesheet" type="text/css" href="/style/nav.css">-->
+<!--    <link rel="stylesheet" type="text/css" href="/style/slidshow.css">-->
+    <link data-th-href="@{/style/nav.css}" type="text/css" rel="stylesheet">
+    <link data-th-href="@{/style/nav.css}" type="text/css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+    <!-- Profile & Login Section -->
+    <div class="user-options">
+        <div id="profile-container"><a href="/index.html">Home</a></div>
+        <div id="login-container"><a href="/services/login.html">Login</a></div>
+        <div id="login-container"><a href="/Class/class-list.html">CLass</a></div>
+    </div>
+    <!-- Logo Section -->
+    <h2 class="logo">Spartan Motion</h2>
+
+    <!-- Search Section -->
+    <div class="search-container">
+        <form >
+            <input type="text" placeholder="Search.." name="search">
+            <button type="submit"><i class="fa fa-search">Search</i></button>
+        </form>
+    </div>
+</div>
+
+
+
+
+<!-- All the column sections -->
+<div class="row">
+
+
+    <!-- Navigation column -->
+
+    <div id="nav" class="column_side">
+
+        <!-- Navigation Menu -->
+        <ul id="links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="privacypolicy.html">Privacy Policy</a></li>
+        </ul>
+    </div>
+
+
+
+    <!-- Middle Section -->
+    <div class="column_middle">
+        <div id = "text">
+
+            <h1> Welcome to Spartan Motion</h1>
+            <p> Spartan Motion is a platform that allows users to track their physical activity and set goals for themselves. Users can track their progress and see how they are improving over time. </p>
+            <p> Users can also connect with other users and see how they are doing. </p>
+            <p><a href="/services/signup.html">Sign up</a> to train like a Spartan today! </p>
+        </div>
+    </div>
+
+</div>
+
+<!-- CONTENT -->
+<!--Bottom  Section  -->
+<!-- Image Section -->
+<div class="image_container">
+    <!-- Display multiple images at once -->
+    <img src="/image/gym_girl1.jpeg" alt="Image 1">
+    <img src="/image/gym_girl2.jpeg" alt="Image 2">
+    <img src="/image/gym_guy.jpg" alt="Image 3">
+    <img src="/image/gym_person.jpg" alt="Image 4">
+</div>
+
+<!-- Footer -->
+
+<footer>
+    <div class="footer">
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h3>About Us</h3>
+                <p>We are dedicated to providing the best services and products for our customers. Stay connected for updates and special offers.</p>
+            </div>
+
+            <div class="footer-section links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="privacypolicy.html">Privacy Policy</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section contact">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-phone"></i> +1 (234) 567-890</p>
+                <p><i class="fas fa-envelope"></i> info@example.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> 1234 Street Name, City, Country</p>
+            </div>
+
+            <div class="footer-section social">
+                <h3>Follow Us</h3>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 Your Website Name. All Rights Reserved.</p>
+        </div>
+    </div>
+</footer>
+
+
+</body>
+<style>
+    /* Image Container */
+.image_container {
+    display: grid; /* Use grid layout */
+    grid-template-columns: repeat(4, 1fr); /* Create 4 equal columns */
+    width: 100%; /* Full width */
+    height: 500px; /* Fixed height */
+    gap: 10px; /* Space between images */
+    overflow: hidden; /* Hide any overflow */
+    margin: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 5px;
+}
+
+/* Image Styling */
+.image_container img {
+    width: 100%; /* Full width of grid cell */
+    height: 100%; /* Full height of grid cell */
+    object-fit: cover; /* Ensure image covers the entire space */
+    border-radius: 10px;
+}
+
+</style>
+
+</html>
+
+

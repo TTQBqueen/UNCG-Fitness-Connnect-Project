@@ -1,0 +1,74 @@
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+
+}
+h1{
+    text-align: center;
+    margin-top: 20px;
+    color: #272855;
+}
+
+.class-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 20%;
+    height: 300px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    padding: 10px;
+    height: fit-content;
+    padding: 5px;
+}
+
+.class-card:hover {
+    transform: translateY(-10px);
+}
+
+.class-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.class-details {
+    padding: 20px;
+}
+
+.class-details h3 {
+    margin: 0 0 10px;
+    color: #333;
+    font-size: 22px;
+}
+
+.class-details p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #272855;
+}
+
+.class-details .instructor {
+    font-weight: bold;
+    color: #333;
+}
+
+.btn-signup {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #869De9;
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.btn-signup:hover {
+    background-color: #272855;
+}
