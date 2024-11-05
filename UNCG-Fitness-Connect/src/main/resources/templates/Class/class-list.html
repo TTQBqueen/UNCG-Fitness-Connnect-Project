@@ -5,7 +5,6 @@
 
 <head>
 
-    <link rel="stylesheet" type="text/css" href="../../style/nav.css">
     <link data-th-href="@{/Styles/template.css}" type="text/css" rel="stylesheet">
     <link data-th-href="@{/Class/card.css}" type="text/css" rel="stylesheet">
 
@@ -22,7 +21,7 @@
 <div class="header">
     <!-- Profile & Login Section -->
     <div class="user-options">
-        <div id="profile-container"><a href="/Instructor/html_insc/profile_inc.html">Profile</a></div>
+        <div id="profile-container"><a href="/Views/prfoile.html">Profile</a></div>
         <div id="login-container"><a href="/index.html">Sign Out</a></div>
     </div>
     <!-- Logo Section -->
@@ -50,7 +49,7 @@
 
         <!-- Navigation Menu -->
         <ul id="links">
-            <li><a href="/Class/class-list">Home</a></li>
+            <li><a href="/class/all">Home</a></li>
             <li><a href="/Class/">Classes</a></li>
 <!--            <li th:each="class : ${classList}">-->
 <!--                <a th:href="@{/classes/{id}(id=${class.userid})}" th:text="${class.title}">Class Title</a>-->
@@ -79,55 +78,6 @@
 <!--Bottom  Section  -->
 
 <div class="container">
-
-    <div class="class-card">
-        <img src="/Instructor/img_insc/yoga_1.jpeg" alt="Yoga Class" class="class-img">
-        <div class="class-details">
-            <h3>Yoga</h3>
-            <p>Date: 10/10/2024</p>
-            <p>Duration: 60 mins</p>
-            <p>Level: Beginner</p>
-            <p class="instructor">Instructor: Sarah Johnson</p>
-            <a href="#" class="btn-signup">Sign Up</a>
-        </div>
-    </div>
-
-    <div class="class-card">
-        <img src="/Instructor/img_insc/gym_guy.jpg" alt="Spin Class" class="class-img">
-        <div class="class-details">
-            <h3>Spin Class</h3>
-            <p>Date: 10/10/2024</p>
-            <p>Duration: 45 mins</p>
-            <p>Level: Intermediate</p>
-            <p class="instructor">Instructor: James Wilson</p>
-            <a href="#" class="btn-signup">Sign Up</a>
-        </div>
-    </div>
-
-    <div class="class-card">
-        <img src="/Instructor/img_insc/kickbox_1.jpeg" alt="Kickboxing Class" class="class-img">
-        <div class="class-details">
-            <h3>Kickboxing</h3>
-            <p>Date: 10/10/2024</p>
-            <p>Duration: 50 mins</p>
-            <p>Level: Advanced</p>
-            <p class="instructor">Instructor: Emily Davis</p>
-            <a href="#" class="btn-signup">Sign Up</a>
-        </div>
-    </div>
-
-    <div class="class-card">
-        <img src="/Instructor/img_insc/kickbox_1.jpeg" alt="Kickboxing Class" class="class-img">
-        <div class="class-details">
-            <h3>Kickboxing</h3>
-            <p>Date: 10/10/2024</p>
-            <p>Duration: 50 mins</p>
-            <p>Level: Advanced</p>
-            <p class="instructor">Instructor: Emily Davis</p>
-            <a href="#" class="btn-signup">Sign Up</a>
-        </div>
-    </div>
-
     <div th:each="class: ${classList}" class="class-card">
         <img th:src="@{class.imagePath}" alt="Class Image" class="class-img">
         <div class="class-details">
@@ -140,15 +90,6 @@
         </div>
 
     </div>
-
-
-
-
-
-
-
-
-
 
 
 
@@ -199,3 +140,56 @@
 
 </body>
 </html>
+
+
+
+
+<!--These are hared code class that are not need just have for reference-->
+
+<!--<div class="class-card">-->
+<!--    <img src="/Instructor/img_insc/yoga_1.jpeg" alt="Yoga Class" class="class-img">-->
+<!--    <div class="class-details">-->
+<!--        <h3>Yoga</h3>-->
+<!--        <p>Date: 10/10/2024</p>-->
+<!--        <p>Duration: 60 mins</p>-->
+<!--        <p>Level: Beginner</p>-->
+<!--        <p class="instructor">Instructor: Sarah Johnson</p>-->
+<!--        <a href="#" class="btn-signup">Sign Up</a>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<div class="class-card">-->
+<!--    <img src="/Instructor/img_insc/gym_guy.jpg" alt="Spin Class" class="class-img">-->
+<!--    <div class="class-details">-->
+<!--        <h3>Spin Class</h3>-->
+<!--        <p>Date: 10/10/2024</p>-->
+<!--        <p>Duration: 45 mins</p>-->
+<!--        <p>Level: Intermediate</p>-->
+<!--        <p class="instructor">Instructor: James Wilson</p>-->
+<!--        <a href="#" class="btn-signup">Sign Up</a>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<div class="class-card">-->
+<!--    <img src="/Instructor/img_insc/kickbox_1.jpeg" alt="Kickboxing Class" class="class-img">-->
+<!--    <div class="class-details">-->
+<!--        <h3>Kickboxing</h3>-->
+<!--        <p>Date: 10/10/2024</p>-->
+<!--        <p>Duration: 50 mins</p>-->
+<!--        <p>Level: Advanced</p>-->
+<!--        <p class="instructor">Instructor: Emily Davis</p>-->
+<!--        <a href="#" class="btn-signup">Sign Up</a>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<div class="class-card">-->
+<!--    <img src="/Instructor/img_insc/kickbox_1.jpeg" alt="Kickboxing Class" class="class-img">-->
+<!--    <div class="class-details">-->
+<!--        <h3>Kickboxing</h3>-->
+<!--        <p>Date: 10/10/2024</p>-->
+<!--        <p>Duration: 50 mins</p>-->
+<!--        <p>Level: Advanced</p>-->
+<!--        <p class="instructor">Instructor: Emily Davis</p>-->
+<!--        <a href="#" class="btn-signup">Sign Up</a>-->
+<!--    </div>-->
+<!--</div>-->
