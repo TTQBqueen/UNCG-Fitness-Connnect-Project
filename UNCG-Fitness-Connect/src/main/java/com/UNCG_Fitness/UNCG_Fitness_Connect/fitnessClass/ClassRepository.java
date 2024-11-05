@@ -1,4 +1,4 @@
-package com.UNCG_Fitness.UNCG_Fitness_Connect.Instructor;
+package com.UNCG_Fitness.UNCG_Fitness_Connect.fitnessClass;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

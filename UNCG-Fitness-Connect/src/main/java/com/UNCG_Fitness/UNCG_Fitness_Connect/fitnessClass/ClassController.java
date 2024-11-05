@@ -1,6 +1,5 @@
-package com.UNCG_Fitness.UNCG_Fitness_Connect.Instructor;
+package com.UNCG_Fitness.UNCG_Fitness_Connect.fitnessClass;
 
-import com.UNCG_Fitness.UNCG_Fitness_Connect.user.User;
 import com.UNCG_Fitness.UNCG_Fitness_Connect.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

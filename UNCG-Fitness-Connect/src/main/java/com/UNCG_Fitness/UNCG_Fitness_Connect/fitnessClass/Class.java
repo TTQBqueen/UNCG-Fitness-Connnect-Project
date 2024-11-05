@@ -1,6 +1,5 @@
-package com.UNCG_Fitness.UNCG_Fitness_Connect.Instructor;
+package com.UNCG_Fitness.UNCG_Fitness_Connect.fitnessClass;
 
-import com.UNCG_Fitness.UNCG_Fitness_Connect.contants.Status;
 import com.UNCG_Fitness.UNCG_Fitness_Connect.user.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.*;

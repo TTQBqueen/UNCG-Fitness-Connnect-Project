@@ -1,4 +1,4 @@
-package com.UNCG_Fitness.UNCG_Fitness_Connect.Instructor;
+package com.UNCG_Fitness.UNCG_Fitness_Connect.fitnessClass;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
