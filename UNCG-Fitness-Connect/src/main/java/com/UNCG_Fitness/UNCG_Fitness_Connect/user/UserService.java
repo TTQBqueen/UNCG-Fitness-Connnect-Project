@@ -12,48 +12,51 @@ public class UserService {
     UserRepository repo;
 
     /**
-     * Get all users
+     * Fetch all Users.
      *
-     * @return the list of users.
+     * @return the list of all Users.
      */
     public List<User> getAllUsers() {
         return repo.findAll();
     }
 
     /**
-     * Save user entry.
+     * Fetch a unique User.
      *
-     * @param user
-     */
-    public void saveUser(User user) {
-        repo.save(user);
-    }
-
-    /**
-     * Get user by Id.
+     * @param userId the unique User Id.
+     * @return a unique Student object.
      *
-     * @return used fetched
      */
-    public Object getUserById(long id) {
-        return repo.getReferenceById(id);
+    public User getUserById(long userId) {
+        return repo.findById(userId).orElse(null);
     }
 
     /**
      * Add a new User to the database.
      *
-     * @param user
+     * @param user the new User to add
      */
+    public void addNewUser(User user) {
+        repo.save(user);
+    }
 
     /**
      * Update an existing User.
      *
-     * @param user
+     * @param userId the unique User Id.
+     * @param user   the new User details.
      */
+    public void updateUser(long userId, User user) {
+        repo.save(user);
+    }
 
     /**
      * Delete a unique User.
      *
-     * @param user
+     * @param userId the unique User Id.
      */
+    public void deleteUserById(long userId) {
+        repo.deleteById(userId);
+    }
 
 }

@@ -69,11 +69,11 @@ public class User {
     public User() {
     }
 
-    public long getId() {
+    public long getUserId() {
         return userId;
     }
 
-    public void setId(long userId) {
+    public void setUserId(long userId) {
         this.userId = userId;
     }
 
