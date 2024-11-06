@@ -66,13 +66,6 @@ public class ClassService {
         return "Class removed !! " + classId;
     }
 
-    public void createNewGoal(Class class) {
-        if (classRepository.existsById(class.getClassId())) {
-
-        }
-        class = new Class(class.getUser(), class.getTitle(), class.getDetails(), class.getTargetDate());
-        classRepository.save(class);
-    }
 
 
 }
