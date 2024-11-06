@@ -25,7 +25,7 @@ public String getAllClasses(Model model) {
 }
 
 //    Look up User class based on ID
-@GetMapping("/user/{userId}")
+@GetMapping("/INSTRUCTOR/{userId}")
 public String getClassesByUser(@PathVariable long userId,Model model) {
     model.addAttribute("classList", classService.getAllUserClasses(userId));
     model.addAttribute("title", "Your Classes: "+userId);
