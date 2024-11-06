@@ -20,7 +20,7 @@ public class ClassController {
 
     @Autowired
 //    SubscriptionService subsService;
-    
+
 //    All Class
     /**
      * Get a list of all Classes .
@@ -48,6 +48,7 @@ public class ClassController {
 
 
 //    IDK if it work until i get the user table
+
     /**
      * Get a specific class by Id.
      * http://localhost:8080/classes/2
@@ -59,9 +60,6 @@ public class ClassController {
     public List<Class> getClassesByCreatorId(@PathVariable int creatorId) {
         return classService.getClassesByCreatorId(creatorId);
     }
-
-
-
 
 
     /**
@@ -119,13 +117,13 @@ public class ClassController {
      * http://localhost:8080/Classes/update/2 --data '{
      * "classId": 1, "title": "cat", "ScientificName": "Felion", "Classification": "manmmal", "Habitat": "outside" , "Description": "this is a cat" }'
      *
-     * @param classId the unique Class Id.
+     * @param classId      the unique Class Id.
      * @param fitnessClass the new update Class details.
      * @return the updated Class object.
      */
     @PutMapping("/update/{classId}")
     public Class updateClass(@PathVariable int classId, @RequestBody Class fitnessClass) {
-        classService.updateClass(classId,fitnessClass);
+        classService.updateClass(classId, fitnessClass);
         return classService.getClassById(classId);
     }
 
@@ -142,3 +140,4 @@ public class ClassController {
         return classService.getAllClasses();
     }
 
+}
