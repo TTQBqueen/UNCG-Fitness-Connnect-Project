@@ -2,12 +2,11 @@ package com.UNCG_Fitness.UNCG_Fitness_Connect.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/users")
 public class UserController {
 
@@ -64,12 +63,12 @@ public class UserController {
     }
 
     /**
-     * Update an existing Student object.
-     * http://localhost:8080/students/update/{userId}
+     * Update an existing User object.
+     * http://localhost:8080/users/update/{userId}
      *
-     * @param userId the unique Student Id.
-     * @param user   the new update Student details.
-     * @return the updated Student object.
+     * @param userId the unique User Id.
+     * @param user   the new update User details.
+     * @return the updated User object.
      */
     @PutMapping("/update/{userId}")
     public User updateUser(@PathVariable int userId, @RequestBody User user) {
