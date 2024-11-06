@@ -28,20 +28,15 @@ public class SubscriptionService {
         return subscribedRepository.findAll();
     }
 
-    public Subscription getSubscriptionById(long subs_id) {
+    public Subscription getSubscriptionById(int subs_id) {
         return subscribedRepository.getReferenceById(subs_id);
     }
 
-    public List<Subscription> getSubscriptionByClassId(long classId) {
+    public List<Subscription> getSubscriptionByClassId(int classId) {
         return subscribedRepository.getSubscriptionsByClass(classId);
     }
 
-    public Subscription getOneSubscription(long classId, long userId) {
-        return subscribedRepository.getOneSubscription(classId, userId);
-    }
-
-
-    public void addNewSubscription(long classId, long userId) {
+    public void addNewSubscription(int classId, int userId) {
         Subscription sub = new Subscription(userRepository.getReferenceById(userId),
                 classRepository.getReferenceById(classId));
 
@@ -52,7 +47,7 @@ public class SubscriptionService {
         return subscribedRepository.getSubscriptionsByUser(userId);
     }
 
-    public void removeSub(long subs_id) {
+    public void removeSub(int subs_id) {
         subscribedRepository.deleteById(subs_id);
     }
 

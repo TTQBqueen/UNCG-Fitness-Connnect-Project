@@ -18,6 +18,20 @@ public class SubscriptionController {
     UserService userService;
 
     /**
+     * Create a new Subscription for a Class.
+     * http://localhost:8080/subs/new/{classId} --data '{ "classId": }'
+     *
+     * @param classId the class for the subscription to be assigned to
+     * @return the updated list of subscriptions.
+     */
+    @PostMapping("/add/{classId}")
+    public List<Subscription> createNewSubscription(@PathVariable int classId, @PathVariable int userId) {
+        subscriptionService.addNewSubscription(classId, userId);
+        return subscriptionService.getSubscriptionByClassId(classId);
+    }
+
+
+    /**
      * Get a list of all Subscriptions in the database.
      * http://localhost:8080/subs/all
      *
@@ -36,22 +50,8 @@ public class SubscriptionController {
      * @return One Subscription object.
      */
     @GetMapping("/{subs_id}")
-    public int getSubs(@PathVariable int subs_id) {
+    public Subscription getSubs(@PathVariable int subs_id) {
         return subscriptionService.getSubscriptionById(subs_id);
-    }
-
-    /**
-     * Create a new Subscription for a Class.
-     * http://localhost:8080/subs/new/{classId} --data '{ "classId": }'
-     *
-     * @param classId the class for the subscription to be assigned to
-     * @param subscription new subscription object.
-     * @return the updated list of subscriptions.
-     */
-    @PostMapping("/new/{classId}")
-    public String createNewSubscription(@PathVariable int classId, @RequestBody Subscription subscription) {
-        SubscriptionService.addNewSubscription(classId, subscription);
-            return SubscriptionService.getAllSubscriptions();
     }
 
     /**
@@ -61,10 +61,9 @@ public class SubscriptionController {
      * @param userId the unique Id for a subscription.
      * @return all Users connected to the subs_id.
      */
-    @GetMapping("/subs/{userId}")
+    @GetMapping("/{userId}")
     public List<Subscription> getUsersBySubs(@RequestParam int userId) {
-        subscriptionService.getSubscriptionsByUser(userId);
-            return subscriptionService.getSubscriptionById(userId);
+            return subscriptionService.getSubscriptionsByUser(userId);
     }
 
     //delete function
