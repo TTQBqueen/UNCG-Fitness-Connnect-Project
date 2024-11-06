@@ -39,8 +39,22 @@ public String getClassesByUser(@PathVariable long userId,Model model) {
         return "/Class/class-details";
     }
 
+
 //    Create Class
-    
+@PostMapping("/new")
+public String addNewAnimal(@ModelAttribute("class") Class class) {
+    classService.addNewClass(class);
+    return "redirect:/class/all";
+}
+
+    @GetMapping("/createForm")
+    public String showCreateForm(Model model) {
+        Class class = new Class();
+        //attach user list
+        model.addAttribute("classList", classService.getAllClasses());
+        return "/class-create";
+    }
+
 //    Update
     
 //    Delete
