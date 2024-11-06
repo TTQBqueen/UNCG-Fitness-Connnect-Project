@@ -63,9 +63,17 @@ public class SubscriptionController {
      */
     @GetMapping("/{userId}")
     public List<Subscription> getUsersBySubs(@RequestParam int userId) {
-            return subscriptionService.getSubscriptionsByUser(userId);
+        return subscriptionService.getSubscriptionsByUser(userId);
     }
 
-    //delete function
-
+    /**
+     * Remove subscription by Subscription Id.
+     * http://localhost:8080/subs/all/{subs_id}
+     *
+     * @param subs_id the unique Id for a subscription.
+     */
+    @GetMapping("/remove/{subs_id}")
+    public void removeSub(@PathVariable int subs_id) {
+        subscriptionService.removeSub(subs_id);
+    }
 }
