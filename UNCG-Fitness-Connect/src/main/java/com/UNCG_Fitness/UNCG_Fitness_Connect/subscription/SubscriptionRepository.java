@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface SubscriptionRepository extends JpaRepository<Subscription, Long> {
+public interface SubscriptionRepository extends JpaRepository<Subscription, Integer> {
     @Query(value = "select * from subscriptions where user_id = :userId", nativeQuery = true)
     List<Subscription> getSubscriptionsByUser(int userId);
 
