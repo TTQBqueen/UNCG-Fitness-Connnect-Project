@@ -72,7 +72,7 @@ public class SubscriptionController {
      *
      * @param subs_id the unique Id for a subscription.
      */
-    @GetMapping("/remove/{subs_id}")
+    @DeleteMapping("/remove/{subs_id}")
     public void removeSub(@PathVariable int subs_id) {
         subscriptionService.removeSub(subs_id);
     }

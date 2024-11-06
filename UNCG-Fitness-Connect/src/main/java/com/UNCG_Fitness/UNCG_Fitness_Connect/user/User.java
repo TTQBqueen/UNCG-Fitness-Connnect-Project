@@ -10,7 +10,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long userId;
+    private int userId;
 
     private String userName;
 
@@ -26,11 +26,11 @@ public class User {
 
     private Boolean flagged;
 
-    public long getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(long userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
@@ -99,7 +99,7 @@ public class User {
         this.role = role;
     }
 
-    public User(long userId, String userName, String email, String firstName, String lastName, Date joinDate, String role) {
+    public User(int userId, String userName, String email, String firstName, String lastName, Date joinDate, String role) {
         this.userId = userId;
         this.userName = userName;
         this.email = email;

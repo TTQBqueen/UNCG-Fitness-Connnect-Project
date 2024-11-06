@@ -5,50 +5,75 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/users")
 public class UserController {
 
     @Autowired
-    private UserService service;
+    private UserService userService;
 
-    // create user
+    /**
+     * Create a new User entry.
+     * http://localhost:8080/users/new
+     *
+     * @param user the new User object.
+     * @return the updated list of Users.
+     */
     @PostMapping("/new")
-    public String createUser(@ModelAttribute("user") User user) {
-        service.saveUser(user);
-        return "redirect:/users/all";
+    public List<User> addNewUser(@RequestBody User user) {
+        userService.addNewUser(user);
+        return userService.getAllUsers();
     }
 
+    /**
+     * Get a list of all Users in the database.
+     * http://localhost:8080/users/all
+     *
+     * @return a list of User objects.
+     */
     @GetMapping("/all")
-    public String getAllUsers(Model model,
-                              @RequestParam(name = "continue",required = false) String cont) {
-        model.addAttribute("userList", service.getAllUsers());
-        model.addAttribute("title", "User List");
-        return "user/user-list";
+    public List<User> getAllUsers() {
+        return userService.getAllUsers();
     }
 
-    @GetMapping("/{id}")
-    public String getUser(@PathVariable long id, Model model) {
-        model.addAttribute("user", service.getUserById(id));
-        model.addAttribute("title", "User Details:"+id);
-        return "user/user-details";
+    /**
+     * Get a specific User by Id.
+     * http://localhost:8080/users/{userId}
+     *
+     * @param userId the unique Id for a User.
+     * @return One User object.
+     */
+    @GetMapping("/{userId}")
+    public User getUser(@PathVariable int userId) {
+        return userService.getUserById(userId);
     }
 
-    @GetMapping("/delete/{id}")
-    public String deleteUser(@PathVariable long id, Model model) {
-        service.deleteUser(id);
-        return "redirect:/users/all";
+    /**
+     * Delete a User object.
+     * http://localhost:8080/users/delete/{userId}
+     *
+     * @param userId the unique User Id.
+     * @return the updated list of Users.
+     */
+    @DeleteMapping("/delete/{userId}")
+    public List<User> deleteUser(@PathVariable int userId) {
+        userService.deleteUser(userId);
+        return userService.getAllUsers();
     }
 
-    @GetMapping("/update/{id}")
-    public String updateUserForm(@PathVariable long id, Model model) {
-        model.addAttribute("user", service.getUser(id));
-        return "user/user-update";
-    }
-
-    @PostMapping("/update")
-    public String updateUser(User user) {
-        service.updateUser(user);
-        return "redirect:/users/"+user.getUserId();
+    /**
+     * Update an existing Student object.
+     * http://localhost:8080/students/update/{userId}
+     *
+     * @param userId the unique Student Id.
+     * @param user   the new update Student details.
+     * @return the updated Student object.
+     */
+    @PutMapping("/update/{userId}")
+    public User updateUser(@PathVariable int userId, @RequestBody User user) {
+        userService.updateUser(userId, user);
+        return userService.getUserById(userId);
     }
 }

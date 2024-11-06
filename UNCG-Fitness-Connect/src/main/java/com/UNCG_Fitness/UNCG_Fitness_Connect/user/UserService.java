@@ -9,7 +9,7 @@ import java.util.List;
 public class UserService {
 
     @Autowired
-    UserRepository repo;
+    UserRepository userRepository;
 
     /**
      * Get all Users.
@@ -17,7 +17,7 @@ public class UserService {
      * @return the list of all Users.
      */
     public List<User> getAllUsers() {
-        return repo.findAll();
+        return userRepository.findAll();
     }
 
     /**
@@ -27,19 +27,8 @@ public class UserService {
      * @return a unique Student object.
      *
      */
-    public User getUserById(long id) {
-        return repo.getReferenceById(id);
-    }
-
-    /**
-     * Find one user by ID.
-     *
-     * @param id the unique User Id.
-     * @return a unique Student object.
-     *
-     */
-    public User getUser(long id) {
-        return repo.getReferenceById(id);
+    public User getUserById(int id) {
+        return userRepository.getReferenceById(id);
     }
 
     /**
@@ -48,7 +37,7 @@ public class UserService {
      * @param user the new User to add
      */
     public void addNewUser(User user) {
-        repo.save(user);
+        userRepository.save(user);
     }
 
     /**
@@ -56,8 +45,10 @@ public class UserService {
      *
      * @param user the User details.
      */
-    public void updateUser(User user) {
-        repo.save(user);
+    public void updateUser(int userId, User user) {
+        User existing = getUserById(userId);
+
+        userRepository.save(user);
     }
 
     /**
@@ -66,7 +57,7 @@ public class UserService {
      * @param user the User details.
      */
     public void saveUser(User user) {
-        repo.save(user);
+        userRepository.save(user);
     }
 
     /**
@@ -74,8 +65,8 @@ public class UserService {
      *
      * @param userId the unique User Id.
      */
-    public void deleteUser(long userId) {
-        repo.deleteById(userId);
+    public void deleteUser(int userId) {
+        userRepository.deleteById(userId);
     }
 
     /**
@@ -84,7 +75,7 @@ public class UserService {
      * @param userName the unique User username
      */
     public User getUserByUserName(String userName) {
-        return repo.findByUserName(userName).orElseThrow();
+        return userRepository.findByUserName(userName).orElseThrow();
     }
 
 }
