@@ -28,7 +28,10 @@ public class Class {
 
     @Column(nullable = false)
     private Date date;
-    
+
+    @Column(nullable = false)
+    private int duration;
+
     @Column(nullable = false)
     private LocalTime startTime;
 
@@ -46,6 +49,9 @@ public class Class {
 
     @Column(nullable = false)
     private String imagePath;
+
+    @Column(nullable = false)
+    private Boolean flag;
 
 
     public Class(User user) {
@@ -65,34 +71,15 @@ public class Class {
         this.status = status;
         this.imagePath = imagePath;
     }
-//
-//    public Class(User user, @NonNull String title, @NonNull Date date, @NonNull LocalTime startTime, @NonNull LocalTime endTime, String instructorName, String details) {
-//        this.user = user;
-//        this.title = title;
-//        this.date = date;
-//        this.details = details;
-//        this.startTime = startTime;
-//        this.endTime = endTime;
-//        this.instructorName = instructorName;
-//        this.status = Status.Canceled;
-//    }
 
-//    public Class(Class class) {
-//        this.classId = class.getClassId();
-//        this.user = class.getUser();
-//        this.title = class.getTitle();
-//        this.details = class.getDetails();
-//        this.date = date;
-//        this.startTime = class.getStartTime();
-//        this.endTime = class.getEndTime();
-//        this.level = class.getLevel();
-//        this.instructorName = class.getInstructorName();
-//        this.status = class.getStatus();
-//    }
-public Class(){}
+public Class(){
+
+}
     public int getClassId() {
+
         return classId;
     }
+
 
     public void setClassId(int classId) {
         this.classId = classId;
