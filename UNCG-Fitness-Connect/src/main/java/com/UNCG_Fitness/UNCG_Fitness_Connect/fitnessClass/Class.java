@@ -29,6 +29,11 @@ public class Class {
     @Column(nullable = false)
     private Date date;
 
+
+    @Column(nullable = false)
+    private int duration;
+
+
     @Column(nullable = false)
     private LocalTime startTime;
 
@@ -48,7 +53,12 @@ public class Class {
     private String imagePath;
 
     @Column(nullable = false)
+
     private Date createdAt;
+
+    private Boolean flag;
+
+
 
     @Column(nullable = false)
     private Date updatedAt;
@@ -57,11 +67,19 @@ public class Class {
         this.title = title;
     }
 
-    public Class() {
+
+public Class(){
+
+}
+    public int getClassId() {
+
+        return classId;
     }
 
-    public int getClassId() {return classId;}
-    public void setClassId(int classId) {this.classId = classId;}
+
+    public void setClassId(int classId) {
+        this.classId = classId;
+    }
 
     public User getCreator() {
         return creator;

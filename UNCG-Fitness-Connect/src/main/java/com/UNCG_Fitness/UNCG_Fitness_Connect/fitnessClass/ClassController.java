@@ -142,4 +142,3 @@ public class ClassController {
         return classService.getAllClasses();
     }
 
-}
