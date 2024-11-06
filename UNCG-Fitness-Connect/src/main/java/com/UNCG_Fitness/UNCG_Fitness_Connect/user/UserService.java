@@ -28,7 +28,8 @@ public class UserService {
      *
      */
     public User getUserById(int id) {
-        return userRepository.getReferenceById(id);
+        //return userRepository.getReferenceById(id);
+        return userRepository.findById(id).orElse(null);
     }
 
     /**
@@ -45,9 +46,7 @@ public class UserService {
      *
      * @param user the User details.
      */
-    public void updateUser(int userId, User user) {
-        User existing = getUserById(userId);
-
+    public void updateUser(int id, User user) {
         userRepository.save(user);
     }
 
