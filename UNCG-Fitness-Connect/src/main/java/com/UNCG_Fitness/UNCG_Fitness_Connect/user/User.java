@@ -2,9 +2,7 @@ package com.UNCG_Fitness.UNCG_Fitness_Connect.user;
 
 import jakarta.persistence.*;
 
-import java.time.LocalTime;
 import java.util.Date;
-import org.springframework.lang.NonNull;
 
 @Entity
 @Table(name = "users")
@@ -14,60 +12,19 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long userId;
 
-    @Column(nullable = false)
     private String userName;
 
-    @Column(nullable = false)
     private String email;
 
-    @Column(nullable = false)
     private String firstName;
 
-    @Column(nullable = false)
     private String lastName;
 
-    private String profilePic_url;
+    private Date joinDate;
 
-    private String bio;
-
-    @Column(nullable = false)
-    private LocalTime joinDate;
-
-    @Column(nullable = false)
     private String role;
 
-    @Column(nullable = false)
     private Boolean flagged;
-
-    public User(String userName, String email, String firstName, String lastName, String profilePic_url, String bio, LocalTime joinDate, String role) {
-        this.userName = userName;
-        this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.profilePic_url = profilePic_url;
-        this.bio = bio;
-        this.joinDate = joinDate;
-        this.role = role;
-    }
-
-    public User(long userId, String userName, String email, String firstName, String lastName, String profilePic_url, String bio, LocalTime joinDate, String role) {
-        this.userId = userId;
-        this.userName = userName;
-        this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.profilePic_url = profilePic_url;
-        this.bio = bio;
-        this.joinDate = joinDate;
-        this.role = role;
-    }
-
-    public User(long userId) {
-        this.userId = userId;
-    }
-
-    public User() {
-    }
 
     public long getUserId() {
         return userId;
@@ -109,28 +66,12 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getProfilePic_url() {
-        return profilePic_url;
-    }
-
-    public void setProfilePic_url(String profilePic_url) {
-        this.profilePic_url = profilePic_url;
-    }
-
-    public String getBio() {
-        return bio;
-    }
-
-    public void bio(String bio) {
-        this.bio = bio;
-    }
-
-    public LocalTime getJoinDate() {
+    public Date getJoinDate() {
         return joinDate;
     }
 
-    public void setJoinDate(String joinDate) {
-        this.joinDate = LocalTime.parse(joinDate);
+    public void setJoinDate(Date joinDate) {
+        this.joinDate = joinDate;
     }
 
     public String getRole() {
@@ -148,4 +89,27 @@ public class User {
     public void setFlagged(Boolean flagged) {
         this.flagged = flagged;
     }
+
+    public User(String userName, String email, String firstName, String lastName, Date joinDate, String role) {
+        this.userName = userName;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.joinDate = joinDate;
+        this.role = role;
+    }
+
+    public User(long userId, String userName, String email, String firstName, String lastName, Date joinDate, String role) {
+        this.userId = userId;
+        this.userName = userName;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.joinDate = joinDate;
+        this.role = role;
+    }
+
+    public User() {
+    }
+
 }
