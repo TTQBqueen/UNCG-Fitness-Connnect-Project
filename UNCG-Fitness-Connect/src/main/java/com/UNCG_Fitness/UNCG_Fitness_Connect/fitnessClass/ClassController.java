@@ -18,9 +18,6 @@ public class ClassController {
     @Autowired
     UserService userService;
 
-    @Autowired
-//    SubscriptionService subsService;
-
 //    All Class
     /**
      * Get a list of all Classes .
@@ -47,14 +44,14 @@ public class ClassController {
     }
 
 
-//    IDK if it work until i get the user table
+//    IDK if it works until I get the user table
 
     /**
-     * Get a specific class by Id.
+     * Get a specific class by creatorId.
      * http://localhost:8080/classes/2
      *
-     * @param creatorId the unique Id for a Classes.
-     * @return A list of Classes objects matching the creatorId key..
+     * @param creatorId the unique creatorId for a Classes.
+     * @return A list of Classes objects matching the creatorId key.
      */
     @GetMapping("INSTRUCTOR/{creatorId}")
     public List<Class> getClassesByCreatorId(@PathVariable int creatorId) {
@@ -128,11 +125,11 @@ public class ClassController {
     }
 
     /**
-     * Delete a Animal object.
+     * Delete a Class object.
      * http://localhost:8080/classes/delete/2
      *
-     * @param classId the unique Animal Id.
-     * @return the updated list of Animals.
+     * @param classId the unique Class Id.
+     * @return the updated list of Classes.
      */
     @DeleteMapping("/delete/{classId}")
     public List<Class> deleteClassById(@PathVariable int classId) {

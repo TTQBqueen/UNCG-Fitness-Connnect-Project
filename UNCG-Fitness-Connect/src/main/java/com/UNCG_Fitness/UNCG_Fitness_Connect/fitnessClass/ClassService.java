@@ -35,7 +35,7 @@ public class ClassService {
         return classRepository.getClassesByLevel(level);
     }
 
-    // Fetch an class by part of a title
+    // Fetch a class by part of a title
     public List<Class> getClassesByTitleContains(String title) {
         return classRepository.findByTitleContainingIgnoreCase(title);
     }
@@ -47,7 +47,7 @@ public class ClassService {
     public Class updateClass(int classID, Class fitnessClass) {
         Class existingClass = getClassById(classID);
         existingClass.setTitle(fitnessClass.getTitle());
-        existingClass.setCreator(fitnessClass.getCreator());
+        existingClass.setCreatorId(fitnessClass.getCreatorId());
         existingClass.setDetails(fitnessClass.getDetails());
         existingClass.setDate(fitnessClass.getDate());
         existingClass.setStartTime(fitnessClass.getStartTime());

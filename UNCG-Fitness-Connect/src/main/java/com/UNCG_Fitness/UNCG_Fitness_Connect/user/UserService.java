@@ -1,5 +1,6 @@
 package com.UNCG_Fitness.UNCG_Fitness_Connect.user;
 
+import com.UNCG_Fitness.UNCG_Fitness_Connect.fitnessClass.Class;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,82 +10,85 @@ import java.util.List;
 public class UserService {
 
     @Autowired
-    UserRepository repo;
+    UserRepository userRepository;
+
 
     /**
-     * Get all Users.
+     * Fetch all Users.
      *
      * @return the list of all Users.
      */
     public List<User> getAllUsers() {
-        return repo.findAll();
+        return userRepository.findAll();
     }
 
     /**
-     * Find one user by ID.
+     * Fetch a unique user.
      *
-     * @param id the unique User Id.
-     * @return a unique Student object.
-     *
+     * @param userId the unique User id.
+     * @return a unique User object.
      */
-    public User getUserById(long id) {
-        return repo.getReferenceById(id);
+    public User getUserById(long userId) {
+        return userRepository.findById(userId).orElse(null);
     }
 
     /**
-     * Find one user by ID.
+     * Fetch all users whose major matches the search term.
      *
-     * @param id the unique User Id.
-     * @return a unique Student object.
-     *
+     * @param role the search key.
+     * @return the list of matching Users.
      */
-    public User getUser(long id) {
-        return repo.getReferenceById(id);
+    public List<User> getUsersByRole(String role) {
+        return userRepository.getUsersByRole(role);
+    }
+
+
+    /**
+     * Fetch all users with a GPA above a threshold.
+     *
+     * @param userName the threshold
+     * @return the list of matching Users
+     */
+    public List<User> getUsersByUserName(String userName) {
+        return userRepository.getUsersByUserName(userName);
     }
 
     /**
      * Add a new User to the database.
      *
-     * @param user the new User to add
+     * @param user the new User to add.
      */
     public void addNewUser(User user) {
-        repo.save(user);
+        userRepository.save(user);
     }
 
     /**
      * Update an existing User.
      *
-     * @param user the User details.
+     * @param userId the unique User Id.
+     * @param user   the new User details.
      */
-    public void updateUser(User user) {
-        repo.save(user);
+    public void updateUser(int userId, User user) {
+        User existing = getUserById(userId);
+        existing.setUserName(user.getUserName());
+        existing.setEmail(user.getEmail());
+        existing.setFirstName(user.getFirstName());
+        existing.setLastName(user.getLastName());
+        existing.setJoinDate(user.getJoinDate());
+        existing.setRole(user.getRole());
+        existing.setFlagged(user.getFlagged());
+
+        userRepository.save(existing);
     }
 
     /**
-     * Save user entry.
-     *
-     * @param user the User details.
-     */
-    public void saveUser(User user) {
-        repo.save(user);
-    }
-
-    /**
-     * Delete a unique User by Id.
+     * Delete a unique User.
      *
      * @param userId the unique User Id.
      */
-    public void deleteUser(long userId) {
-        repo.deleteById(userId);
+    public void deleteUserById(long userId) {
+        userRepository.deleteById(userId);
     }
 
-    /**
-     * Get a User by username
-     *
-     * @param userName the unique User username
-     */
-    public User getUserByUserName(String userName) {
-        return repo.findByUserName(userName).orElseThrow();
-    }
 
 }
