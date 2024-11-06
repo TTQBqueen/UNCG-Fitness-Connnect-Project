@@ -17,8 +17,8 @@ public class Class {
     private int classId;
 
     @ManyToOne
-    @JoinColumn(name = "userID")
-    private User user;
+    @JoinColumn(name = "creatorId")
+    private User creator;
 
     @Column(nullable = false)
     private String title;
@@ -29,8 +29,10 @@ public class Class {
     @Column(nullable = false)
     private Date date;
 
+
     @Column(nullable = false)
     private int duration;
+
 
     @Column(nullable = false)
     private LocalTime startTime;
@@ -51,26 +53,20 @@ public class Class {
     private String imagePath;
 
     @Column(nullable = false)
+
+    private Date createdAt;
+
     private Boolean flag;
 
 
-    public Class(User user) {
-        this.user = new User();
+
+    @Column(nullable = false)
+    private Date updatedAt;
+
+    public Class(String title) {
+        this.title = title;
     }
 
-    public Class(int classId, User user, @NonNull String title, String details, @NonNull Date date, @NonNull LocalTime startTime, @NonNull LocalTime endTime, String level, String instructorName, @NonNull String status, String imagePath) {
-        this.classId = classId;
-        this.user = user;
-        this.title = title;
-        this.details = details;
-        this.date = date;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.level = level;
-        this.instructorName = instructorName;
-        this.status = status;
-        this.imagePath = imagePath;
-    }
 
 public Class(){
 
@@ -85,15 +81,14 @@ public Class(){
         this.classId = classId;
     }
 
-    public User getUser() {
-        return user;
+    public User getCreator() {
+        return creator;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setCreator(User creator) {
+        this.creator = creator;
     }
 
-    @NonNull
     public String getTitle() {
         return title;
     }
@@ -109,30 +104,28 @@ public Class(){
     public void setDetails(String details) {
         this.details = details;
     }
-    @NonNull
+
     public Date getDate() {
         return date;
     }
 
-    public void setDate(@NonNull Date date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
-    @NonNull
     public LocalTime getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(@NonNull LocalTime startTime) {
+    public void setStartTime(LocalTime startTime) {
         this.startTime = startTime;
     }
 
-    @NonNull
     public LocalTime getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(@NonNull LocalTime endTime) {
+    public void setEndTime(LocalTime endTime) {
         this.endTime = endTime;
     }
 
@@ -144,21 +137,19 @@ public Class(){
         this.level = level;
     }
 
-    @NonNull
     public String getInstructorName() {
         return instructorName;
     }
 
-    public void setInstructorName(@NonNull String instructorName) {
+    public void setInstructorName(String instructorName) {
         this.instructorName = instructorName;
     }
 
-    @NonNull
     public String getStatus() {
         return status;
     }
 
-    public void setStatus(@NonNull String status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -170,11 +161,70 @@ public Class(){
         this.imagePath = imagePath;
     }
 
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+
+
+//For the Instructor
+    public Class(User creator, String title, String details, Date date, LocalTime startTime, LocalTime endTime, String level, String instructorName, String status, String imagePath, Date createdAt, Date updatedAt) {
+        this.creator = creator;
+        this.title = title;
+        this.details = details;
+        this.date = date;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.level = level;
+        this.instructorName = instructorName;
+        this.status = status;
+        this.imagePath = imagePath;
+        this.createdAt=createdAt;
+        this.updatedAt=updatedAt;
+    }
+
+//    For admin
+public Class(String title, String details, Date date, LocalTime startTime, LocalTime endTime, String level, String instructorName, String status, String imagePath) {
+    this.title = title;
+    this.details = details;
+    this.date = date;
+    this.startTime = startTime;
+    this.endTime = endTime;
+    this.level = level;
+    this.instructorName = instructorName;
+    this.status = status;
+    this.imagePath = imagePath;
+}
+
+//short information
+public Class(String title, String details, Date date, String level, String instructorName, String status, Date createdAt) {
+    this.title = title;
+    this.details = details;
+    this.date = date;
+    this.level = level;
+    this.instructorName = instructorName;
+    this.status = status;
+    this.createdAt=createdAt;
+}
+
+
     @Override
     public String toString() {
         return "Class{" +
                 "classId=" + classId +
-                ", user=" + user +
+                ", user=" + creator +
                 ", title='" + title + '\'' +
                 ", details='" + details + '\'' +
                 ", startTime=" + startTime +
