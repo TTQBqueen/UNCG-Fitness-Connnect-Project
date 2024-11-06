@@ -10,7 +10,7 @@ public class Subscription {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private int subs_id;
 
     @ManyToOne
     @JoinColumn(name = "userId")
@@ -20,8 +20,8 @@ public class Subscription {
     @JoinColumn(name = "classId")
     private Class fitnessClass;
 
-    public Subscription(long id, User user, Class fitnessClass) {
-        this.id = id;
+    public Subscription(int subs_id, User user, Class fitnessClass) {
+        this.subs_id = subs_id;
         this.user = user;
         this.fitnessClass = fitnessClass;
     }
@@ -34,12 +34,12 @@ public class Subscription {
     public Subscription() {
     }
 
-    public long getId() {
-        return id;
+    public int getId() {
+        return subs_id;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setId(int subs_id) {
+        this.subs_id = subs_id;
     }
 
     public User getUser() {
