@@ -17,7 +17,7 @@ public class Class {
     private int classId;
 
     @ManyToOne
-    @JoinColumn(name = "creator_id")
+    @JoinColumn(name = "creatorid")
     private User creator;
 
     @Column(nullable = false)
@@ -68,9 +68,9 @@ public class Class {
     }
 
 
-public Class(){
+    public Class(){
 
-}
+    }
     public int getClassId() {
 
         return classId;
@@ -179,7 +179,7 @@ public Class(){
 
 
 
-//For the Instructor
+    //For the Instructor
     public Class(User creator, String title, String details, Date date, LocalTime startTime, LocalTime endTime, String level, String instructorName, String status, String imagePath, Date createdAt, Date updatedAt) {
         this.creator = creator;
         this.title = title;
@@ -195,29 +195,29 @@ public Class(){
         this.updatedAt=updatedAt;
     }
 
-//    For admin
-public Class(String title, String details, Date date, LocalTime startTime, LocalTime endTime, String level, String instructorName, String status, String imagePath) {
-    this.title = title;
-    this.details = details;
-    this.date = date;
-    this.startTime = startTime;
-    this.endTime = endTime;
-    this.level = level;
-    this.instructorName = instructorName;
-    this.status = status;
-    this.imagePath = imagePath;
-}
+    //    For admin
+    public Class(String title, String details, Date date, LocalTime startTime, LocalTime endTime, String level, String instructorName, String status, String imagePath) {
+        this.title = title;
+        this.details = details;
+        this.date = date;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.level = level;
+        this.instructorName = instructorName;
+        this.status = status;
+        this.imagePath = imagePath;
+    }
 
-//short information
-public Class(String title, String details, Date date, String level, String instructorName, String status, Date createdAt) {
-    this.title = title;
-    this.details = details;
-    this.date = date;
-    this.level = level;
-    this.instructorName = instructorName;
-    this.status = status;
-    this.createdAt=createdAt;
-}
+    //short information
+    public Class(String title, String details, Date date, String level, String instructorName, String status, Date createdAt) {
+        this.title = title;
+        this.details = details;
+        this.date = date;
+        this.level = level;
+        this.instructorName = instructorName;
+        this.status = status;
+        this.createdAt=createdAt;
+    }
 
 
     @Override
