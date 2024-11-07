@@ -8,7 +8,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long userId;
+    private int userId;
     private String userName;
     private String email;
     private String role;
@@ -19,20 +19,14 @@ public class User {
         this.role = role;
     }
 
-    public User(long userId, String userName, String email, String role) {
+    public User(int userId, String userName, String email, String role) {
         this.userId = userId;
         this.userName = userName;
         this.email = email;
         this.role = role;
     }
 
-    public User(long userId, String userName, String role) {
-        this.userId = userId;
-        this.userName = userName;
-        this.role = role;
-    }
-
-    public User(long userId) {
+    public User(int userId) {
         this.userId = userId;
     }
 
@@ -43,7 +37,7 @@ public class User {
         return userId;
     }
 
-    public void setId(long userId) {
+    public void setId(int userId) {
         this.userId = userId;
     }
 
