@@ -14,14 +14,16 @@ public class Admin {
     private String username;  
     
     @Column(nullable = false)  
-    private String role;
+    private String role; 
+
+    private String accountStatus;
 
     public Admin() { 
     } 
     public Admin(int adminId, String username, String role) {  
         this.adminId = adminId;
         this.username = username;
-        this.role = role;
+        this.role = role; 
     } 
     
     public int getAdminId() {
@@ -41,5 +43,5 @@ public class Admin {
     } 
     public void setRole(String role) {
         this.role = role; 
-    } 
+    }  
 }
