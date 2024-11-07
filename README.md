@@ -14,10 +14,10 @@ The motivation for this app is to encourage UNCG students to improve their healt
 The UNCG Group Fitness App will help to solve the issue of availability issues. Therefore, individuals will now have the opportunity to schedule a fitness course based on their availability, intensity of the fitness course, and comfortability with the instructor.
 ﻿
 ---
-### User
+## User
 
 > A user is a person who signs up for the site and can enroll in classes. Each user can have one of three roles: Customer, Instructor, or Admin.
---- 
+
 
 POST
 
@@ -86,7 +86,6 @@ update user by id
 ### Subscriptions
 
 > Connect a user to a class like a signup
----
 
 POST
 
@@ -125,11 +124,10 @@ DELETE
 delete a subscription by subs_id
 
 ---
----
-### Classes
+## Classes
 
 > The classes are fitness classes that customers can sign up for, and instructors can create and modify.
----
+
 ﻿
  POST
 
@@ -249,11 +247,10 @@ delete class
 Search class by creatorId
 
 ---
-### Reports
+## Reports
 > User is allowed to create a report again a class or review
 ---
----
-### Reviews
+## Reviews
 > User can create a Review for a class
 ---
 
