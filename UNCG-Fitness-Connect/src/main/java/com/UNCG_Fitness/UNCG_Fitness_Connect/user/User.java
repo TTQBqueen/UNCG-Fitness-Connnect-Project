@@ -26,6 +26,12 @@ public class User {
         this.role = role;
     }
 
+    public User(long userId, String userName, String role) {
+        this.userId = userId;
+        this.userName = userName;
+        this.role = role;
+    }
+
     public User(long userId) {
         this.userId = userId;
     }

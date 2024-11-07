@@ -17,7 +17,7 @@ public class Class {
     private int classId;
 
     @ManyToOne
-    @JoinColumn(name = "creatorId")
+    @JoinColumn(name = "creator_id")
     private User creator;
 
     @Column(nullable = false)
