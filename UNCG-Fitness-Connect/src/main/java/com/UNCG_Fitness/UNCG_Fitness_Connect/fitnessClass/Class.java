@@ -3,7 +3,6 @@ package com.UNCG_Fitness.UNCG_Fitness_Connect.fitnessClass;
 import com.UNCG_Fitness.UNCG_Fitness_Connect.user.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.*;
-import org.springframework.lang.NonNull;
 
 import java.sql.Date;
 
@@ -17,7 +16,7 @@ public class Class {
     private int classId;
 
     @ManyToOne
-    @JoinColumn(name = "creatorid")
+    @JoinColumn(name = "creatorId")
     private User creator;
 
     @Column(nullable = false)
@@ -29,10 +28,8 @@ public class Class {
     @Column(nullable = false)
     private Date date;
 
-
     @Column(nullable = false)
     private int duration;
-
 
     @Column(nullable = false)
     private LocalTime startTime;
@@ -196,7 +193,8 @@ public class Class {
     }
 
     //    For admin
-    public Class(String title, String details, Date date, LocalTime startTime, LocalTime endTime, String level, String instructorName, String status, String imagePath) {
+    public Class(User creator,String title, String details, Date date, LocalTime startTime, LocalTime endTime, String level, String instructorName, String status, String imagePath) {
+        this.creator = creator;
         this.title = title;
         this.details = details;
         this.date = date;

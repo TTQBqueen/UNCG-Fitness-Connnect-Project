@@ -9,29 +9,78 @@ import java.util.List;
 public class UserService {
 
     @Autowired
-    UserRepository repo;
+    UserRepository userRepository;
 
     /**
-     * Get all users
+     * Get all Users.
      *
-     * @return the list of users.
+     * @return the list of all Users.
      */
     public List<User> getAllUsers() {
-        return repo.findAll();
+        return userRepository.findAll();
     }
 
+    /**
+     * Find one user by ID.
+     *
+     * @param id the unique User Id.
+     * @return a unique Student object.
+     *
+     */
+    public User getUserById(int id) {
+        //return userRepository.getReferenceById(id);
+        return userRepository.findById(id).orElse(null);
+    }
+
+    /**
+     * Add a new User to the database.
+     *
+     * @param user the new User to add
+     */
+    public void addNewUser(User user) {
+        userRepository.save(user);
+    }
+
+    /**
+     * Update an existing User.
+     *
+     * @param user the User details.
+     */
+    public void updateUser(int userId, User user) {
+        User existing = getUserById(userId);
+        existing.setUserName(user.getUserName());
+        existing.setEmail(user.getEmail());
+        existing.setFirstName(user.getFirstName());
+        existing.setLastName(user.getLastName());
+        existing.setRole(user.getRole());
+        userRepository.save(existing);
+    }
 
     /**
      * Save user entry.
      *
-     * @param user
+     * @param user the User details.
      */
     public void saveUser(User user) {
-        repo.save(user);
+        userRepository.save(user);
     }
 
-
-    public Object getUserById(long id) {
-        return repo.getReferenceById(id);
+    /**
+     * Delete a unique User by Id.
+     *
+     * @param userId the unique User Id.
+     */
+    public void deleteUser(int userId) {
+        userRepository.deleteById(userId);
     }
+
+    /**
+     * Get a User by username
+     *
+     * @param userName the unique User username
+     */
+    public User getUserByUserName(String userName) {
+        return userRepository.findByUserName(userName).orElseThrow();
+    }
+
 }

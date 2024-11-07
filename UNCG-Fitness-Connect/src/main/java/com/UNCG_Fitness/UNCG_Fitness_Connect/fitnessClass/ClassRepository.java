@@ -19,4 +19,5 @@ public interface ClassRepository extends JpaRepository<Class, Integer> {
     List<Class> findByTitleContainingIgnoreCase(String title);
 
     List<Class> getClassesByCreatorId(int creatorId);
+
 }

@@ -2,6 +2,8 @@ package com.UNCG_Fitness.UNCG_Fitness_Connect.user;
 
 import jakarta.persistence.*;
 
+import java.util.Date;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -9,31 +11,22 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int userId;
+
     private String userName;
+
     private String email;
+
+    private String firstName;
+
+    private String lastName;
+
+    private Date joinDate;
+
     private String role;
 
-    public User(String userName, String email, String role) {
-        this.userName = userName;
-        this.email = email;
-        this.role = role;
-    }
+    private Boolean flagged;
 
-    public User(int userId, String userName, String email, String role) {
-        this.userId = userId;
-        this.userName = userName;
-        this.email = email;
-        this.role = role;
-    }
-
-    public User(int userId) {
-        this.userId = userId;
-    }
-
-    public User() {
-    }
-
-    public long getId() {
+    public int getId() {
         return userId;
     }
 
@@ -57,6 +50,30 @@ public class User {
         this.email = email;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Date getJoinDate() {
+        return joinDate;
+    }
+
+    public void setJoinDate(Date joinDate) {
+        this.joinDate = joinDate;
+    }
+
     public String getRole() {
         return role;
     }
@@ -64,4 +81,35 @@ public class User {
     public void setRole(String role) {
         this.role = role;
     }
+
+    public Boolean getFlagged() {
+        return flagged;
+    }
+
+    public void setFlagged(Boolean flagged) {
+        this.flagged = flagged;
+    }
+
+    public User(String userName, String email, String firstName, String lastName, Date joinDate, String role) {
+        this.userName = userName;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.joinDate = joinDate;
+        this.role = role;
+    }
+
+    public User(int userId, String userName, String email, String firstName, String lastName, Date joinDate, String role) {
+        this.userId = userId;
+        this.userName = userName;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.joinDate = joinDate;
+        this.role = role;
+    }
+
+    public User() {
+    }
+
 }
