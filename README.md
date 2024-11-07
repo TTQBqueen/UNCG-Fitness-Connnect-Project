@@ -21,13 +21,11 @@ A user is a person who signs up for the site and can enroll in classes. Each use
 
 POST
 http://localhost:8080/users/new
-http://localhost:8080/users/new
 create new user
 
 ﻿
 
 GET
-http://localhost:8080/users/all
 http://localhost:8080/users/all
 fetch all users
 
@@ -40,16 +38,9 @@ The classes are fitness classes that customers can sign up for, and instructors 
 
 POST
 http://localhost:8080/classes/new
-http://localhost:8080/classes/new
 create new class
 
-﻿
-
-Body
-raw (json)
-View More
-json
-{
+﻿{
        "creatorId": 1,
        "title": "Core Pilates",
        "details": "A Pilates class designed to strengthen the core and improve flexibility.",
@@ -64,16 +55,16 @@ json
        "updatedAt": "2024-10-31"
 
 }
+
+
 GET
-http://localhost:8080/classes/all
 http://localhost:8080/classes/all
 fetch all classes
 
 ﻿
 
 GET
-http://localhost:8080/classes/search?title=High
-http://localhost:8080/classes/search?title=High
+http://localhost:8080/classes/search?title=Hi
 search for class part of name no contrians.
 
 ﻿
@@ -104,16 +95,9 @@ level
 Advanced
 PUT
 http://localhost:8080/classes/update/2
-http://localhost:8080/classes/update/2
-mofify class
+modify class
 
-﻿
-
-Body
-raw (json)
-View More
-json
-{
+﻿{
         "classId": 2,
         "creator": null,
         "title": "High-Intensity Interval Training",
@@ -128,9 +112,10 @@ json
         "createdAt": "2024-10-28",
         "updatedAt": "2024-10-29"
         
-    }
+}
+
+    
 DELETE
-http://localhost:8080/classes/delete/4
 http://localhost:8080/classes/delete/4
 delete class
 
@@ -138,13 +123,6 @@ delete class
 
 GET
 http://localhost:8080/classes/INSTRUCTOR/2
-http://localhost:8080/classes/INSTRUCTOR/2
 seach class by creatorId
 
-﻿
 
-JUMP TO
-Introduction
-User
-Classes
-Online
