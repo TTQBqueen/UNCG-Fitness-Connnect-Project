@@ -46,8 +46,14 @@ public class UserService {
      *
      * @param user the User details.
      */
-    public void updateUser(int id, User user) {
-        userRepository.save(user);
+    public void updateUser(int userId, User user) {
+        User existing = getUserById(userId);
+        existing.setUserName(user.getUserName());
+        existing.setEmail(user.getEmail());
+        existing.setFirstName(user.getFirstName());
+        existing.setLastName(user.getLastName());
+        existing.setRole(user.getRole());
+        userRepository.save(existing);
     }
 
     /**
