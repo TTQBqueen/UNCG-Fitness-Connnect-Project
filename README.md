@@ -25,6 +25,15 @@ POST
 
 create new user
 
+{
+        "userName": "emilyclark",
+        "email": "emilyclark.user@example.com",
+        "firstName": "Emily",
+        "lastName": "Clark",
+        "joinDate": "2024-11-07",
+        "role": "USER",
+        "flagged": true
+    }
 
  GET
 
@@ -32,10 +41,77 @@ create new user
 
 fetch all users
 
+ GET
+
+<u> http://localhost:8080/users/{userId}
+
+get user by id
+
+DELETE
+
+<u> http://localhost:8080/users/delete/{userId}
+
+delete user by id
+
+PUT
+
+<u> http://localhost:8080/users/update/{userId}
+
+update user by id
+
+{
+        "userName": "emilyclarkUPDATED",
+        "email": "emilyclark.user@example.com",
+        "firstName": "Emily",
+        "lastName": "Clark",
+        "joinDate": "2024-11-07",
+        "role": "USER",
+        "flagged": true
+    }
+
+
 ---
 ### Subscriptions
 
 > Connect a user to a class like a signup
+---
+
+POST
+
+<u> http://localhost:8080/subs/add/{classId}
+
+create new subscription added to a class by classId
+
+{
+    "creatorId": 1,
+    "userId": 1001
+}
+
+
+GET
+
+<u> http://localhost:8080/subs/all
+
+get all subscriptions
+
+GET
+
+<u> http://localhost:8080/subs/{subs_id}
+
+get all subscriptions by subs_id
+
+GET
+
+<u> http://localhost:8080/subs/{userId}
+
+get all subscriptions by user_id
+
+DELETE
+
+<u> http://localhost:8080/subs/remove/{subs_id}
+
+delete a subscription by subs_id
+
 ---
 ---
 ### Classes
