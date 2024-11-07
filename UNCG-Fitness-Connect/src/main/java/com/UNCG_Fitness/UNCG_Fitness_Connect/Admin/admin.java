@@ -1,15 +1,6 @@
-package com.UNCG_Fitness.UNCG_Fitness_Connect.Admin;  
+package com.UNCG_Fitness.UNCG_Fitness_Connect.Admin;   
 
-import com.UNCG_Fitness.UNCG_Fitness_Connect.user.User;  
-import com.UNCG_Fitness.UNCG_Fitness_Connect.Service.Service; 
-import com.UNCG_Fitness.UNCG_Fitness_Connect.Review.Review; 
-import com.UNCG_Fitness.UNCG_Fitness_Connect.Statistics.UsagStatistics
-import org.springframework.beans.factory.annotation.Autowired;
-import jakarta.persistence.Entity; 
 import jakarta.persistence.*;  
- 
-import java.util.List;  
-
 
 @Entity
 @Table(name = "admin")
@@ -17,72 +8,38 @@ public class Admin {
 
     @Id 
     @GeneratedValue(strategy = GenerationType.AUTO) 
-    private int id; 
-
-    @ManyToOne  
-    @JoinColumn(name = "user_id", nullable = false) 
-    private User user;  
-
+    private int adminId; 
+ 
     @Column(nullable = false) 
     private String username;  
     
-    @Autowired 
-    private ReviewService reviewService; 
-
-    @Autowired 
-    private ServiceService serviceService;
+    @Column(nullable = false)  
+    private String role;
 
     public Admin() { 
-    }
-
-    public Admin(User user, String username) {  
-        this.user = user; 
+    } 
+    public Admin(int adminId, String username, String role) {  
+        this.adminId = adminId;
         this.username = username;
-    }  
-    public int getId(){ 
-        return id;
+        this.role = role;
     } 
-    public void setId(int id){ 
-        this.id = id;
-    }
-    public User getUser(){  
-        return user;
+    
+    public int getAdminId() {
+        return adminId;
     } 
-    public void setUser(User user) {  
-        this.user = user;
+    public void setAdminId(int adminId) { 
+        this.adminId = adminId;
     } 
-    public String getUsername(){ 
-        return username; 
+    public String getUsername() {
+        return username;
     } 
-    public void setUsername(String username) {  
+    public void setUsername(String username) {
         this.username = username;
-    }    
-    public void manageUserAccess(User user, String newAccountStatus){ 
-        user.setAccountStatus(newAccountStatus);
     } 
-    public List<Review> getAllReviewsForService(Service service){ 
-        return reviewService.getReviewsByService(service);
+    public String getRole() {
+        return role;
     } 
-    public void deleteService(Service service){
-        serviceService.deleteServiceById(service.getId()); 
-
+    public void setRole(String role) {
+        this.role = role; 
     } 
-    public List<Review> getAllReviews(){ 
-        return null;
-    } 
-    public void deleteReview(Review review){ 
-        reviewService.deleteReviewById(review.getId());
-    } 
-    public List<UsageStatistics> getAllStatistics(){ 
-        return null;
-    } 
-@Override 
-public String toString(){ 
-    return "Admin{" + 
-            "id=" + id +
-            ", user=" + user +
-            ", username='" + username + '\'' +
-            '}';
 }
- }
-
