@@ -27,11 +27,17 @@ create new user
 
 {
         "userName": "emilyclark",
+        
         "email": "emilyclark.user@example.com",
+        
         "firstName": "Emily",
+        
         "lastName": "Clark",
+        
         "joinDate": "2024-11-07",
+        
         "role": "USER",
+        
         "flagged": true
     }
 
@@ -61,11 +67,17 @@ update user by id
 
 {
         "userName": "emilyclarkUPDATED",
+        
         "email": "emilyclark.user@example.com",
+        
         "firstName": "Emily",
+        
         "lastName": "Clark",
+        
         "joinDate": "2024-11-07",
+        
         "role": "USER",
+        
         "flagged": true
     }
 
