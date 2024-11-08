@@ -249,9 +249,83 @@ Search class by creatorId
 ---
 ## Reports
 > User is allowed to create a report again a class or review
+
+GET 
+<u> http://localhost:8080/reports/all 
+
+fetches all reports  
+
+GET    
+http://localhost:8080/reports/{reportId}  
+
+fetches report by reportId  
+
+{
+    "reportId": 111,
+    "contentId": 234,
+    "reporterId": 444,
+    "reportType": "inappropriate comment",
+    "reason": "Bad review",
+    "createdAt": "2024-11-08T20:42:22.000+00:00",
+    "updatedAt": "2024-11-08T20:42:22.000+00:00",
+    "status": "deleted"
+}
+
+POST 
+<u> http://localhost:8080/reports/new  
+
+posts a report
+
+PUT 
+<u>  http://localhost:8080/reports/update/status/{reportId} 
+
+updates the status of the reportId
+
+DELETE 
+<u> http://localhost:8080/reports/delete/{reportId} 
+
+deletes reportID  
+
+
 ---
 ## Reviews
 > User can create a Review for a class
+
+GET 
+<u> http://localhost:8080/reviews/all 
+
+fetches all reviews  
+
+GET 
+<u> http://localhost:8080/reviews/222 
+
+fetches reviewId  
+
+{
+    "reviewId": 222,
+    "classId": 340,
+    "rating": 5,
+    "userId": 5,
+    "details": "\"I really liked this class, I would recommend it!\"",
+    "createdAt": "2024-11-05T02:03:55.000+00:00",
+    "updatedAt": "2024-11-06T02:03:55.000+00:00",
+    "status": "Completed"
+}
+
+POST 
+<u> http://localhost:8080/reviews/add 
+
+adds new review 
+
+PUT 
+<u> http://localhost:8080/reviews/update/status/{reviewId}  
+Updates status of reviewId
+
+DELETE 
+<u> http://localhost:8080/reviews/delete/{reviewId} 
+deletes reviewId
+
+
 ---
 
 
