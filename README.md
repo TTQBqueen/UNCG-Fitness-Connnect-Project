@@ -261,15 +261,24 @@ http://localhost:8080/reports/{reportId}
 fetches report by reportId  
 
 {
-    "reportId": 111,
-    "contentId": 234,
-    "reporterId": 444,
-    "reportType": "inappropriate comment",
-    "reason": "Bad review",
-    "createdAt": "2024-11-08T20:42:22.000+00:00",
-    "updatedAt": "2024-11-08T20:42:22.000+00:00",
-    "status": "deleted"
+        "reportId": 111,
+        
+        "contentId": 234,
+        
+        "reporterId": 444,
+        
+        "reportType": "innapropriate comment",  
+        
+        "reason": "Bad Review",
+        
+        "createdAt": "2024-11-08",
+        
+        "updatedAt": "2024-11-08",
+        
+        "status": "deleted",
+        
 }
+
 
 POST 
 <u> http://localhost:8080/reports/new  
@@ -302,14 +311,22 @@ GET
 fetches reviewId  
 
 {
-    "reviewId": 222,
-    "classId": 340,
-    "rating": 5,
-    "userId": 5,
-    "details": "\"I really liked this class, I would recommend it!\"",
-    "createdAt": "2024-11-05T02:03:55.000+00:00",
-    "updatedAt": "2024-11-06T02:03:55.000+00:00",
-    "status": "Completed"
+        "reviewId": 222,
+        
+        "classId": 340,
+        
+        "rating": 5,
+        
+        "userId": 5,  
+        
+        "details": "I really liked this clas, I would recommend it!",
+        
+        "createdAt": "2024-11-05",
+        
+        "updatedAt": "2024-11-06",
+        
+        "status": "Completed",
+        
 }
 
 POST 
