@@ -29,6 +29,17 @@ public class Report {
 
     private String status;
 
+    public Report(String reason) {
+        this.reason = reason;
+    }
+
+
+    public int getId() {
+        return reportId;
+    }
+
+
+
     public Report(int reportId, int contentId, int reporterId, String reportType, String reason, Date createdAt, Date updatedAt, String status) {
         this.reportId = reportId;
         this.contentId = contentId;

@@ -18,8 +18,6 @@ public class ClassController {
     @Autowired
     UserService userService;
 
-    @Autowired
-//    SubscriptionService subsService;
 
 //    All Class
     /**
