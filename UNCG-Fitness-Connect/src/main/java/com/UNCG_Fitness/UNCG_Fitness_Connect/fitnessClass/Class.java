@@ -29,10 +29,8 @@ public class Class {
     @Column(nullable = false)
     private Date date;
 
-
     @Column(nullable = false)
     private int duration;
-
 
     @Column(nullable = false)
     private LocalTime startTime;
@@ -71,13 +69,12 @@ public class Class {
     public Class(){
 
     }
-    public int getClassId() {
+    public int getId() {
 
         return classId;
     }
 
-
-    public void setClassId(int classId) {
+    public void setId(int classId) {
         this.classId = classId;
     }
 
@@ -180,8 +177,8 @@ public class Class {
 
 
     //For the Instructor
-    public Class(User creator, String title, String details, Date date, LocalTime startTime, LocalTime endTime, String level, String instructorName, String status, String imagePath, Date createdAt, Date updatedAt) {
-        this.creator = creator;
+    public Class(User creatorid, String title, String details, Date date, LocalTime startTime, LocalTime endTime, String level, String instructorName, String status, String imagePath, Date createdAt, Date updatedAt) {
+        this.creator = creatorid;
         this.title = title;
         this.details = details;
         this.date = date;

@@ -5,9 +5,8 @@
         "firstName": "John",
         "lastName": "Doe",
         "joinDate": "2024-11-07T00:00:00.000+00:00",
-        "role": "USER",
+        "role": "CUSTOMER",
         "flagged": false,
-        "id": 302
     },
     {
         "userName": "sarasmith",
@@ -15,9 +14,8 @@
         "firstName": "Sara",
         "lastName": "Smith",
         "joinDate": "2024-11-07T00:00:00.000+00:00",
-        "role": "ADMIN",
+        "role": "INSTRUCTOR",
         "flagged": true,
-        "id": 303
     },
     {
         "userName": "brianlee",
@@ -25,9 +23,8 @@
         "firstName": "Brian",
         "lastName": "Lee",
         "joinDate": "2024-11-07T00:00:00.000+00:00",
-        "role": "USER",
+        "role": "INSTRUCTOR",
         "flagged": false,
-        "id": 304
     },
     {
         "userName": "emilyclarkUPDATED",
@@ -35,9 +32,8 @@
         "firstName": "Emily",
         "lastName": "Clark",
         "joinDate": "2024-11-07T00:00:00.000+00:00",
-        "role": "USER",
+        "role": "INSTRUCTOR",
         "flagged": true,
-        "id": 305
     },
     {
         "userName": "davidmiller",
@@ -45,8 +41,7 @@
         "firstName": "David",
         "lastName": "Miller",
         "joinDate": "2024-11-07T00:00:00.000+00:00",
-        "role": "USER",
+        "role": "ADMIN",
         "flagged": false,
-        "id": 306
     }
 ]

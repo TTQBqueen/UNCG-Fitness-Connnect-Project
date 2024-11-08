@@ -47,7 +47,6 @@ public class ClassService {
     public Class updateClass(int classID, Class fitnessClass) {
         Class existingClass = getClassById(classID);
         existingClass.setTitle(fitnessClass.getTitle());
-        existingClass.setCreator(fitnessClass.getCreator());
         existingClass.setDetails(fitnessClass.getDetails());
         existingClass.setDate(fitnessClass.getDate());
         existingClass.setStartTime(fitnessClass.getStartTime());
