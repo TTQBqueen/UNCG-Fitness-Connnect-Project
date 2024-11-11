@@ -29,9 +29,9 @@
 
     <!-- Search Section -->
     <div class="search-container">
-        <form >
-            <input type="text" placeholder="Search.." name="search">
-            <button type="submit"><i class="fa fa-search">Search</i></button>
+        <form action="/classes">
+            <input type="text" placeholder="Search.." name="title">
+            <button type="submit" class="fa fa-search" placeholder="Search By Name &#128270">Search</button>
         </form>
     </div>
 </div>
@@ -49,7 +49,7 @@
 
         <!-- Navigation Menu -->
         <ul id="links">
-            <li><a href="/class/all">Home</a></li>
+            <li><a aria-current="page">Home</a></li>
             <li><a href="/Class/">Classes</a></li>
 <!--            <li th:each="class : ${classList}">-->
 <!--                <a th:href="@{/classes/{id}(id=${class.userid})}" th:text="${class.title}">Class Title</a>-->

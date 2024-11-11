@@ -69,7 +69,7 @@ public class ClassController {
      * @param title the search key.
      * @return A list of Class objects matching the search key.
      */
-    @GetMapping("")
+    @GetMapping("/search")
     public String getClassesByName(@RequestParam(name = "title", defaultValue = "yoga") String title, Model model) {
         model.addAttribute("classList", classService.getClassesByTitle(title));
         model.addAttribute("title", "Class Name: " + title);
@@ -77,8 +77,8 @@ public class ClassController {
     }
 
 
-    @GetMapping("/search")
-    public String getAnimalsByNameContains(@RequestParam(name = "title", required = false) String title, Model model) {
+    @GetMapping("")
+    public String getClassesByTitleContains(@RequestParam(name = "title", required = false) String title, Model model) {
         model.addAttribute("classList", classService.getClassesByTitleContains(title));
         model.addAttribute("title", "Class Name: " + title);
         return "/Class/class-list";
