@@ -16,11 +16,7 @@ public class Class {
     private int classId;
 
     @ManyToOne
-<<<<<<< Updated upstream
-    @JoinColumn(name = "creatorid")
-=======
     @JoinColumn(name = "creatorId")
->>>>>>> Stashed changes
     private User creator;
 
     @Column(nullable = false)
@@ -53,13 +49,12 @@ public class Class {
     @Column(nullable = false)
     private String imagePath;
 
-    @Column(nullable = false)
 
+    @Column(nullable = false)
     private Date createdAt;
 
+    @Column(nullable = false)
     private Boolean flag;
-
-
 
     @Column(nullable = false)
     private Date updatedAt;
@@ -68,20 +63,15 @@ public class Class {
         this.title = title;
     }
 
-
     public Class(){
 
     }
-<<<<<<< Updated upstream
-    public int getId() {
-=======
-    public int getClassId() {
->>>>>>> Stashed changes
 
+    public int getClassId() {
         return classId;
     }
 
-    public void setId(int classId) {
+    public void setClassId(int classId) {
         this.classId = classId;
     }
 
@@ -184,13 +174,9 @@ public class Class {
 
 
     //For the Instructor
-<<<<<<< Updated upstream
-    public Class(User creatorid, String title, String details, Date date, LocalTime startTime, LocalTime endTime, String level, String instructorName, String status, String imagePath, Date createdAt, Date updatedAt) {
-        this.creator = creatorid;
-=======
+
     public Class(User creator, String title, String details, Date date, LocalTime startTime, LocalTime endTime, String level, String instructorName, String status, String imagePath, Date createdAt, Date updatedAt) {
         this.creator = creator;
->>>>>>> Stashed changes
         this.title = title;
         this.details = details;
         this.date = date;
@@ -205,12 +191,9 @@ public class Class {
     }
 
     //    For admin
-<<<<<<< Updated upstream
-    public Class(String title, String details, Date date, LocalTime startTime, LocalTime endTime, String level, String instructorName, String status, String imagePath) {
-=======
-    public Class(User creator,String title, String details, Date date, LocalTime startTime, LocalTime endTime, String level, String instructorName, String status, String imagePath) {
+
+    public Class(User creator, String title, String details, Date date, LocalTime startTime, LocalTime endTime, String level, String instructorName, String status, String imagePath) {
         this.creator = creator;
->>>>>>> Stashed changes
         this.title = title;
         this.details = details;
         this.date = date;
