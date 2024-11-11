@@ -86,7 +86,7 @@
             <p th:text="'Time : ' + ${class.startTime} +'-'+ ${class.endTime} "></p>
             <p th:text="'Level: ' + ${class.level}"></p>
             <p class="instructor" th:text="'Instructor: ' + ${class.instructorName}"></p>
-            <a href="#" class="btn-signup">Sign Up</a>
+            <a class="btn-signup" th:href="@{/classes/{classId}(classId=${class.classId})}">Sign Up</a>
         </div>
 
     </div>
