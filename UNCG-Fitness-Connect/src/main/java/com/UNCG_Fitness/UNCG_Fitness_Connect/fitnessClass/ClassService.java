@@ -33,6 +33,40 @@ public class ClassService {
     // Fetch Classes by level.
     public List<Class> getClassesByLevel(String level) {
         return classRepository.getClassesByLevel(level);
+<<<<<<< Updated upstream
+=======
+    }
+
+    // Fetch an class by part of a title
+    public List<Class> getClassesByTitleContains(String title) {
+        return classRepository.findByTitleContainingIgnoreCase(title);
+    }
+    // add Class .
+    public void addNewClass(Class fitnessClass) {classRepository.save(fitnessClass);
+    }
+
+    // update existing Class.
+    public Class updateClass(int classID, Class fitnessClass) {
+        Class existingClass = getClassById(classID);
+        existingClass.setTitle(fitnessClass.getTitle());
+        existingClass.setCreator(fitnessClass.getCreator());
+        existingClass.setDetails(fitnessClass.getDetails());
+        existingClass.setDate(fitnessClass.getDate());
+        existingClass.setStartTime(fitnessClass.getStartTime());
+        existingClass.setEndTime(fitnessClass.getEndTime());
+        existingClass.setLevel(fitnessClass.getLevel());
+        existingClass.setInstructorName(fitnessClass.getInstructorName());
+        existingClass.setStatus(fitnessClass.getStatus());
+        existingClass.setImagePath(fitnessClass.getImagePath());
+        existingClass.setUpdatedAt(fitnessClass.getUpdatedAt());
+
+        return classRepository.save(existingClass);
+    }
+    // delete class
+    public String deleteClassById(int classId) {
+        classRepository.deleteById(classId);
+        return "Class removed !! " + classId;
+>>>>>>> Stashed changes
     }
 
     // Fetch an class by part of a title
@@ -67,5 +101,10 @@ public class ClassService {
 
 
 
+<<<<<<< Updated upstream
 }
 
+=======
+
+}
+>>>>>>> Stashed changes

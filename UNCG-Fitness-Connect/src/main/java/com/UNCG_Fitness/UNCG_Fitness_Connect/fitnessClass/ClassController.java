@@ -8,7 +8,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+<<<<<<< Updated upstream
 @RestController
+=======
+@Controller
+>>>>>>> Stashed changes
 @RequestMapping("/classes")
 public class ClassController {
 
@@ -17,6 +21,7 @@ public class ClassController {
 
     @Autowired
     UserService userService;
+<<<<<<< Updated upstream
 
 
 //    All Class
@@ -39,12 +44,26 @@ public class ClassController {
      * @param classId the unique Id for a Classes.
      * @return One Class object.
      */
+=======
+
+    //    All Class
+    @GetMapping("/all")
+    public String getAllClasses(Model model) {
+        model.addAttribute("classList", classService.getAllClasses());
+        model.addAttribute("title", "All Class");
+        return "/Class/class-list";
+    }
+
+
+    //Class by classID
+>>>>>>> Stashed changes
     @GetMapping("/{classId}")
     public Class getOneClass(@PathVariable int classId) {
         return classService.getClassById(classId);
     }
 
 
+<<<<<<< Updated upstream
 //    IDK if it work until i get the user table
 
     /**
@@ -57,8 +76,86 @@ public class ClassController {
     @GetMapping("INSTRUCTOR/{creatorId}")
     public List<Class> getClassesByCreatorId(@PathVariable int creatorId) {
         return classService.getClassesByCreatorId(creatorId);
+=======
+
+    //  Look up User class based on UserId
+    @GetMapping("/INSTRUCTOR/{creatorId}")
+    public String getClassesByCreatorId(@PathVariable int creatorId, Model model) {
+        model.addAttribute("classList", classService.getClassesByCreatorId(creatorId));
+        model.addAttribute("title", "Your Classes: "+creatorId);
+        return "/Class/class-list";
     }
 
+
+    /**
+     * Get a list of Classes based on their level.
+     * http://localhost:8080/classes/level
+     *
+     * @param level the search key.
+     * @return A list of Classes objects matching the level key.
+     */
+
+    @GetMapping("/levels")
+    public String getClassesByLevel(@RequestParam(name = "level", defaultValue = "BEGINNER") String level, Model model) {
+        model.addAttribute("classList", classService.getClassesByLevel(level));
+        model.addAttribute("title", "Class Name: " + level);
+        return "class-list";
+    }
+
+
+    /**
+     * Get a list of Classes based on their name.
+     * http://localhost:8080/classes?title=yoga
+     *
+     * @param title the search key.
+     * @return A list of Class objects matching the search key.
+     */
+    @GetMapping("")
+    public String getClassesByName(@RequestParam(name = "title", defaultValue = "yoga") String title, Model model) {
+        model.addAttribute("classList", classService.getClassesByTitle(title));
+        model.addAttribute("title", "Class Name: " + title);
+        return "class-list";
+    }
+
+
+
+    @GetMapping("/search")
+    public String getAnimalsByNameContains(@RequestParam(name = "title",  required = false) String title, Model model) {
+        model.addAttribute("classList", classService.getClassesByTitleContains(title));
+        model.addAttribute("title", "Class Name: " + title);
+        return "class-list";
+    }
+
+    //    Create Class
+    @PostMapping("/new")
+    public String addNewAnimal(@ModelAttribute("class") Class fitnessclass) {
+        classService.addNewClass(fitnessclass);
+        return "redirect:/class/all";
+    }
+//Create new Class Form
+    @GetMapping("/createForm")
+    public String showCreateForm(Model model) {
+        Class fitnessclass = new Class();
+        //attach user list
+        model.addAttribute("classList", classService.getAllClasses());
+        return "/class-create";
+>>>>>>> Stashed changes
+    }
+//Update
+    /**
+     * Show the update form.
+     *
+     * @param classId
+     * @param model
+     * @return
+     */
+    @GetMapping("/update/{classlId}")
+    public String showUpdateForm(@PathVariable int classId, Model model) {
+        model.addAttribute("class", classService.getClassById(classId));
+        return "class-update";
+    }
+
+<<<<<<< Updated upstream
 
     /**
      * Get a list of Classes based on their level.
@@ -124,6 +221,20 @@ public class ClassController {
         classService.updateClass(classId, fitnessClass);
         return classService.getClassById(classId);
     }
+=======
+    /**
+     * Perform the update.
+     *
+     * @param fitnessClass
+     * @return
+     */
+    @PostMapping("/update")
+    public String updateClass(Class fitnessClass) {
+        classService.addNewClass(fitnessClass);
+        return "redirect:/classes/" + fitnessClass.getClassId();
+    }
+
+>>>>>>> Stashed changes
 
     /**
      * Delete a Animal object.

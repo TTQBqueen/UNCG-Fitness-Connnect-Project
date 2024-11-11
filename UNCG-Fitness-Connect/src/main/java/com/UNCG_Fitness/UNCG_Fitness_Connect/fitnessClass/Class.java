@@ -3,7 +3,6 @@ package com.UNCG_Fitness.UNCG_Fitness_Connect.fitnessClass;
 import com.UNCG_Fitness.UNCG_Fitness_Connect.user.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.*;
-import org.springframework.lang.NonNull;
 
 import java.sql.Date;
 
@@ -17,7 +16,11 @@ public class Class {
     private int classId;
 
     @ManyToOne
+<<<<<<< Updated upstream
     @JoinColumn(name = "creatorid")
+=======
+    @JoinColumn(name = "creatorId")
+>>>>>>> Stashed changes
     private User creator;
 
     @Column(nullable = false)
@@ -69,7 +72,11 @@ public class Class {
     public Class(){
 
     }
+<<<<<<< Updated upstream
     public int getId() {
+=======
+    public int getClassId() {
+>>>>>>> Stashed changes
 
         return classId;
     }
@@ -177,8 +184,13 @@ public class Class {
 
 
     //For the Instructor
+<<<<<<< Updated upstream
     public Class(User creatorid, String title, String details, Date date, LocalTime startTime, LocalTime endTime, String level, String instructorName, String status, String imagePath, Date createdAt, Date updatedAt) {
         this.creator = creatorid;
+=======
+    public Class(User creator, String title, String details, Date date, LocalTime startTime, LocalTime endTime, String level, String instructorName, String status, String imagePath, Date createdAt, Date updatedAt) {
+        this.creator = creator;
+>>>>>>> Stashed changes
         this.title = title;
         this.details = details;
         this.date = date;
@@ -193,7 +205,12 @@ public class Class {
     }
 
     //    For admin
+<<<<<<< Updated upstream
     public Class(String title, String details, Date date, LocalTime startTime, LocalTime endTime, String level, String instructorName, String status, String imagePath) {
+=======
+    public Class(User creator,String title, String details, Date date, LocalTime startTime, LocalTime endTime, String level, String instructorName, String status, String imagePath) {
+        this.creator = creator;
+>>>>>>> Stashed changes
         this.title = title;
         this.details = details;
         this.date = date;
