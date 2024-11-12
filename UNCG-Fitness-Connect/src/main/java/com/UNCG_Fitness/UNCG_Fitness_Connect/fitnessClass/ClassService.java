@@ -1,5 +1,6 @@
 package com.UNCG_Fitness.UNCG_Fitness_Connect.fitnessClass;
 
+import com.UNCG_Fitness.UNCG_Fitness_Connect.review.Review;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,31 +43,20 @@ public class ClassService {
     }
 
     // add Class .
-    public void addNewClass(Class fitnessClass) {
+    public void saveClass(Class fitnessClass) {
         classRepository.save(fitnessClass);
     }
 
-    // update existing Class.
-    public Class updateClass(int classID, Class fitnessClass) {
-        Class existingClass = getClassById(classID);
-        existingClass.setTitle(fitnessClass.getTitle());
-        existingClass.setCreator(fitnessClass.getCreator());
-        existingClass.setDetails(fitnessClass.getDetails());
-        existingClass.setDate(fitnessClass.getDate());
-        existingClass.setStartTime(fitnessClass.getStartTime());
-        existingClass.setEndTime(fitnessClass.getEndTime());
-        existingClass.setLevel(fitnessClass.getLevel());
-        existingClass.setInstructorName(fitnessClass.getInstructorName());
-        existingClass.setStatus(fitnessClass.getStatus());
-        existingClass.setImagePath(fitnessClass.getImagePath());
-        existingClass.setUpdatedAt(fitnessClass.getUpdatedAt());
-
-        return classRepository.save(existingClass);
-    }
+//    // update existing Class.
+//    public Class updateClass(int classID, Class fitnessClass) {
+//        classRepository.save(fitnessClass);
+//        return classRepository.save(existingClass);
+//    }
 
     // delete class
     public String deleteClassById(int classId) {
         classRepository.deleteById(classId);
         return "Class removed !! " + classId;
     }
+
 }

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User List</title>
+
+</head>
+<body>
+
+
+<div class="container">
+
+    <h1 data-th-text="${title}"></h1>
+
+    <div style="align-content: center;">
+
+        <table class="table table-striped rounded-3 overflow-hidden">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>UserName</th>
+                <th>Email</th>
+                <th>Role</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${userList}">
+                <td><a th:href="@{/users/{id}(id=${user.id})}" th:text=" ${user.id}"> </a></td>
+                <td th:text=" ${user.userName}"></td>
+                <td th:text=" ${user.email}"></td>
+                <td th:text=" ${user.role}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <button  class="btn btn-outline-primary" onclick="openForm()">Create New User</button>
+    <form id="new-student" action="/users/new" method="post" style="display:none">
+        <input type="text" id="userName" name="userName" placeholder="username"/>
+        <input type="text" id="firstName" name="firstName" placeholder="firstName"/>
+        <input type="text" id="LastName" name="LastName" placeholder="LastName"/>
+        <input type="email" id="email" name="email" placeholder="email"/>
+        <select id="role" name="role">
+            <option selected>Select Role</option>
+            <option value="USER">User</option>
+            <option value="ADMIN">Admin</option>
+            <option value="INSTRUCTOR">Instructor</option>
+        </select>
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="reset" class="btn btn-danger" onclick="closeForm()">Cancel</button>
+    </form>
+</div>
+
+<script>
+    function openForm() {
+      document.getElementById("new-student").style.display = "block";
+    }
+    function closeForm() {
+      document.getElementById("new-student").style.display = "none";
+    }
+</script>
+</body>
+</html>

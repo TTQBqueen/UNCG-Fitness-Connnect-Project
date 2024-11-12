@@ -74,18 +74,24 @@
                 </div>
 
                 <div class="reviews">
-                    <p><span>Reviews:</span></p>
-                    <p><span class="rating">★★★★★</span> - "Loved the intensity!"</p>
-                    <p><span class="rating">★★★★☆</span> - "Really pushed me, great class."</p>
-                </div>
-                <div class ="class_buttton">
-                    <button id = "edit" >save</button>
-                    <button id = "delete" >delete</button>
-                </div>
+                <p><span>Reviews:</span></p>
+                <th:block th:each="review : ${reviews}">
+                    <p th:text="${review.classId}"></p>
+                    <p>
+                        <span th:text="${review.details}"></span>
+                        <span th:text="${review.rating}"> </span>
+                    </p>
+                    <p>
+                        <span class="rating">★★★★☆</span> -
+                        <span th:text="${review.details}">"Review text here."</span>
+                    </p>
+                </th:block>
+
             </div>
 
 
         </div>
+    </div>
     </div>
 </div>
 
@@ -94,47 +100,10 @@
 
 
 <!-- Footer -->
-
 <footer>
-    <div class="footer">
-        <div class="footer-content">
-            <div class="footer-section about">
-                <h3>About Us</h3>
-                <p>We are dedicated to providing the best services and products for our customers. Stay connected for updates and special offers.</p>
-            </div>
-
-            <div class="footer-section links">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section contact">
-                <h3>Contact Us</h3>
-                <p><i class="fas fa-phone"></i> +1 (234) 567-890</p>
-                <p><i class="fas fa-envelope"></i> info@example.com</p>
-                <p><i class="fas fa-map-marker-alt"></i> 1234 Street Name, City, Country</p>
-            </div>
-
-            <div class="footer-section social">
-                <h3>Follow Us</h3>
-                <a href="#"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <p>&copy; 2024 Your Website Name. All Rights Reserved.</p>
-        </div>
-    </div>
+    <div th:replace="~{/fragments/_footer :: footer}"></div>
 </footer>
+
 
 </body>
 <style>

@@ -1,5 +1,6 @@
 package com.UNCG_Fitness.UNCG_Fitness_Connect.fitnessClass;
 
+import com.UNCG_Fitness.UNCG_Fitness_Connect.review.ReviewService;
 import com.UNCG_Fitness.UNCG_Fitness_Connect.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,9 @@ public class ClassController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    ReviewService reviewService;
 
 
     //    All Class
@@ -85,19 +89,14 @@ public class ClassController {
     }
 
     //    Create Class
-    @PostMapping("/new")
-    public String addNewAnimal(@ModelAttribute("class") Class fitnessclass) {
-        classService.addNewClass(fitnessclass);
-        return "redirect:/class/all";
-    }
-
-    //Create new Class Form
     @GetMapping("/createForm")
-    public String showCreateForm(Model model) {
-        Class fitnessclass = new Class();
-        //attach user list
-        model.addAttribute("classList", classService.getAllClasses());
-        return "Class/class-create";
+    public String showCreateForm(){
+        return "/Class/create-class";
+    }
+    @PostMapping("/new")
+    public String addNewClass(Class fitnessClass) {
+        classService.saveClass(fitnessClass);
+        return "redirect:/classes/all";
     }
 //Update
 
@@ -123,8 +122,9 @@ public class ClassController {
      */
     @PostMapping("/update")
     public String updateClass(Class fitnessClass) {
-        classService.addNewClass(fitnessClass);
+        classService.saveClass(fitnessClass);
         return "redirect:/classes/" + fitnessClass.getClassId();
     }
+
 
 }

@@ -1,10 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Create Class</title>
+    <link data-th-href="@{/Styles/template.css}" type="text/css" rel="stylesheet">
+    <link data-th-href="@{/Class/card.css}" type="text/css" rel="stylesheet">
 </head>
 <body>
 
+<h1>Create a New Class</h1>
+
+    <form action="/classes/new" method="POST">
+
+<!--        <label for="creator">Creator:</label>-->
+<!--        <input type="text" id="creator" name="creator" required><br><br>-->
+
+        <label for="instructorName">Instructor Name:</label>
+        <input type="text" id="instructorName" name="instructorName" required><br><br>
+
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required><br><br>
+
+        <label for="details">Details:</label>
+        <textarea id="details" name="details" rows="4" required></textarea><br><br>
+
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required><br><br>
+
+        <label for="startTime">Start Time:</label>
+        <input type="time" id="startTime" name="startTime" required><br><br>
+
+        <label for="endTime">End Time:</label>
+        <input type="time" id="endTime" name="endTime" required><br><br>
+
+        <label for="duration">Duration (minutes):</label>
+        <input type="number" id="duration" name="duration" required><br><br>
+
+        <label for="level">Level:</label>
+        <select id="level" name="level" required>
+            <option value="Beginner">Beginner</option>
+            <option value="Intermediate">Intermediate</option>
+            <option value="Advanced">Advanced</option>
+        </select>
+        <br><br>
+
+        <label for="status">Status:</label>
+        <select id="status" name="status" required>
+            <option value="Open">Open</option>
+            <option value="Full">Full</option>
+            <option value="Cancelled">Cancelled</option>
+        </select>
+        <br><br>
+
+        <label for="createdAt">Created At:</label>
+        <input type="date" id="createdAt" name="createdAt"><br><br>
+
+        <label for="updatedAt">Updated At:</label>
+        <input type="date" id="updatedAt" name="updatedAt"><br><br>
+
+        <label for="imagePath">Image Path:</label>
+        <input type="text" id="imagePath" name="imagePath"><br><br>
+
+        <label for="flag">I Accpect terms and Condtions</label>
+        <input type="checkbox" id="flag" name="flag" value="0"><br><br>
+
+
+
+        <button type="submit">Create Class</button>
+    </form>
 </body>
 </html>

@@ -8,7 +8,7 @@ public class AppController {
 
     @GetMapping({"", "/", "/home"})
     public String home() {
-        return "redirect:/classes/all";
+        return "redirect:/users/all";
     }
 
 }
