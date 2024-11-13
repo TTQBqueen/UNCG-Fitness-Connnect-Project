@@ -1,6 +1,9 @@
 package com.UNCG_Fitness.UNCG_Fitness_Connect.review;
 
+import com.UNCG_Fitness.UNCG_Fitness_Connect.fitnessClass.Class;
 import java.util.Date;
+
+import com.UNCG_Fitness.UNCG_Fitness_Connect.user.User;
 import jakarta.persistence.*;
 
 
@@ -12,8 +15,9 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int reviewId;
 
-    @Column(nullable = false)
-    private int classId;
+    @ManyToOne
+    @JoinColumn(name = "classId")
+    private Class classId;
 
     @Column(nullable = false)
     private int rating;
@@ -30,7 +34,7 @@ public class Review {
 
     private String status;
 
-    public Review(int reviewId, int classId, int rating, int userId, String details, Date createdAt, Date updatedAt, String status) {
+    public Review(int reviewId, Class classId, int rating, int userId, String details, Date createdAt, Date updatedAt, String status) {
         this.reviewId = reviewId;
         this.classId = classId;
         this.rating = rating;
@@ -40,7 +44,7 @@ public class Review {
         this.updatedAt = updatedAt;
         this.status = status;
     }
-    public Review(String reviewId, String classId, String userId, String details, Date created, Date updated, String status) {
+    public Review(String reviewId, Class classId, String userId, String details, Date created, Date updated, String status) {
     }
     public Review(){
     }
@@ -51,12 +55,10 @@ public class Review {
     public void setReviewId(int reviewId) {
         this.reviewId = reviewId;
     }
-    public int getClassId() {
+    public Class getClassId() {
         return classId;
     }
-    public void setClassId(int classId) {
-        this.classId = classId;
-    }
+    public void getClassId(Class classId) {this.classId = classId;}
     public int getRating() {
         return rating;
     }

@@ -1,12 +1,14 @@
 package com.UNCG_Fitness.UNCG_Fitness_Connect.user;
 
+import com.UNCG_Fitness.UNCG_Fitness_Connect.fitnessClass.Class;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/users")
 public class UserController {
 
@@ -21,10 +23,20 @@ public class UserController {
      * @return the updated list of Users.
      */
     @PostMapping("/new")
-    public List<User> addNewUser(@RequestBody User user) {
+    public String addNewUser(@RequestBody User user) {
         userService.addNewUser(user);
-        return userService.getAllUsers();
+        return "redirect:/users/all";
     }
+
+    //    Create Class
+    @GetMapping("/createForm")
+    public String showCreateForm(){
+        return "signup";
+    }
+
+
+
+
 
     /**
      * Get a list of all Users in the database.
@@ -33,9 +45,13 @@ public class UserController {
      * @return a list of User objects.
      */
     @GetMapping("/all")
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
+    public String getAllUsers(Model model) {
+        model.addAttribute("userList", userService.getAllUsers());
+        model.addAttribute("title", "All Users");
+        return "/User/user-list";
     }
+
+
 
     /**
      * Get a specific User by Id.

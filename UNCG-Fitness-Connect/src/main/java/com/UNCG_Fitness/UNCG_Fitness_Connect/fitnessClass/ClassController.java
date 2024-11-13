@@ -1,5 +1,6 @@
 package com.UNCG_Fitness.UNCG_Fitness_Connect.fitnessClass;
 
+import com.UNCG_Fitness.UNCG_Fitness_Connect.review.ReviewService;
 import com.UNCG_Fitness.UNCG_Fitness_Connect.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,7 +9,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+
+@Controller
+
 @RequestMapping("/classes")
 public class ClassController {
 
@@ -18,45 +21,32 @@ public class ClassController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    ReviewService reviewService;
 
-//    All Class
-    /**
-     * Get a list of all Classes .
-     * http://localhost:8080/classes/all
-     *
-     * @return a list of Class  objects.
-     */
+
+    //    All Class
     @GetMapping("/all")
-    public List<Class> getAllClasses() {
-        return classService.getAllClasses();
+    public String getAllClasses(Model model) {
+        model.addAttribute("classList", classService.getAllClasses());
+        model.addAttribute("title", "All Class");
+        return "/Class/class-list";
     }
 
-
-    /**
-     * Get a specific class by Id.
-     * http://localhost:8080/classes/2
-     *
-     * @param classId the unique Id for a Classes.
-     * @return One Class object.
-     */
+    //Class by ID
     @GetMapping("/{classId}")
-    public Class getOneClass(@PathVariable int classId) {
-        return classService.getClassById(classId);
+    public String getClassesById(@PathVariable int classId, Model model) {
+        model.addAttribute("class", classService.getClassById(classId));
+        model.addAttribute("title", "Class # "+classId+" Details");
+        return "/Class/class-details";
     }
 
-
-//    IDK if it work until i get the user table
-
-    /**
-     * Get a specific class by Id.
-     * http://localhost:8080/classes/2
-     *
-     * @param creatorId the unique Id for a Classes.
-     * @return A list of Classes objects matching the creatorId key..
-     */
-    @GetMapping("INSTRUCTOR/{creatorId}")
-    public List<Class> getClassesByCreatorId(@PathVariable int creatorId) {
-        return classService.getClassesByCreatorId(creatorId);
+    //  Look up User class based on UserId
+    @GetMapping("/INSTRUCTOR/{creatorId}")
+    public String getClassesByCreatorId(@PathVariable int creatorId, Model model) {
+        model.addAttribute("classList", classService.getClassesByCreatorId(creatorId));
+        model.addAttribute("title", "Your Classes: " + creatorId);
+        return "/Class/class-list";
     }
 
 
@@ -69,9 +59,12 @@ public class ClassController {
      */
 
     @GetMapping("/levels")
-    public List<Class> getClassesByLevel(@RequestParam(name = "level", defaultValue = "BEGINNER") String level) {
-        return classService.getClassesByLevel(level);
+    public String getClassesByLevel(@RequestParam(name = "level", defaultValue = "BEGINNER") String level, Model model) {
+        model.addAttribute("classList", classService.getClassesByLevel(level));
+        model.addAttribute("title", "Class Name: " + level);
+        return "/Class/class-list";
     }
+
 
     /**
      * Get a list of Classes based on their name.
@@ -80,62 +73,58 @@ public class ClassController {
      * @param title the search key.
      * @return A list of Class objects matching the search key.
      */
-    @GetMapping("")
-    public List<Class> getClassesByName(@RequestParam(name = "title", defaultValue = "yoga") String title) {
-        return classService.getClassesByTitle(title);
-    }
-
-    /**
-     * Get a list of Classes based on their title.
-     * http://localhost:8080/classes/search?title=yoga
-     *
-     * @param title the search key.
-     * @return A list of Class objects matching the search key.
-     */
     @GetMapping("/search")
-    public List<Class> getClassesByNameContains(@RequestParam(name = "title", required = false) String title) {
-        return classService.getClassesByTitleContains(title);
+    public String getClassesByName(@RequestParam(name = "title", defaultValue = "yoga") String title, Model model) {
+        model.addAttribute("classList", classService.getClassesByTitle(title));
+        model.addAttribute("title", "Class Name: " + title);
+        return "/Class/class-list";
     }
 
-    /**
-     * Create a new Classes entry.
-     * http://localhost:8080/classes/new --data '{ "ClassId": 4, "name": "sample4", "major": "csc", "gpa": 3.55}'
-     *
-     * @param fitnessClass the new Class object.
-     * @return the updated list of Classes.
-     */
+
+    @GetMapping("")
+    public String getClassesByTitleContains(@RequestParam(name = "title", required = false) String title, Model model) {
+        model.addAttribute("classList", classService.getClassesByTitleContains(title));
+        model.addAttribute("title", "Class Name: " + title);
+        return "/Class/class-list";
+    }
+
+    //    Create Class
+    @GetMapping("/createForm")
+    public String showCreateForm(){
+        return "/Class/create-class";
+    }
     @PostMapping("/new")
-    public List<Class> addNewClass(@RequestBody Class fitnessClass) {
-        classService.addNewClass(fitnessClass);
-        return classService.getAllClasses();
+    public String addNewClass(Class fitnessClass) {
+        classService.saveClass(fitnessClass);
+        return "redirect:/classes/all";
     }
+//Update
 
     /**
-     * Update an existing Class object.
-     * http://localhost:8080/Classes/update/2 --data '{
-     * "classId": 1, "title": "cat", "ScientificName": "Felion", "Classification": "manmmal", "Habitat": "outside" , "Description": "this is a cat" }'
+     * Show the update form.
      *
-     * @param classId      the unique Class Id.
-     * @param fitnessClass the new update Class details.
-     * @return the updated Class object.
+     * @param classId
+     * @param model
+     * @return
      */
-    @PutMapping("/update/{classId}")
-    public Class updateClass(@PathVariable int classId, @RequestBody Class fitnessClass) {
-        classService.updateClass(classId, fitnessClass);
-        return classService.getClassById(classId);
+    @GetMapping("/update/{classlId}")
+    public String showUpdateForm(@PathVariable int classId, Model model) {
+        model.addAttribute("class", classService.getClassById(classId));
+        return "Class/class-update";
     }
 
+
     /**
-     * Delete a Animal object.
-     * http://localhost:8080/classes/delete/2
+     * Perform the update.
      *
-     * @param classId the unique Animal Id.
-     * @return the updated list of Animals.
+     * @param fitnessClass
+     * @return
      */
-    @DeleteMapping("/delete/{classId}")
-    public List<Class> deleteClassById(@PathVariable int classId) {
-        classService.deleteClassById(classId);
-        return classService.getAllClasses();
+    @PostMapping("/update")
+    public String updateClass(Class fitnessClass) {
+        classService.saveClass(fitnessClass);
+        return "redirect:/classes/" + fitnessClass.getClassId();
     }
+
 
 }

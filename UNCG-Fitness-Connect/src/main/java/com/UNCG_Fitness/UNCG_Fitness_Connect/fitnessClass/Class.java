@@ -1,12 +1,13 @@
 package com.UNCG_Fitness.UNCG_Fitness_Connect.fitnessClass;
 
 import com.UNCG_Fitness.UNCG_Fitness_Connect.user.User;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.*;
-import org.springframework.lang.NonNull;
 
 import java.sql.Date;
 
+import java.sql.Timestamp;
 import java.time.LocalTime;
 
 @Entity
@@ -17,7 +18,7 @@ public class Class {
     private int classId;
 
     @ManyToOne
-    @JoinColumn(name = "creatorid")
+    @JoinColumn(name = "creatorId")
     private User creator;
 
     @Column(nullable = false)
@@ -51,30 +52,30 @@ public class Class {
     private String imagePath;
 
     @Column(nullable = false)
-
     private Date createdAt;
 
+    @Column(nullable = false)
     private Boolean flag;
-
-
 
     @Column(nullable = false)
     private Date updatedAt;
+
+    @Column(nullable = false)
+    private String Frequency;
 
     public Class(String title) {
         this.title = title;
     }
 
-
     public Class(){
 
     }
-    public int getId() {
 
+    public int getClassId() {
         return classId;
     }
 
-    public void setId(int classId) {
+    public void setClassId(int classId) {
         this.classId = classId;
     }
 
@@ -158,6 +159,71 @@ public class Class {
         this.imagePath = imagePath;
     }
 
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public Boolean getFlag() {
+        return flag;
+    }
+
+    public void setFlag(Boolean flag) {
+        this.flag = flag;
+    }
+
+//For the Instructor
+
+    public Class(int classId, User creator, String title, String details, Date date, LocalTime startTime, LocalTime endTime,
+                 String level, String instructorName, String status, String imagePath, Date createdAt, Date updatedAt,
+                 int duration, boolean flag) {
+        this.classId = classId;
+        this.creator = creator;
+        this.title = title;
+        this.details = details;
+        this.date = date;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.level = level;
+        this.instructorName = instructorName;
+        this.status = status;
+        this.imagePath = imagePath;
+        this.duration = duration;
+        this.flag = false;
+        this.createdAt= createdAt;
+        this.updatedAt= updatedAt;
+
+    }
+
+    //    For admin
+
+    public Class(User creator, String title, String details, Date date, LocalTime startTime, LocalTime endTime, String level, String instructorName, String status, String imagePath,Date createdAt ) {
+        this.creator = creator;
+        this.title = title;
+        this.details = details;
+        this.date = date;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.level = level;
+        this.instructorName = instructorName;
+        this.status = status;
+        this.imagePath = imagePath;
+        this.createdAt=createdAt;
+    }
+
+    //short information
+    public Class(String title, String details, Date date, String level, String instructorName, String status, Date createdAt) {
+        this.title = title;
+        this.details = details;
+        this.date = date;
+        this.level = level;
+        this.instructorName = instructorName;
+        this.status = status;
+        this.createdAt=createdAt;
+    }
     public Date getCreatedAt() {
         return createdAt;
     }
@@ -172,61 +238,5 @@ public class Class {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-
-
-    //For the Instructor
-    public Class(User creatorid, String title, String details, Date date, LocalTime startTime, LocalTime endTime, String level, String instructorName, String status, String imagePath, Date createdAt, Date updatedAt) {
-        this.creator = creatorid;
-        this.title = title;
-        this.details = details;
-        this.date = date;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.level = level;
-        this.instructorName = instructorName;
-        this.status = status;
-        this.imagePath = imagePath;
-        this.createdAt=createdAt;
-        this.updatedAt=updatedAt;
-    }
-
-    //    For admin
-    public Class(String title, String details, Date date, LocalTime startTime, LocalTime endTime, String level, String instructorName, String status, String imagePath) {
-        this.title = title;
-        this.details = details;
-        this.date = date;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.level = level;
-        this.instructorName = instructorName;
-        this.status = status;
-        this.imagePath = imagePath;
-    }
-
-    //short information
-    public Class(String title, String details, Date date, String level, String instructorName, String status, Date createdAt) {
-        this.title = title;
-        this.details = details;
-        this.date = date;
-        this.level = level;
-        this.instructorName = instructorName;
-        this.status = status;
-        this.createdAt=createdAt;
-    }
-
-
-    @Override
-    public String toString() {
-        return "Class{" +
-                "classId=" + classId +
-                ", user=" + creator +
-                ", title='" + title + '\'' +
-                ", details='" + details + '\'' +
-                ", startTime=" + startTime +
-                ", endTime=" + endTime +
-                ", status=" + status +
-                '}';
     }
 }

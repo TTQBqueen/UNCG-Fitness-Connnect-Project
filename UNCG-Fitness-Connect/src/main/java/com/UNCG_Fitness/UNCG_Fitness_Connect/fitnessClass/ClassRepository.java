@@ -1,3 +1,4 @@
+
 package com.UNCG_Fitness.UNCG_Fitness_Connect.fitnessClass;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -19,4 +20,5 @@ public interface ClassRepository extends JpaRepository<Class, Integer> {
     List<Class> findByTitleContainingIgnoreCase(String title);
 
     List<Class> getClassesByCreatorId(int creatorId);
+
 }

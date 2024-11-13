@@ -18,20 +18,13 @@ xmlns:form="http://www.w3.org/1999/xhtml">
 <div class="header">
     <!-- Profile & Login Section -->
     <div class="user-options">
-        <div id="profile-container"><a href="/index.html">Home</a></div>
-        <div id="login-container"><a href="/services/login.html">Login</a></div>
-        <div id="login-container"><a href="/Class/class-list.html">CLass</a></div>
+        <div id="profile-container"><a href="">Home</a></div>
+        <div id="login-container"><a href="login">Login</a></div>
+        <div id="login-container"><a href="/classes/all">CLass</a></div>
     </div>
     <!-- Logo Section -->
     <h2 class="logo">Spartan Motion</h2>
 
-    <!-- Search Section -->
-    <div class="search-container">
-        <form >
-            <input type="text" placeholder="Search.." name="search">
-            <button type="submit"><i class="fa fa-search">Search</i></button>
-        </form>
-    </div>
 </div>
 
 
@@ -43,16 +36,11 @@ xmlns:form="http://www.w3.org/1999/xhtml">
 
     <!-- Navigation column -->
 
-    <div id="nav" class="column_side">
 
-        <!-- Navigation Menu -->
-        <ul id="links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="privacypolicy.html">Privacy Policy</a></li>
-        </ul>
-    </div>
+    <!-- Footer -->
+    <header>
+        <div th:replace="~{/fragments/home-side-nav :: header}"></div>
+    </header>
 
 
 
@@ -63,7 +51,7 @@ xmlns:form="http://www.w3.org/1999/xhtml">
             <h1> Welcome to Spartan Motion</h1>
             <p> Spartan Motion is a platform that allows users to track their physical activity and set goals for themselves. Users can track their progress and see how they are improving over time. </p>
             <p> Users can also connect with other users and see how they are doing. </p>
-            <p><a href="/services/signup.html">Sign up</a> to train like a Spartan today! </p>
+            <p><a href="/users/createForm">Sign up</a> to train like a Spartan today! </p>
         </div>
     </div>
 
@@ -82,45 +70,11 @@ xmlns:form="http://www.w3.org/1999/xhtml">
 
 <!-- Footer -->
 
+<!-- Footer -->
 <footer>
-    <div class="footer">
-        <div class="footer-content">
-            <div class="footer-section about">
-                <h3>About Us</h3>
-                <p>We are dedicated to providing the best services and products for our customers. Stay connected for updates and special offers.</p>
-            </div>
-
-            <div class="footer-section links">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="privacypolicy.html">Privacy Policy</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section contact">
-                <h3>Contact Us</h3>
-                <p><i class="fas fa-phone"></i> +1 (234) 567-890</p>
-                <p><i class="fas fa-envelope"></i> info@example.com</p>
-                <p><i class="fas fa-map-marker-alt"></i> 1234 Street Name, City, Country</p>
-            </div>
-
-            <div class="footer-section social">
-                <h3>Follow Us</h3>
-                <a href="#"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <p>&copy; 2024 Your Website Name. All Rights Reserved.</p>
-        </div>
-    </div>
+    <div th:replace="~{/fragments/_footer :: footer}"></div>
 </footer>
+
 
 
 </body>
