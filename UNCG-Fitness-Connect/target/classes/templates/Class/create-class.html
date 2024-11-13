@@ -3,9 +3,11 @@
 <head>
     <title>Create Class</title>
     <link data-th-href="@{/Styles/template.css}" type="text/css" rel="stylesheet">
-    <link data-th-href="@{/Class/card.css}" type="text/css" rel="stylesheet">
+    <link data-th-href="@{/Class/Class-styles.css}" type="text/css" rel="stylesheet">
 </head>
 <body>
+<div class="form-container">
+    <a id ="cancel_button" href="/classes/all">X</a>
 
 <h1>Create a New Class</h1>
 
@@ -13,28 +15,42 @@
 
 <!--        <label for="creator">Creator:</label>-->
 <!--        <input type="text" id="creator" name="creator" required><br><br>-->
+        <div  class="form-group">
+            <label  for="instructorName">Instructor Name:</label>
+            <input type="text" id="instructorName" name="instructorName" required><br><br>
+        </div>
 
-        <label for="instructorName">Instructor Name:</label>
-        <input type="text" id="instructorName" name="instructorName" required><br><br>
+        <div  class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required><br><br>
+        </div>
 
-        <label for="title">Title:</label>
-        <input type="text" id="title" name="title" required><br><br>
+        <div  class="form-group">
+            <label for="details">Details:</label>
+            <textarea id="details" name="details" rows="4" required></textarea><br><br>
+        </div>
 
-        <label for="details">Details:</label>
-        <textarea id="details" name="details" rows="4" required></textarea><br><br>
-
+        <div  class="form-group">
         <label for="date">Date:</label>
         <input type="date" id="date" name="date" required><br><br>
+        </div>
 
+        <div  class="form-group">
         <label for="startTime">Start Time:</label>
         <input type="time" id="startTime" name="startTime" required><br><br>
+        </div>
 
+        <div  class="form-group">
         <label for="endTime">End Time:</label>
         <input type="time" id="endTime" name="endTime" required><br><br>
+        </div>
 
+        <div  class="form-group">
         <label for="duration">Duration (minutes):</label>
         <input type="number" id="duration" name="duration" required><br><br>
+        </div>
 
+        <div  class="form-group">
         <label for="level">Level:</label>
         <select id="level" name="level" required>
             <option value="Beginner">Beginner</option>
@@ -42,7 +58,9 @@
             <option value="Advanced">Advanced</option>
         </select>
         <br><br>
+        </div>
 
+        <div  class="form-group">
         <label for="status">Status:</label>
         <select id="status" name="status" required>
             <option value="Open">Open</option>
@@ -50,22 +68,119 @@
             <option value="Cancelled">Cancelled</option>
         </select>
         <br><br>
+        </div>
 
+        <div  class="form-group">
         <label for="createdAt">Created At:</label>
         <input type="date" id="createdAt" name="createdAt"><br><br>
+        </div>
 
+        <div  class="form-group">
         <label for="updatedAt">Updated At:</label>
         <input type="date" id="updatedAt" name="updatedAt"><br><br>
+        </div>
 
+        <div  class="form-group">
         <label for="imagePath">Image Path:</label>
         <input type="text" id="imagePath" name="imagePath"><br><br>
+        </div>
 
+        <div  class="form-group">
         <label for="flag">I Accpect terms and Condtions</label>
         <input type="checkbox" id="flag" name="flag" value="0"><br><br>
+        </div>
 
-
-
-        <button type="submit">Create Class</button>
+        <div class="form-group">
+            <button type="submit">Create Class</button>
+        </div>
     </form>
+</div>
 </body>
+<style>
+    * {
+    box-sizing: border-box;
+}
+    body {
+     font-family: Arial, sans-serif;
+     background-color: #333;
+     margin: 0;
+     padding: 20px;
+ }
+
+ .form-container {
+     max-width: 600px;
+     background-color: white;
+     padding: 30px;
+     margin: 50px auto;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+     border-radius: 8px;
+ }
+
+ h2 {
+     text-align: center;
+     color: #333;
+ }
+
+ .form-group {
+     margin-bottom: 20px;
+ }
+
+ .form-group label {
+     display: block;
+     font-size: 16px;
+     color: #333;
+     margin-bottom: 8px;
+ }
+
+ .form-group input[type="text"],
+ .form-group input[type="number"],
+ .form-group textarea,
+ .form-group select {
+     width: 100%;
+     padding: 10px;
+     font-size: 16px;
+     border-radius: 4px;
+     border: 1px solid #ccc;
+ }
+
+ .form-group textarea {
+     resize: vertical;
+     height: 100px;
+ }
+
+ .form-group button {
+     display: inline-block;
+     width: 100%;
+     padding: 12px;
+     background-color: #869de9;
+     color: white;
+     border: none;
+     border-radius: 4px;
+     font-size: 16px;
+     cursor: pointer;
+     transition: background-color 0.3s ease;
+ }
+
+ .form-group button:hover {
+     background-color: #5054b9;
+ }
+ #cancel_button{
+     display: inline-block;
+     width: 10%;
+     float: right;
+     padding: 2%;
+     height: 40px;
+     background-color: #f399a2;
+     color: white;
+     border: none;
+     border-radius: 4px;
+     cursor: pointer;
+     text-align: center;
+ }
+ #cancel_button:hover {
+     opacity: 0.9;
+ }
+
+
+</style>
 </html>

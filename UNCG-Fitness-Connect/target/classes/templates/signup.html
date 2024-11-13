@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+
+  <link data-th-href="@{/Styles/template.css}" type="text/css" rel="stylesheet">
+  <link data-th-href="@{/Styles/service.css}" type="text/css" rel="stylesheet">
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SignUp</title>
+</head>
+<body>
+
+<div class="header">
+  <!-- Profile & Login Section -->
+  <div class="user-options">
+    <div id="profile-container"><a href="">Home</a></div>
+    <div id="login-container"><a href="login">Login</a></div>
+  </div>
+  <!-- Logo Section -->
+  <h2 class="logo">Spartan Motion</h2>
+
+  <!-- Search Section -->
+  <div class="search-container">
+  </div>
+</div>
+
+
+<div class="sinup_container" id="id01">
+
+  <h1>Sign Up</h1>
+  <p>Please fill in this form to create an account.</p>
+
+
+  <form action="/users/new" method="POST">
+
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" name="firstName" required><br><br>
+
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" name="LastName" required><br><br>
+
+    <label for="email">Email:</label>
+    <input type="text" id="email" name="email" required><br><br>
+
+    <label for="password">Password:</label>
+    <input type="text" id="password" name="password" required><br><br>
+
+    <label for="role">Role:</label>
+    <select id="role" name="role" required>
+      <option value="STUDENT">Student</option>
+      <option value="INSTRUCTOR">Instructor</option>
+    </select>
+    <br><br>
+
+    <label for="flag">By Clicking the button you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a></label>
+    <input type="checkbox" id="flag" name="flag" value="0"><br><br>
+
+    <div class="clearfix">
+      <button type="button" class="cancelbtn">Cancel</button>
+      <button type="submit" class="signupbtn">Sign Up</button>
+    </div>
+  </form>
+  <p>Already have an account <a href ="login">Login in</a></p>
+</div>
+
+</div>
+
+
+
+<!-- Footer -->
+<footer>
+  <div th:replace="~{/fragments/_footer :: footer}"></div>
+</footer>
+
+
+</body>
+</html>
+

@@ -60,6 +60,9 @@ public class Class {
     @Column(nullable = false)
     private Date updatedAt;
 
+    @Column(nullable = false)
+    private String Frequency;
+
     public Class(String title) {
         this.title = title;
     }
