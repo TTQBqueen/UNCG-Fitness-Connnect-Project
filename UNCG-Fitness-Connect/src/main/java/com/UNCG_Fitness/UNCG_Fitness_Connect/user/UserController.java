@@ -1,5 +1,6 @@
 package com.UNCG_Fitness.UNCG_Fitness_Connect.user;
 
+import com.UNCG_Fitness.UNCG_Fitness_Connect.fitnessClass.Class;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,8 +27,16 @@ public class UserController {
     public String addNewUser(@ModelAttribute User user, Model model) {
         userService.addNewUser(user);
         model.addAttribute("users", userService.getAllUsers());
-        return "/User/user-list";
+        return "/Class/class-list";
     }
+
+    //    Create Class
+    @GetMapping("/createForm")
+    public String showCreateForm(){
+        return "signup";
+    }
+
+
 
     /**
      * Get a list of all Users in the database.

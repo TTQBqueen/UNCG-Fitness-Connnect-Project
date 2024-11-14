@@ -62,21 +62,36 @@
     <p></p>
     <img src="../image/uncg gym.jpeg" alt="running" style="width:100%">
 
-<h1>User</h1>
+    <h1>User</h1>
 
     <div class="container">
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Join Date</th>
+                <th>Role</th>
+                <th>Flag</th>
+            </tr>
 
-        <div th:each="user: ${userList}" class="class-card">
-            <div class="class-details">
-                <h3 th:text="${user.email}"></h3>
-            </div>
+            <tr data-th-each="user : ${userList}">
 
-        </div>
-
+                <td th:text="${user.firstName} + ' ' + ${user.lastName}"></td>
+                <td th:text="${user.email}"></td>
+                <td th:text="${user.userName}"></td>
+                <td th:text="${user.password}"></td>
+                <td th:text="${user.joinDate}"></td>
+                <td th:text="${user.role}"></td>
+                <td th:text="${user.flagged}"></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
+
 </div>
-
-
 
 
 <footer>
@@ -84,4 +99,63 @@
 </footer>
 
 </body>
+<style>
+    /* Container Styling */
+  .container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+
+  /* Table Styling */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+
+  thead th {
+    background-color: #5054B9;
+    color: #fff;
+    text-align: left;
+    padding: 12px;
+    font-weight: bold;
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  tbody tr:hover {
+    background-color: #ddd;
+  }
+
+  td, th {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  /* Cell Styling */
+  td {
+    color: #333;
+    font-size: 16px;
+    text-align: left;
+  }
+
+  /* Add some spacing around the table */
+  .container table {
+    margin: 20px 0;
+  }
+
+  /* Table Header */
+  thead th {
+    font-size: 18px;
+    border-bottom: 2px solid #ddd;
+  }
+
+
+</style>
 </html>
