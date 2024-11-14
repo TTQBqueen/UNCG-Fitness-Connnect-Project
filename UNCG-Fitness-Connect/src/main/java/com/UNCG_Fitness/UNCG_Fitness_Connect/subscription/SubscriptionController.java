@@ -31,7 +31,7 @@ public class SubscriptionController {
         subscriptionService.addNewSubscription(classId, userId);
         List<Subscription> subscriptions = subscriptionService.getSubscriptionByClassId(classId);
         model.addAttribute("subscriptions", subscriptions);
-        return "subscriptionList";
+        return "subscription-list";
     }
 
 
@@ -45,7 +45,7 @@ public class SubscriptionController {
     String getAllSubscriptions(Model model) {
         List<Subscription> subscriptions = subscriptionService.getAllSubscriptions();
         model.addAttribute("subscriptions", subscriptions);
-        return "subscriptionList";
+        return "subscription-list";
     }
 
     /**
@@ -59,7 +59,7 @@ public class SubscriptionController {
     public String getSubscription(@PathVariable int subs_id, Model model) {
         Subscription subscription = subscriptionService.getSubscriptionById(subs_id);
         model.addAttribute("subscription", subscription);
-        return "subscriptionDetail";
+        return "subscription-details";
     }
 
     /**
@@ -73,7 +73,7 @@ public class SubscriptionController {
     public String getSubscriptionsByUser(@PathVariable int userId, Model model) {
         List<Subscription> subscriptions = subscriptionService.getSubscriptionsByUser(userId);
         model.addAttribute("subscriptions", subscriptions);
-        return "subscriptionList";
+        return "subscription-list";
     }
 
     /**
