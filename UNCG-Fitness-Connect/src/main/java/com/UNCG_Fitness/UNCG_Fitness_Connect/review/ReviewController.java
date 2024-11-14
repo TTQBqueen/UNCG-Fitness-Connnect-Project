@@ -1,9 +1,11 @@
 package com.UNCG_Fitness.UNCG_Fitness_Connect.review;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired;  
+import org.springframework.stereotype.Controller;
+import jakarta.persistence.*; 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/reviews")
 public class ReviewController {
 
