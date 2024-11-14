@@ -37,10 +37,11 @@ public class UserController {
      */
     @GetMapping("/all")
     public String getAllUsers(Model model) {
-        List<User> users = userService.getAllUsers();
-        model.addAttribute("users", users);
+        model.addAttribute("userList", userService.getAllUsers());
+        model.addAttribute("title", "All Users");
         return "/User/user-list";
     }
+
 
     /**
      * Get a specific User by Id.
