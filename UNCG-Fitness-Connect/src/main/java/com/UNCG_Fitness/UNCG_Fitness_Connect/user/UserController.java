@@ -26,7 +26,7 @@ public class UserController {
     public String addNewUser(@ModelAttribute User user, Model model) {
         userService.addNewUser(user);
         model.addAttribute("users", userService.getAllUsers());
-        return "user-list";
+        return "/User/user-list";
     }
 
     /**
@@ -39,7 +39,7 @@ public class UserController {
     public String getAllUsers(Model model) {
         List<User> users = userService.getAllUsers();
         model.addAttribute("users", users);
-        return "user-list";
+        return "/User/user-list";
     }
 
     /**
@@ -54,7 +54,7 @@ public class UserController {
     public String getUser(@PathVariable int userId, Model model) {
         User user = userService.getUserById(userId);
         model.addAttribute("user", user);
-        return "user-details";
+        return "/User/user-details";
     }
 
     /**
@@ -69,7 +69,7 @@ public class UserController {
     public String deleteUser(@PathVariable int userId, Model model) {
         userService.deleteUser(userId);
         model.addAttribute("users", userService.getAllUsers());
-        return "user-list";
+        return "/User/user-list";
     }
 
     /**
@@ -85,6 +85,6 @@ public class UserController {
     public String updateUser(@PathVariable int userId, @ModelAttribute User user, Model model) {
         userService.updateUser(userId, user);
         model.addAttribute("user", userService.getUserById(userId));
-        return "user-details";
+        return "/User/user-details";
     }
 }

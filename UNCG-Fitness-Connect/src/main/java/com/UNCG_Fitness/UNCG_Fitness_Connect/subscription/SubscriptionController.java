@@ -34,7 +34,6 @@ public class SubscriptionController {
         return "subscription-list";
     }
 
-
     /**
      * Get a list of all Subscriptions in the database.
      * http://localhost:8080/subs/all
