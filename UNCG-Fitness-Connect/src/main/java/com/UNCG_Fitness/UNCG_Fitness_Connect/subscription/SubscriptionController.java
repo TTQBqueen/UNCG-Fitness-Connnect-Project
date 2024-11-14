@@ -3,11 +3,12 @@ package com.UNCG_Fitness.UNCG_Fitness_Connect.subscription;
 import com.UNCG_Fitness.UNCG_Fitness_Connect.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/subs")
 public class SubscriptionController {
 
@@ -19,15 +20,18 @@ public class SubscriptionController {
 
     /**
      * Create a new Subscription for a Class.
-     * http://localhost:8080/subs/new/{classId} --data '{ "classId": }'
+     * http://localhost:8080/subs/add/{classId}/{userId}
      *
      * @param classId the class for the subscription to be assigned to
+     * @param userId  the user for whom the subscription is created
      * @return the updated list of subscriptions.
      */
-    @PostMapping("/add/{classId}")
-    public List<Subscription> createNewSubscription(@PathVariable int classId, @PathVariable int userId) {
+    @PostMapping("/add/{classId}/{userId}")
+    public String createNewSubscription(@PathVariable int classId, @PathVariable int userId, Model model) {
         subscriptionService.addNewSubscription(classId, userId);
-        return subscriptionService.getSubscriptionByClassId(classId);
+        List<Subscription> subscriptions = subscriptionService.getSubscriptionByClassId(classId);
+        model.addAttribute("subscriptions", subscriptions);
+        return "subscriptionList";
     }
 
 
@@ -38,32 +42,38 @@ public class SubscriptionController {
      * @return a list of Subscription objects.
      */
     @GetMapping("/all")
-    public List<Subscription> getAllStudents() {
-        return subscriptionService.getAllSubscriptions();
+    String getAllSubscriptions(Model model) {
+        List<Subscription> subscriptions = subscriptionService.getAllSubscriptions();
+        model.addAttribute("subscriptions", subscriptions);
+        return "subscriptionList";
     }
 
     /**
      * Get a specific Subscription by Subscription Id.
-     * http://localhost:8080/subs/2
+     * http://localhost:8080/subs/{subs_id}
      *
      * @param subs_id the unique Id for a Student.
      * @return One Subscription object.
      */
     @GetMapping("/{subs_id}")
-    public Subscription getSubs(@PathVariable int subs_id) {
-        return subscriptionService.getSubscriptionById(subs_id);
+    public String getSubscription(@PathVariable int subs_id, Model model) {
+        Subscription subscription = subscriptionService.getSubscriptionById(subs_id);
+        model.addAttribute("subscription", subscription);
+        return "subscriptionDetail";
     }
 
     /**
-     * Get all users subscribed to a subscription.
-     * http://localhost:8080/subs/all/{subs_id}
+     * Get all subscriptions for a specific user.
+     * http://localhost:8080/subs/user/{userId}
      *
      * @param userId the unique Id for a subscription.
      * @return all Users connected to the subs_id.
      */
-    @GetMapping("/{userId}")
-    public List<Subscription> getUsersBySubs(@RequestParam int userId) {
-        return subscriptionService.getSubscriptionsByUser(userId);
+    @GetMapping("/user/{userId}")
+    public String getSubscriptionsByUser(@PathVariable int userId, Model model) {
+        List<Subscription> subscriptions = subscriptionService.getSubscriptionsByUser(userId);
+        model.addAttribute("subscriptions", subscriptions);
+        return "subscriptionList";
     }
 
     /**
@@ -73,7 +83,8 @@ public class SubscriptionController {
      * @param subs_id the unique Id for a subscription.
      */
     @DeleteMapping("/remove/{subs_id}")
-    public void removeSub(@PathVariable int subs_id) {
+    public String removeSubscription(@PathVariable int subs_id) {
         subscriptionService.removeSub(subs_id);
+        return "redirect:/subs/all"; // Redirects to the list of all subscriptions after deletion
     }
 }

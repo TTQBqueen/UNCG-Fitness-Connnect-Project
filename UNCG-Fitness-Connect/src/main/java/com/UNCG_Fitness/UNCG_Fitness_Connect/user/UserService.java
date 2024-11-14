@@ -28,7 +28,6 @@ public class UserService {
      *
      */
     public User getUserById(int id) {
-        //return userRepository.getReferenceById(id);
         return userRepository.findById(id).orElse(null);
     }
 
@@ -48,6 +47,9 @@ public class UserService {
      */
     public void updateUser(int userId, User user) {
         User existing = getUserById(userId);
+        if (existing == null) {
+            throw new IllegalArgumentException("User not found with ID: " + userId);
+        }
         existing.setUserName(user.getUserName());
         existing.setEmail(user.getEmail());
         existing.setFirstName(user.getFirstName());
@@ -80,7 +82,8 @@ public class UserService {
      * @param userName the unique User username
      */
     public User getUserByUserName(String userName) {
-        return userRepository.findByUserName(userName).orElseThrow();
+        return userRepository.findByUserName(userName)
+                .orElseThrow(() -> new IllegalArgumentException("User not found with username: " + userName));
     }
 
 }

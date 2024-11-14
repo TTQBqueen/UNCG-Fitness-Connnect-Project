@@ -2,11 +2,12 @@ package com.UNCG_Fitness.UNCG_Fitness_Connect.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/users")
 public class UserController {
 
@@ -18,12 +19,14 @@ public class UserController {
      * http://localhost:8080/users/new
      *
      * @param user the new User object.
+     * @param model the Model object to pass data to the view.
      * @return the updated list of Users.
      */
     @PostMapping("/new")
-    public List<User> addNewUser(@RequestBody User user) {
+    public String addNewUser(@ModelAttribute User user, Model model) {
         userService.addNewUser(user);
-        return userService.getAllUsers();
+        model.addAttribute("users", userService.getAllUsers());
+        return "userList";
     }
 
     /**
@@ -33,8 +36,10 @@ public class UserController {
      * @return a list of User objects.
      */
     @GetMapping("/all")
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
+    public String getAllUsers(Model model) {
+        List<User> users = userService.getAllUsers();
+        model.addAttribute("users", users);
+        return "userList";
     }
 
     /**
@@ -42,12 +47,14 @@ public class UserController {
      * http://localhost:8080/users/{userId}
      *
      * @param userId the unique Id for a User.
-     * @return One User object.
+     * @param model the Model object to pass data to the view.
+     * @return the view displaying the user's details.
      */
     @GetMapping("/{userId}")
-    public User getUser(@PathVariable int userId) {
-        System.out.println(userId);
-        return userService.getUserById(userId);
+    public String getUser(@PathVariable int userId, Model model) {
+        User user = userService.getUserById(userId);
+        model.addAttribute("user", user);
+        return "userDetail";
     }
 
     /**
@@ -55,12 +62,14 @@ public class UserController {
      * http://localhost:8080/users/delete/{userId}
      *
      * @param userId the unique User Id.
+     * @param model the Model object to pass data to the view.
      * @return the updated list of Users.
      */
     @DeleteMapping("/delete/{userId}")
-    public List<User> deleteUser(@PathVariable int userId) {
+    public String deleteUser(@PathVariable int userId, Model model) {
         userService.deleteUser(userId);
-        return userService.getAllUsers();
+        model.addAttribute("users", userService.getAllUsers());
+        return "userList";
     }
 
     /**
@@ -68,12 +77,14 @@ public class UserController {
      * http://localhost:8080/users/update/{userId}
      *
      * @param userId the unique User Id.
-     * @param user   the new update User details.
-     * @return the updated User object.
+     * @param user the new updated User details.
+     * @param model the Model object to pass data to the view.
+     * @return the view displaying the updated user's details.
      */
-    @PutMapping("/update/{userId}")
-    public User updateUser(@PathVariable int userId, @RequestBody User user) {
+    @PostMapping("/update/{userId}")
+    public String updateUser(@PathVariable int userId, @ModelAttribute User user, Model model) {
         userService.updateUser(userId, user);
-        return userService.getUserById(userId);
+        model.addAttribute("user", userService.getUserById(userId));
+        return "userDetail";
     }
 }
