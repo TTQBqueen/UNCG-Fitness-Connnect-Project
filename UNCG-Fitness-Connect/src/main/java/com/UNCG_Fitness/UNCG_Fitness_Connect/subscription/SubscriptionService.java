@@ -1,5 +1,6 @@
 package com.UNCG_Fitness.UNCG_Fitness_Connect.subscription;
 
+import com.UNCG_Fitness.UNCG_Fitness_Connect.fitnessClass.Class;
 import com.UNCG_Fitness.UNCG_Fitness_Connect.fitnessClass.ClassRepository;
 import com.UNCG_Fitness.UNCG_Fitness_Connect.user.User;
 import com.UNCG_Fitness.UNCG_Fitness_Connect.user.UserRepository;
@@ -24,6 +25,9 @@ public class SubscriptionService {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    SubscriptionRepository subscriptionRepository;
+
     public List<Subscription> getAllSubscriptions() {
         return subscribedRepository.findAll();
     }
@@ -37,10 +41,17 @@ public class SubscriptionService {
     }
 
     public void addNewSubscription(int classId, int userId) {
-        Subscription sub = new Subscription(userRepository.getReferenceById(userId),
-                classRepository.getReferenceById(classId));
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("User no found with Id: " + userId));
+        Class fitnessClass = classRepository.findById(classId)
+                .orElseThrow(() -> new IllegalArgumentException("Class not found with Id: " + classId));
 
-        subscribedRepository.save(sub);
+        if (subscriptionRepository.getOneSubscription(classId, userId) == null) {
+            Subscription sub = new Subscription(user, fitnessClass);
+            subscriptionRepository.save(sub);
+        } else {
+            throw new IllegalArgumentException("Subscription already exists for user ID " + userId + " and class ID " + classId);
+        }
     }
 
     public List<Subscription> getSubscriptionsByUser(int userId) {

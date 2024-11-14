@@ -14,6 +14,8 @@ public class User {
 
     private String userName;
 
+    private String password;
+
     private String email;
 
     private String firstName;
@@ -41,6 +43,10 @@ public class User {
     public void setUserName(String userName) {
         this.userName = userName;
     }
+
+    public String getPassword() { return  password; }
+
+    public void setPassword(String password) { this.password = password; }
 
     public String getEmail() {
         return email;
@@ -90,8 +96,9 @@ public class User {
         this.flagged = flagged;
     }
 
-    public User(String userName, String email, String firstName, String lastName, Date joinDate, String role) {
+    public User(String userName, String password, String email, String firstName, String lastName, Date joinDate, String role) {
         this.userName = userName;
+        this.password = password;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -99,9 +106,10 @@ public class User {
         this.role = role;
     }
 
-    public User(int userId, String userName, String email, String firstName, String lastName, Date joinDate, String role) {
+    public User(int userId, String userName, String password, String email, String firstName, String lastName, Date joinDate, String role) {
         this.userId = userId;
         this.userName = userName;
+        this.password = password;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
