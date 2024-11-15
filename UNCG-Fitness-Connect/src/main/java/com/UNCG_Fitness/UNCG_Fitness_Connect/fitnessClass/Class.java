@@ -52,16 +52,7 @@ public class Class {
     private String imagePath;
 
     @Column(nullable = false)
-    private Date createdAt;
-
-    @Column(nullable = false)
     private Boolean flag;
-
-    @Column(nullable = false)
-    private Date updatedAt;
-
-    @Column(nullable = false)
-    private String Frequency;
 
     public Class(String title) {
         this.title = title;
@@ -175,11 +166,12 @@ public class Class {
         this.flag = flag;
     }
 
+
 //For the Instructor
 
     public Class(int classId, User creator, String title, String details, Date date, LocalTime startTime, LocalTime endTime,
-                 String level, String instructorName, String status, String imagePath, Date createdAt, Date updatedAt,
-                 int duration, boolean flag) {
+                 String level, String instructorName, String status, String imagePath,
+                 int duration, boolean flag ) {
         this.classId = classId;
         this.creator = creator;
         this.title = title;
@@ -192,15 +184,13 @@ public class Class {
         this.status = status;
         this.imagePath = imagePath;
         this.duration = duration;
-        this.flag = false;
-        this.createdAt= createdAt;
-        this.updatedAt= updatedAt;
+        this.flag = flag;
 
     }
 
     //    For admin
 
-    public Class(User creator, String title, String details, Date date, LocalTime startTime, LocalTime endTime, String level, String instructorName, String status, String imagePath,Date createdAt ) {
+    public Class(User creator, String title, String details, Date date, LocalTime startTime, LocalTime endTime, String level, String instructorName, String status, String imagePath ) {
         this.creator = creator;
         this.title = title;
         this.details = details;
@@ -211,32 +201,16 @@ public class Class {
         this.instructorName = instructorName;
         this.status = status;
         this.imagePath = imagePath;
-        this.createdAt=createdAt;
     }
 
     //short information
-    public Class(String title, String details, Date date, String level, String instructorName, String status, Date createdAt) {
+    public Class(String title, String details, Date date, String level, String instructorName, String status) {
         this.title = title;
         this.details = details;
         this.date = date;
         this.level = level;
         this.instructorName = instructorName;
         this.status = status;
-        this.createdAt=createdAt;
-    }
-    public Date getCreatedAt() {
-        return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
 }

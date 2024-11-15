@@ -55,44 +55,42 @@
 
     <!-- Middle Section -->
     <div class="column_middle">
-        <h1> Class Editor</h1>
         <div id = "text">
+            <h1 data-th-text="${class.title}"></h1>
+
 
             <!-- CONTENT -->
             <!--Bottom  Section  -->
-            <h1 data-th-text="${class.title}"> Swimming</h1>
-            <p data-th-text="${class.details}">fun and free swimming group lessons</p>
+            <img data-th-src="@{class.imagePath}" alt="Class Image" class="class-img">
+            <p data-th-text="${class.details}"></p>
             <div class="the_class-details">
-                <p data-th-text="${class.instructorName}"><span>Instructor:</span> Emily Davis</p>
-                <p><span>Duration:</span> 50 minutes</p>
-                <p data-th-text="${class.level}"><span>Level:</span> Beginner</p>
-
+                <p data-th-text="'Instructor Name: '+ ${class.instructorName}"></p>
+                <p data-th-text="'Duration: ' + ${class.duration}"></p>
+                <p data-th-text="'Level: ' + ${class.level}"></p>
+                <p data-th-text="'Date: ' + ${class.date}"></p>
+                <p data-th-text="'Time : ' + ${class.startTime} +'-'+ ${class.endTime} "></p>
 
                 <div class="signups">
                     <p><span>People Signed Up:</span> 18</p>
 
+                    <div class="reviews">
+                        <p><span>Reviews:</span></p>
+                        <th:block th:each="review : ${reviews}">
+                            <p th:text="${review.classId}"></p>
+                            <p>
+                                <span th:text="${review.details}"></span>
+                                <span th:text="${review.rating}"> </span>
+                            </p>
+                        </th:block>
+                    </div>
                 </div>
-
-                <div class="reviews">
-                <p><span>Reviews:</span></p>
-                <th:block th:each="review : ${reviews}">
-                    <p th:text="${review.classId}"></p>
-                    <p>
-                        <span th:text="${review.details}"></span>
-                        <span th:text="${review.rating}"> </span>
-                    </p>
-                    <p>
-                        <span class="rating">★★★★☆</span> -
-                        <span th:text="${review.details}">"Review text here."</span>
-                    </p>
-                </th:block>
-
+                <button>Modify</button>
+                <button>Delete</button>
             </div>
-
-
         </div>
     </div>
-    </div>
+
+
 </div>
 
 
@@ -107,9 +105,60 @@
 
 </body>
 <style>
-    .column_middle{
-        width: 100%;
-      margin-right: 5%;
-    }
+    .column_middle {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     max-width: 800px;
+     width: 100%;
+     padding: 20px;
+     background-color: #f9f9f9;
+     border-radius: 10px;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+ }
+
+ .class-img {
+     width: 100%;
+     height: auto;
+     max-height: 300px;
+     border-radius: 8px;
+     object-fit: cover;
+     margin-bottom: 20px;
+ }
+
+ .the_class-details {
+     text-align: left;
+     color: #272855;
+     font-size: 20px;
+ }
+
+ .the_class-details p {
+     margin: 5px 0;
+ }
+
+ .signups {
+     margin-top: 20px;
+     font-size: 16px;
+     color: #272855;
+     background-color: #e9eaf5;
+     padding: 10px;
+     border-radius: 5px;
+ }
+
+ .reviews {
+     margin-top: 15px;
+ }
+
+ .reviews span {
+     font-weight: bold;
+     color: #272855;
+ }
+
+ .reviews p {
+     margin: 5px 0;
+     font-size: 14px;
+     color: #555;
+ }
+
 </style>
 </html>

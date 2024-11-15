@@ -17,7 +17,7 @@
     <!-- Profile & Login Section -->
     <div class="user-options">
         <div id="profile-container"><a href="/services/profile.html">Profile</a></div>
-        <div id="login-container"><a href="../index.html">Logout</a></div>
+        <div id="login-container"><a href="/">Logout</a></div>
     </div>
     <!-- Logo Section -->
     <h2 class="logo">Spartan Motion</h2>
@@ -36,11 +36,11 @@
     <!-- Navigation column -->
     <div id ="nav" class="column_side" >
         <ul id ="links">
-            <li><a href="customer_home.html">Home</a></li>
-            <li><a href="classes.html">Classes</a></li>
-            <li><a href="../about.html">About</a></li>
-            <li><a href="../contact.html">Contact</a></li>
-            <li><a href="../privacypolicy.html">Privacy Policy</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="classes/all">Classes</a></li>
+            <li><a href="/">About</a></li>
+            <li><a href="/">Contact</a></li>
+            <li><a href="/">Privacy Policy</a></li>
         </ul>
     </div>
     <!-- Middle Section -->
@@ -68,6 +68,7 @@
         <table>
             <thead>
             <tr>
+                <th>ID</th>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Username</th>
@@ -78,7 +79,7 @@
             </tr>
 
             <tr data-th-each="user : ${userList}">
-
+                <td th:text="${user.id}"></td>
                 <td th:text="${user.firstName} + ' ' + ${user.lastName}"></td>
                 <td th:text="${user.email}"></td>
                 <td th:text="${user.userName}"></td>
