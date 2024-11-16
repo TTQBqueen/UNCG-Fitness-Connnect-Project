@@ -77,10 +77,11 @@
                 <th>Role</th>
                 <th>Flag</th>
             </tr>
-
-            <tr data-th-each="user : ${userList}">
+            </thead>
+            <tbody>
+            <tr th:each="user : ${userList}">
                 <td th:text="${user.id}"></td>
-                <td th:text="${user.firstName} + ' ' + ${user.lastName}"></td>
+                <td th:text="${user.firstName + ' ' + user.lastName}"></td>
                 <td th:text="${user.email}"></td>
                 <td th:text="${user.userName}"></td>
                 <td th:text="${user.password}"></td>
@@ -91,6 +92,7 @@
             </tbody>
         </table>
     </div>
+
 
 </div>
 

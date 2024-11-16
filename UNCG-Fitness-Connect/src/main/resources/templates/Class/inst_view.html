@@ -18,7 +18,7 @@
     <!-- Profile & Login Section -->
     <div class="user-options">
         <div id="profile-container"><a href="/Instructor/html_insc/profile_inc.html">Profile</a></div>
-        <div id="login-container"><a href="/index.html">Sign Out</a></div>
+        <div id="login-container"><a href="/index">Sign Out</a></div>
     </div>
     <!-- Logo Section -->
     <h2 class="logo">Spartan Motion</h2>
@@ -80,8 +80,7 @@
         </div>
             <div class="class-details">
                 <p th:text="'Instructor: ' + ${class.instructorName}"><span></span></p>
-                <!--                Need to add to table-->
-                <p><span>Duration:</span> 60 minutes</p>
+
                 <p th:text="'Level: ' + ${class.level}"><span></span></p>
                 <p th:text="'Description: ' + ${class.details}"><span></span></p>
 
