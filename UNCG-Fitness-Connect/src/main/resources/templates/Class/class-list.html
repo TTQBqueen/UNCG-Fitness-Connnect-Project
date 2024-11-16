@@ -19,8 +19,8 @@
 <div class="header">
     <!-- Profile & Login Section -->
     <div class="user-options">
-        <div id="profile-container"><a href="/Views/prfoile.html">Profile</a></div>
-        <div id="login-container"><a href="/index.html">Sign Out</a></div>
+        <div id="profile-container"><a href="/prfoile">Profile</a></div>
+        <div id="login-container"><a href="/index">Sign Out</a></div>
     </div>
     <!-- Logo Section -->
     <h2 class="logo">Spartan Motion</h2>
@@ -47,13 +47,9 @@
 
         <!-- Navigation Menu -->
         <ul id="links">
-            <li><a aria-current="page">Home</a></li>
-            <li><a href="/Class/">Classes</a></li>
-<!--            <li th:each="class : ${classList}">-->
-<!--                <a th:href="@{/classes/{id}(id=${class.userid})}" th:text="${class.title}">Class Title</a>-->
-<!--            </li>-->
+            <li><a aria-current="/">Home</a></li>
+            <li><a th:href="/classes/createForm">Create</a></li>
 
-            <li><a href="/classes/createForm">Create</a></li>
         </ul>
     </div>
 
@@ -66,7 +62,7 @@
         <div id = "text">
             <p>Here you can view and create classes for UNCG students. </p>
             <p>Click on the "Classes" tab to view all the classes available for students to sign up for.</p>
-            <p>Click on the "Create" tab to create a new class for students to sign up for.</p>
+            <p>Click on the "Create" tab to create a new class.</p>
         </div>
         <h1>Newly Added UNCG Group Fitness Classes</h1>
     </div>
@@ -77,6 +73,7 @@
 
 <div class="container">
     <div th:each="class: ${classList}" class="class-card">
+<!--        <p th:text="${class.creator.id}"></p>-->
         <img th:src="@{class.imagePath}" alt="Class Image" class="class-img">
         <div class="class-details">
             <h3 th:text="${class.title}"></h3>
@@ -84,7 +81,7 @@
             <p th:text="'Time : ' + ${class.startTime} +'-'+ ${class.endTime} "></p>
             <p th:text="'Level: ' + ${class.level}"></p>
             <p class="instructor" th:text="'Instructor: ' + ${class.instructorName}"></p>
-            <a class="btn-signup" th:href="@{/classes/{classId}(classId=${class.classId})}">Sign Up</a>
+            <a class="btn-signup" th:href="@{/classes/{classId}(classId=${class.classId})}">View More</a>
         </div>
 
     </div>

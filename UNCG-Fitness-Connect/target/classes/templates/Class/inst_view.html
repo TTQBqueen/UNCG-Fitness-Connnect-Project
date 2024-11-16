@@ -44,9 +44,9 @@
 
         <!-- Navigation Menu -->
         <ul id="links">
-            <li><a href="/Instructor/html_insc/instructor_home.html">Home</a></li>
-            <li><a href="/Instructor/html_insc/overview.html">Classes</a></li>
-            <li><a href="/Instructor/html_insc/create_class.html">Create</a></li>
+            <li><a href="/classes/instructors">Home</a></li>
+            <li><a href="/classes/all">Classes</a></li>
+            <li><a href="/classes/creatForm">Create</a></li>
         </ul>
     </div>
 
@@ -70,148 +70,40 @@
 
 
 <div class="container">
-    <div class="class-grid">
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Join Date</th>
+            <th>Role</th>
+            <th>Flag</th>
+        </tr>
 
-       <div class = "class-card" th:each="class: ${classList}">
-        <div class="class-header">
-            <h3 th:text="${class.title}"></h3>
-
-            <a data-th-href="@{/classes/{classId}(classId=${class.classId})}"><button class="toggle-info">View Class</button></a>
-        </div>
-            <div class="class-details">
-                <p th:text="'Instructor: ' + ${class.instructorName}"><span></span></p>
-                <!--                Need to add to table-->
-                <p><span>Duration:</span> 60 minutes</p>
-                <p th:text="'Level: ' + ${class.level}"><span></span></p>
-                <p th:text="'Description: ' + ${class.details}"><span></span></p>
-
-                <div class="signups">
-                    <p><span>People Signed Up:</span> 25</p>
-                </div>
-
-                    <div class="reviews">
-                        <p><span>Reviews:</span></p>
-                        <p><span class="rating">★★★★☆</span> - "Great class, very relaxing!"</p>
-                        <p><span class="rating">★★★★★</span> - "Perfect for beginners!"</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <tr th:each="user : ${userList}">
+            <td><a th:href="@{/classes/INSTRUCTOR/{userId}(userId=${user.id})}" th:text="${user.id}"></a></td>
+            <td th:text="${user.firstName} + ' ' + ${user.lastName}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.userName}"></td>
+            <td th:text="${user.password}"></td>
+            <td th:text="${user.joinDate}"></td>
+            <td th:text="${user.role}"></td>
+            <td th:text="${user.flagged}"></td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 
-<!--Hard coded classes-->
-
-<!--        <div class="container">-->
+</div>
 
 
-<!--        <div class="class-grid">-->
-<!--            &lt;!&ndash; Example of a class card with reviews and signups &ndash;&gt;-->
-<!--            <div class="class-card">-->
-<!--                <div class="class-header">-->
-<!--                    <h3>Yoga</h3>-->
-<!--                    <button class="toggle-info">Show Info</button>-->
-<!--                </div>-->
-<!--                <div class="class-details">-->
-<!--                    <p><span>Instructor:</span> Emily Davis</p>-->
-<!--                    <p><span>Duration:</span> 60 minutes</p>-->
-<!--                    <p><span>Level:</span> Beginner</p>-->
-<!--                    <p><span>Description:</span> A relaxing yoga class focused on flexibility and breath control.</p>-->
-
-<!--                    <div class="signups">-->
-<!--                        <p><span>People Signed Up:</span> 25</p>-->
-<!--                    </div>-->
-
-<!--                    <div class="reviews">-->
-<!--                        <p><span>Reviews:</span></p>-->
-<!--                        <p><span class="rating">★★★★☆</span> - "Great class, very relaxing!"</p>-->
-<!--                        <p><span class="rating">★★★★★</span> - "Perfect for beginners!"</p>-->
-<!--                    </div>-->
-<!--                    <a href="/Instructor/html_insc/view_single_class.html"><button id = "view" > View</button></a>-->
-<!--                </div>-->
-<!--            </div>-->
-
-
-<!--            <div class="class-card">-->
-<!--                <div class="class-header">-->
-<!--                    <h3>Spin Class</h3>-->
-<!--                    <button class="toggle-info">Show Info</button>-->
-<!--                </div>-->
-<!--                <div class="class-details">-->
-<!--                    <p><span>Instructor:</span> Emily Davis</p>-->
-<!--                    <p><span>Duration:</span> 45 minutes</p>-->
-<!--                    <p><span>Level:</span> Intermediate</p>-->
-<!--                    <p><span>Description:</span> A high-intensity spin class designed to boost cardiovascular fitness.</p>-->
-
-<!--                    <div class="signups">-->
-<!--                        <p><span>People Signed Up:</span> 30</p>-->
-<!--                    </div>-->
-
-<!--                    <div class="reviews">-->
-<!--                        <p><span>Reviews:</span></p>-->
-<!--                        <p><span class="rating">★★★☆☆</span> - "Good workout, but could be tougher."</p>-->
-<!--                        <p><span class="rating">★★★★★</span> - "Challenging and fun!"</p>-->
-<!--                    </div>-->
-<!--                    <a href="/Instructor/html_insc/view_single_class.html"><button id = "view" > View</button></a>-->
-<!--                </div>-->
-<!--            </div>-->
-
-<!--            <div class="class-card">-->
-<!--                <div class="class-header">-->
-<!--                    <h3>Kickboxing</h3>-->
-<!--                    <button class="toggle-info">Show Info</button>-->
-<!--                </div>-->
-<!--                <div class="class-details">-->
-<!--                    <p><span>Instructor:</span> Emily Davis</p>-->
-<!--                    <p><span>Duration:</span> 50 minutes</p>-->
-<!--                    <p><span>Level:</span> Advanced</p>-->
-<!--                    <p><span>Description:</span> An energetic kickboxing class for those looking to challenge themselves.</p>-->
-
-<!--                    <div class="signups">-->
-<!--                        <p><span>People Signed Up:</span> 18</p>-->
-<!--                    </div>-->
-
-<!--                    <div class="reviews">-->
-<!--                        <p><span>Reviews:</span></p>-->
-<!--                        <p><span class="rating">★★★★★</span> - "Loved the intensity!"</p>-->
-<!--                        <p><span class="rating">★★★★☆</span> - "Really pushed me, great class."</p>-->
-<!--                    </div>-->
-<!--                    <a href="/Instructor/html_insc/view_single_class.html"><button id = "view" > View</button></a>-->
-<!--                </div>-->
-<!--            </div>-->
-
-<!--            <div class="class-card">-->
-<!--                <div class="class-header">-->
-<!--                    <h3>Swimming</h3>-->
-<!--                    <button class="toggle-info">Show Info</button>-->
-<!--                </div>-->
-<!--                <div class="class-details">-->
-<!--                    <p><span>Instructor:</span> Emily Davis</p>-->
-<!--                    <p><span>Duration:</span> 50 minutes</p>-->
-<!--                    <p><span>Level:</span> Beginner</p>-->
-<!--                    <p><span>Description:</span> fun and free swimming group lessons</p>-->
-
-<!--                    <div class="signups">-->
-<!--                        <p><span>People Signed Up:</span> 18</p>-->
-<!--                    </div>-->
-
-<!--                    <div class="reviews">-->
-<!--                        <p><span>Reviews:</span></p>-->
-<!--                        <p><span class="rating">★★★★★</span> - "Loved the intensity!"</p>-->
-<!--                        <p><span class="rating">★★★★☆</span> - "Really pushed me, great class."</p>-->
-<!--                    </div>-->
-<!--                    <a href="/Instructor/html_insc/view_single_class.html"><button id = "view" > View</button></a>-->
-<!--                </div>-->
-<!--            </div>-->
-
-<!--        </div>-->
-
-<!--    </div>-->
-
-
-<!-- Footer -->
 <footer>
     <div th:replace="~{/fragments/_footer :: footer}"></div>
 </footer>
+
 
 <script>
     <!--    // JavaScript to toggle class details visibility-->
@@ -225,6 +117,63 @@
         });
 </script>
 </body>
+<style>
+    /* Container Styling */
+  .container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+
+  /* Table Styling */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+
+  thead th {
+    background-color: #5054B9;
+    color: #fff;
+    text-align: left;
+    padding: 12px;
+    font-weight: bold;
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  tbody tr:hover {
+    background-color: #ddd;
+  }
+
+  td, th {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  /* Cell Styling */
+  td {
+    color: #333;
+    font-size: 16px;
+    text-align: left;
+  }
+
+  /* Add some spacing around the table */
+  .container table {
+    margin: 20px 0;
+  }
+
+  /* Table Header */
+  thead th {
+    font-size: 18px;
+    border-bottom: 2px solid #ddd;
+  }
 
 
+</style>
 </html>

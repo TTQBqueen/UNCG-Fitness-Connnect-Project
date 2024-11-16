@@ -1,6 +1,8 @@
 package com.UNCG_Fitness.UNCG_Fitness_Connect.fitnessClass;
 
 import com.UNCG_Fitness.UNCG_Fitness_Connect.review.ReviewService;
+import com.UNCG_Fitness.UNCG_Fitness_Connect.user.User;
+import com.UNCG_Fitness.UNCG_Fitness_Connect.user.UserRepository;
 import com.UNCG_Fitness.UNCG_Fitness_Connect.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,8 @@ public class ClassController {
     @Autowired
     ClassService classService;
 
+    @Autowired
+    UserRepository userRepository;
     @Autowired
     UserService userService;
 
@@ -88,16 +92,9 @@ public class ClassController {
         return "/Class/class-list";
     }
 
-    //    Create Class
-    @GetMapping("/createForm")
-    public String showCreateForm(){
-        return "/Class/create-class";
-    }
-    @PostMapping("/new")
-    public String addNewClass(Class fitnessClass) {
-        classService.saveClass(fitnessClass);
-        return "redirect:/classes/all";
-    }
+
+
+
 //Update
 
     /**
@@ -107,7 +104,7 @@ public class ClassController {
      * @param model
      * @return
      */
-    @GetMapping("/update/{classlId}")
+    @GetMapping("/update/{classId}")
     public String showUpdateForm(@PathVariable int classId, Model model) {
         model.addAttribute("class", classService.getClassById(classId));
         return "Class/class-update";
@@ -126,5 +123,42 @@ public class ClassController {
         return "redirect:/classes/" + fitnessClass.getClassId();
     }
 
+    @GetMapping("/delete/{classId}")
+    public String deleteClassById(@PathVariable int classId) {
+        classService.deleteClassById(classId);
+        return "redirect:/classes/all";
+    }
+
+
+
+  //    Create Class
+    @GetMapping("/createForm")
+    public String showCreateForm(){
+        return "/Class/create-class";
+    }
+
+    @PostMapping("/new")
+    public String addNewClass(Class fitnessClass) {
+        classService.saveClass(fitnessClass);
+        return "redirect:/classes/all";
+    }
+
+
+    //    Extra methods
+//    getting all users that have the instrutor role
+    @GetMapping("/instructors")
+    public String getInstructors(Model model) {
+        List<User> instructors = userRepository.findByRole("INSTRUCTOR");
+        model.addAttribute("userList", instructors);
+        return "/Class/inst_view";
+    }
+
+    @PostMapping("/create/{id}")
+    public String showTaskForm(@ModelAttribute("fitnessClass") Class fitnessClass, @PathVariable int id) {
+        User user = userService.getUserById(id);
+        classService.saveClass(fitnessClass, user);
+        return "redirect:/goals/" + id;
+
+    }
 
 }

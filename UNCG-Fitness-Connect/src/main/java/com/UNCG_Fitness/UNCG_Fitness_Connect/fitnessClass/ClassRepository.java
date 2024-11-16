@@ -21,4 +21,5 @@ public interface ClassRepository extends JpaRepository<Class, Integer> {
 
     List<Class> getClassesByCreatorId(int creatorId);
 
+
 }

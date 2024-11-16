@@ -1,6 +1,7 @@
 package com.UNCG_Fitness.UNCG_Fitness_Connect.fitnessClass;
 
 import com.UNCG_Fitness.UNCG_Fitness_Connect.review.Review;
+import com.UNCG_Fitness.UNCG_Fitness_Connect.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,9 +49,12 @@ public class ClassService {
     }
 
 //    // update existing Class.
-//    public Class updateClass(int classID, Class fitnessClass) {
-//        classRepository.save(fitnessClass);
-//        return classRepository.save(existingClass);
+//    public void updateClass(int classId, Class fitnessClass) {
+//        Class existing = getClassById(classId);
+//        if (existing == null) {
+//            throw new IllegalArgumentException("Class not found with ID: " + classId);
+//        }
+//        classRepository.save(existing);
 //    }
 
     // delete class
@@ -58,5 +62,15 @@ public class ClassService {
         classRepository.deleteById(classId);
         return "Class removed !! " + classId;
     }
+
+    public void saveClass(Class fitnessClass, User user) {
+        classRepository.save(fitnessClass);
+    }
+
+
+//    public void createNewClass(Class fitnessClass, User user) {
+//        fitnessClass = new User(user.getId(),class);
+//        taskRepository.save(task);
+//    }
 
 }
