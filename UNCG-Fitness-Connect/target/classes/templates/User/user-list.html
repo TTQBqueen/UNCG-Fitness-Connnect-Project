@@ -80,7 +80,10 @@
             </thead>
             <tbody>
             <tr th:each="user : ${userList}">
-                <td th:text="${user.id}"></td>
+                <td>
+                    <a th:href="@{/classes/instructors/{userId}(userId=${user.id})}" th:text="${user.id}"></a>
+                </td>
+
                 <td th:text="${user.firstName + ' ' + user.lastName}"></td>
                 <td th:text="${user.email}"></td>
                 <td th:text="${user.userName}"></td>

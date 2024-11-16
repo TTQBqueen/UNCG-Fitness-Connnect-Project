@@ -157,7 +157,7 @@ public class ClassController {
     public String showTaskForm(@ModelAttribute("fitnessClass") Class fitnessClass, @PathVariable int id) {
         User user = userService.getUserById(id);
         classService.saveClass(fitnessClass, user);
-        return "redirect:/goals/" + id;
+        return "redirect:/classes/instructors" + id;
 
     }
 
