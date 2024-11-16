@@ -58,12 +58,11 @@
     <div class="column_middle">
         <h1> Class Editor</h1>
         <div id = "text">
-<<<<<<< Updated upstream
-=======
+
             <h1 data-th-text="${class.title}"></h1>
 
             <p>Debug: Creator ID = <span th:text="${creator.id}">No Creator Found</span></p>
->>>>>>> Stashed changes
+
 
             <!-- CONTENT -->
             <!--Bottom  Section  -->
@@ -79,7 +78,7 @@
                     <p><span>People Signed Up:</span> 18</p>
 
                 </div>
-<<<<<<< Updated upstream
+
 
                 <div class="reviews">
                 <p><span>Reviews:</span></p>
@@ -94,11 +93,11 @@
                         <span th:text="${review.details}">"Review text here."</span>
                     </p>
                 </th:block>
-=======
+
                 <a class="btn-signup" th:href="@{/classes/update/{classId}(classId=${class.classId})}">Modify</a>
 
                 <a class="btn-delete" th:href="@{/classes/delete/{classId}(classId=${class.classId})}" onclick="confirmDeletion()">Delete</a>
->>>>>>> Stashed changes
+
 
             </div>
 
