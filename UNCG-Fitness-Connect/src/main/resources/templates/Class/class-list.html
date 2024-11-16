@@ -73,7 +73,7 @@
 
 <div class="container">
     <div th:each="class: ${classList}" class="class-card">
-<!--        <p th:text="${class.creator.id}"></p>-->
+        <!--        <p th:text="${class.creator.id}"></p>-->
         <img th:src="@{class.imagePath}" alt="Class Image" class="class-img">
         <div class="class-details">
             <h3 th:text="${class.title}"></h3>
