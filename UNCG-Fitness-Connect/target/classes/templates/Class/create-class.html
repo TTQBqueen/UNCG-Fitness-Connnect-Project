@@ -14,6 +14,8 @@
     <form  th:action="@{/classes/createForm/{userId}(userId=${userId})}" method="POST">
 
 <!--        <label for="creator">Creator:</label>-->
+
+
         <input type="hidden" name="creatorId" th:value="${userId}" />
 
         <div  class="form-group">
