@@ -1,86 +1,169 @@
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link data-th-href="@{/Styles/template.css}" type="text/css" rel="stylesheet">
   <link data-th-href="@{/Styles/service.css}" type="text/css" rel="stylesheet">
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SignUp</title>
+  <style>
+    /* General styling */
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+    }
+
+
+
+    /* Signup container styling */
+    .signup_container {
+      background: white;
+      width: 80%;
+      margin: 50px auto;
+      padding: 20px 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .signup_container h1 {
+      font-size: 24px;
+      color: #272855;
+      margin-bottom: 10px;
+    }
+
+    .signup_container p {
+      font-size: 16px;
+      margin-bottom: 20px;
+      color: #555;
+    }
+
+    /* Form styling */
+    form {
+      text-align: left;
+      border:none;
+      margin: 5%;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #272855;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="file"],
+    select {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+      margin-right:10px;
+    }
+
+    input[type="checkbox"] {
+      margin-right: 10px;
+    }
+
+    /* Button styling */
+    .signupbtn {
+      width: 100%;
+      padding: 12px;
+      background-color: #869de9;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .signupbtn:hover {
+      background-color: #5054b9;
+    }
+
+    .cancelbtn {
+      width: 100%;
+      padding: 12px;
+      background-color: #f399a2;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .cancelbtn:hover {
+      background-color: #e05c70;
+    }
+
+
+  </style>
 </head>
 <body>
-
+<!-- Header -->
 <div class="header">
   <!-- Profile & Login Section -->
   <div class="user-options">
-    <div id="profile-container"><a href="">Home</a></div>
-    <div id="login-container"><a href="login">Login</a></div>
+    <div id="profile-container"><a href="/">Home</a></div>
   </div>
   <!-- Logo Section -->
   <h2 class="logo">Spartan Motion</h2>
 
-  <!-- Search Section -->
-  <div class="search-container">
-  </div>
 </div>
 
-
-<div class="sinup_container" id="id01">
-
+<!-- Signup container -->
+<div class="signup_container">
   <h1>Sign Up</h1>
   <p>Please fill in this form to create an account.</p>
 
-
   <form action="/users/new" method="POST">
-
     <label for="firstName">First Name:</label>
-    <input type="text" id="firstName" name="firstName" required><br><br>
+    <input type="text" id="firstName" name="firstName" required>
 
     <label for="lastName">Last Name:</label>
-    <input type="text" id="lastName" name="LastName" required><br><br>
+    <input type="text" id="lastName" name="lastName" required>
 
     <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required><br><br>
+    <input type="email" id="email" name="email" required>
 
     <label for="userName">Username:</label>
-    <input type="text" id="userName" name="userName" required><br><br>
+    <input type="text" id="userName" name="userName" required>
 
     <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required><br><br>
+    <input type="password" id="password" name="password" required>
 
     <label for="role">Role:</label>
     <select id="role" name="role" required>
       <option value="STUDENT">Student</option>
       <option value="INSTRUCTOR">Instructor</option>
     </select>
-    <br><br>
 
-    <label for="image">Profile pic:</label>
-    <input type="image" id="image" name="image" ><br><br>
+    <label for="image">Profile Picture:</label>
+    <input type="file" id="image" name="image">
 
-    <label for="flagged">By Clicking the button you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a></label>
-    <input type="checkbox" id="flagged" name="flagged" value="0" required><br><br>
+    <label for="flagged">
+      <input type="checkbox" id="flagged" name="flagged" required>
+      By clicking Sign Up, you agree to our <a href="#" style="color:dodgerblue;">Terms & Privacy</a>
+    </label>
 
-    <div class="clearfix">
-      <button type="button" class="cancelbtn">Cancel</button>
-      <button type="submit" class="signupbtn">Sign Up</button>
-    </div>
+    <button type="submit" class="signupbtn">Sign Up</button>
+    <button type="button" class="cancelbtn" onclick="window.location.href='/'">Cancel</button>
   </form>
-  <p>Already have an account <a href ="login">Login in</a></p>
+
+  <p>Already have an account? <a href="/login">Login</a></p>
 </div>
-
-</div>
-
-
 
 <!-- Footer -->
 <footer>
   <div th:replace="~{/fragments/_footer :: footer}"></div>
 </footer>
-
-
 </body>
 </html>
-
