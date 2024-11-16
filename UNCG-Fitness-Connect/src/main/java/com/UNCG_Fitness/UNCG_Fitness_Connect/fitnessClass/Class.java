@@ -178,7 +178,7 @@ public class Class {
 //For the Instructor
 
     public Class(int classId, User creator, String title, String details, Date date, LocalTime startTime, LocalTime endTime,
-                 String level, String instructorName, String status, String imagePath, Date createdAt, Date updatedAt,
+                 String level, String instructorName, String status, String imagePath,
                  int duration, boolean flag) {
         this.classId = classId;
         this.creator = creator;
@@ -193,14 +193,13 @@ public class Class {
         this.imagePath = imagePath;
         this.duration = duration;
         this.flag = false;
-        this.createdAt= createdAt;
-        this.updatedAt= updatedAt;
+
 
     }
 
     //    For admin
 
-    public Class(User creator, String title, String details, Date date, LocalTime startTime, LocalTime endTime, String level, String instructorName, String status, String imagePath,Date createdAt ) {
+    public Class(User creator, String title, String details, Date date, LocalTime startTime, LocalTime endTime, String level, String instructorName, String status, String imagePath) {
         this.creator = creator;
         this.title = title;
         this.details = details;
@@ -211,7 +210,7 @@ public class Class {
         this.instructorName = instructorName;
         this.status = status;
         this.imagePath = imagePath;
-        this.createdAt=createdAt;
+
     }
 
     //short information
@@ -222,21 +221,6 @@ public class Class {
         this.level = level;
         this.instructorName = instructorName;
         this.status = status;
-        this.createdAt=createdAt;
-    }
-    public Date getCreatedAt() {
-        return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
 }
