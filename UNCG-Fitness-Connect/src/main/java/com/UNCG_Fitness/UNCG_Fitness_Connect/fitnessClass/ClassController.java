@@ -130,13 +130,6 @@ public class ClassController {
     }
 
 
-
-  //    Create Class
-    @GetMapping("/createForm")
-    public String showCreateForm(){
-        return "/Class/create-class";
-    }
-
     @PostMapping("/new")
     public String addNewClass(Class fitnessClass) {
         classService.saveClass(fitnessClass);
@@ -145,7 +138,8 @@ public class ClassController {
 
 
     //    Extra methods
-//    getting all users that have the instrutor role
+//    getting all users that have the instructor role
+
     @GetMapping("/instructors")
     public String getInstructors(Model model) {
         List<User> instructors = userRepository.findByRole("INSTRUCTOR");
@@ -153,12 +147,37 @@ public class ClassController {
         return "/Class/inst_view";
     }
 
-    @PostMapping("/create/{id}")
-    public String showTaskForm(@ModelAttribute("fitnessClass") Class fitnessClass, @PathVariable int id) {
-        User user = userService.getUserById(id);
-        classService.saveClass(fitnessClass, user);
-        return "redirect:/classes/instructors" + id;
 
+
+    @GetMapping("/createForm/{userId}")
+    public String showCreateClassForm(@PathVariable int userId, Model model) {
+        // Fetch the user to verify the userId is valid
+        User creator = userService.getUserById(userId);
+        if (creator == null) {
+            throw new IllegalArgumentException("Invalid user ID: " + userId);
+        }
+
+        // Pass the userId and an empty class object to the model
+        model.addAttribute("userId", userId);
+        model.addAttribute("class", new Class());
+        return "Class/create-class";
     }
+
+
+    @PostMapping("/createForm/{userId}")
+    public String createClass(@ModelAttribute Class fitnessClass, @PathVariable int userId) {
+        // Fetch the user to associate with the class
+        User creator = userService.getUserById(userId);
+        if (creator == null) {
+            throw new IllegalArgumentException("Invalid user ID: " + userId);
+        }
+        //  the user with the class
+        fitnessClass.setCreator(creator);
+        // Save the class
+        classService.saveClass(fitnessClass);
+        // Redirect to the instructor's class list
+        return "redirect:/classes/INSTRUCTOR/" + userId;
+    }
+
 
 }

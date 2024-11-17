@@ -11,7 +11,7 @@
 
 <h1>Create a New Class</h1>
 
-    <form  th:action="@{/classes/createForm/{userId}(userId=${userId})}" method="POST">
+    <form th:action="@{/classes/createForm/{userId}(userId=${userId})}" method="post" th:object="${class}">
 
 <!--        <label for="creator">Creator:</label>-->
 
@@ -71,16 +71,6 @@
             <option value="Cancelled">Cancelled</option>
         </select>
         <br><br>
-        </div>
-
-        <div  class="form-group">
-        <label for="createdAt">Created At:</label>
-        <input type="date" id="createdAt" name="createdAt"><br><br>
-        </div>
-
-        <div  class="form-group">
-        <label for="updatedAt">Updated At:</label>
-        <input type="date" id="updatedAt" name="updatedAt"><br><br>
         </div>
 
         <div  class="form-group">

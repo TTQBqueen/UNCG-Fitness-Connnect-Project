@@ -67,10 +67,8 @@ public class ClassService {
         classRepository.save(fitnessClass);
     }
 
-
-//    public void createNewClass(Class fitnessClass, User user) {
-//        fitnessClass = new User(user.getId(),class);
-//        taskRepository.save(task);
-//    }
+    public List<Class> getClassesByInstructor(int userId) {
+        return classRepository.findByCreator_Id(userId);
+    }
 
 }

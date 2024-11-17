@@ -47,7 +47,7 @@
         <ul id="links">
             <li><a href="/">Home</a></li>
             <li><a href="/classes/all">Classes</a></li>
-            <li><a href="/classes/createForm">Create</a></li>
+            <li><a href="/classes/createForm/">Create</a></li>
 <!--            <li><a th:href="@{/classes/INSTRUCTOR/{creatorId}(creatorId=${creator.id})}">View Made Classes</a></li>-->
         </ul>
     </div>
@@ -60,11 +60,13 @@
             <h1 data-th-text="${class.title}"></h1>
 
 
+
             <!-- CONTENT -->
             <!--Bottom  Section  -->
             <img data-th-src="@{class.imagePath}" alt="Class Image" class="class-img">
             <p data-th-text="${class.details}"></p>
             <div class="the_class-details">
+
                 <p data-th-text="'Instructor Name : '+ ${class.instructorName}"></p>
                 <p data-th-text="'Duration : ' + ${class.duration}"></p>
                 <p data-th-text="'Level : ' + ${class.level}"></p>
