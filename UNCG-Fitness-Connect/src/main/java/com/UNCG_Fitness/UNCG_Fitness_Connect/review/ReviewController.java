@@ -13,6 +13,7 @@ public class ReviewController {
     @Autowired
     ReviewService reviewService;
   
+    //This will get all the reviews
     @GetMapping("/all")
     public String getAllReviews(Model model) {
         model.addAttribute("reviewList", reviewService.getAllReviews());
@@ -20,7 +21,7 @@ public class ReviewController {
         //return reviewService.getAllReviews();
     } 
 
-
+// this will get one singular review by its name/ID
     @GetMapping("/{reviewId}")
     public String getReviewById(@PathVariable int reviewId, Model model){
         model.addAttribute("review", reviewService.getReviewById(reviewId));
@@ -28,6 +29,7 @@ public class ReviewController {
         //return reviewService.getReviewById(reviewId);
     } 
 
+    //This will add a new review
     @PostMapping("/add")
     public String addReview(@ModelAttribute Review review) {
         reviewService.createReview(review);
@@ -36,17 +38,19 @@ public class ReviewController {
         //return reviewService.createReview(review);
     }  
 
+    //This will update the status of a review
     @PutMapping("/update/status/{reviewId}")
     public String updateReviewStatus(@PathVariable int reviewId, @RequestBody String status, Model model){ 
         model.addAttribute("review", reviewService.getReviewById(reviewId)); 
         return "review-update"; 
-        //return reviewService.updateReviewStatus(reviewId, status);
-    }
+        //return re viewService.updateReviewStatus(reviewId, status);
+    } 
+
+    // this will delete the review by its name/ID
     @DeleteMapping("/delete/{reviewId}")
     public String deleteReviewById(@PathVariable int reviewId){ 
         reviewService.deleteReviewById(reviewId);
         return "redirect:/reviews/all";
         //reviewService.deleteReviewById(reviewId);
     }
-
 }
