@@ -50,6 +50,8 @@ public class ClassController {
     public String getClassesByCreatorId(@PathVariable int creatorId, Model model) {
         model.addAttribute("classList", classService.getClassesByCreatorId(creatorId));
         model.addAttribute("title", "Your Classes: " + creatorId);
+        model.addAttribute("creatorId",  creatorId);
+
         return "/Class/class-list";
     }
 
