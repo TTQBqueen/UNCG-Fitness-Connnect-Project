@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" type="text/css" href="../../style/nav.css">
+    <link data-th-href="@{/Styles/template.css}" type="text/css" rel="stylesheet">
 
     <title>Welcome</title>
 </head>
@@ -31,9 +32,9 @@
         <!-- Navigation column -->
       <div id ="nav", class="column_side" >
         <ul id="links">
-            <li><a href="/SysAdmin/html_SysAdmin/Sys_AdminHomepage.html">Home</a></li>
-            <li><a href="/SysAdmin/html_SysAdmin/Manage_Users.html">Manage Users</a></li>
-            <li><a href="/SysAdmin/html_SysAdmin/Manage_Classes.html">Manage Classes</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="/login">Manage Users</a></li>
+            <li><a href="/Admin/manage_classes">Manage Classes</a></li>
             <li><a href="/SysAdmin/html_SysAdmin/Manage_Reviews.html">Manage Reviews</a></li> 
             <li><a href="/SysAdmin/html_SysAdmin/Manage_Services.html">Manage Services</a></li>
           </ul>

@@ -17,7 +17,7 @@ public class ReviewController {
     @GetMapping("/all")
     public String getAllReviews(Model model) {
         model.addAttribute("reviewList", reviewService.getAllReviews());
-        return "review-list";
+        return "/Admin/review";
         //return reviewService.getAllReviews();
     } 
 
