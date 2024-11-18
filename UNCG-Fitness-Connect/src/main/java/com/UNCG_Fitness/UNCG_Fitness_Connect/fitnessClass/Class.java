@@ -215,5 +215,12 @@ public class Class {
         this.instructorName = instructorName;
         this.status = status;
     }
+    @Override
+    public String toString() {
+        return "Class{" +
+                "classId=" + classId +
+                ", creator=" + creator +
+                '}';
+    }
 
 }

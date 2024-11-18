@@ -124,5 +124,9 @@ public class User {
 
     public User() {
     }
+    public String toString() {
+        return "User{" +
+                "userId=" + userId  +'}';
+    }
 
 }

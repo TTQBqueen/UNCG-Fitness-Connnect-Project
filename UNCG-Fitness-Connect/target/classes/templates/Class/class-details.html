@@ -47,8 +47,8 @@
         <ul id="links">
             <li><a href="/">Home</a></li>
             <li><a href="/classes/all">Classes</a></li>
-            <li><a href="/classes/createForm/">Create</a></li>
-<!--            <li><a th:href="@{/classes/INSTRUCTOR/{creatorId}(creatorId=${creator.id})}">View Made Classes</a></li>-->
+            <li><a href="@{/classes/createForm/{creatorId}(creatorId=${user.id})}">Create</a></li>
+           <li> <a th:href="@{/classes/createForm/{userId}(userId=${user.id})}" >Create Class</a></li>
         </ul>
     </div>
 

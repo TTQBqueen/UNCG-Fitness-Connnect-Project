@@ -92,8 +92,10 @@
             <td th:text="${user.joinDate}"></td>
             <td th:text="${user.role}"></td>
             <td th:text="${user.flagged}"></td>
+            <td><a th:href="@{/classes/createForm/{userId}(userId=${user.id})}" >Create Class</a></td>
         </tr>
         </tbody>
+
     </table>
 </div>
 
