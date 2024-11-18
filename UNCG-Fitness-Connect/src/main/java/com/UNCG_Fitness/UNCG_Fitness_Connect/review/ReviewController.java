@@ -29,7 +29,7 @@ public class ReviewController {
     } 
 
     @PostMapping("/add")
-    public String addReview(Review review) {
+    public String addReview(@ModelAttribute Review review) {
         reviewService.createReview(review);
         return "redirect:/reviews/all";
 

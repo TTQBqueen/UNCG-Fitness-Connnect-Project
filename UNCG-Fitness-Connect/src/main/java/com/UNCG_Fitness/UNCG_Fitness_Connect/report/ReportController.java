@@ -16,6 +16,7 @@ public class ReportController{
     @Autowired
     private ReportService reportService;
 
+    //This will get all Reports
     @GetMapping("/all")
     //public List<Report> getAllReports() { 
     public String getAllReports(Model model) { 
