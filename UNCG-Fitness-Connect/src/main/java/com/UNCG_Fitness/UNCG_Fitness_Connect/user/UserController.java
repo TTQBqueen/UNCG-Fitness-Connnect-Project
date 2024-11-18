@@ -18,15 +18,14 @@ public class UserController {
      * Create a new User entry.
      * http://localhost:8080/users/new
      *
-     * @param user the new User object.
-     * @param model the Model object to pass data to the view.
      * @return the updated list of Users.
      */
+    @GetMapping("/createUser")
+    public String showSignupForm() { return "signup.html"; }
     @PostMapping("/new")
-    public String addNewUser(@ModelAttribute User user, Model model) {
+    public String addNewUser(User user) {
         userService.addNewUser(user);
-        model.addAttribute("users", userService.getAllUsers());
-        return "/User/user-list";
+        return "redirect:/users/all";
     }
 
     /**
@@ -54,38 +53,64 @@ public class UserController {
     @GetMapping("/{userId}")
     public String getUser(@PathVariable int userId, Model model) {
         User user = userService.getUserById(userId);
+        if (user == null) {
+            return "error/404"; // Redirect to a 404 error page
+        }
         model.addAttribute("user", user);
-        return "/User/user-details";
+        return "User/user-details";
     }
 
     /**
-     * Delete a User object.
+     * Show confirmation for deleting a user.
      * http://localhost:8080/users/delete/{userId}
+     *
+     * @param userId the unique User Id.
+     * @param model the Model object to pass data to the view.
+     *
+     */
+    @GetMapping("/delete/{userId}")
+    public String confirmDelete(@PathVariable int userId, Model model) {
+        User user = userService.getUserById(userId);
+        model.addAttribute("user", user);
+        return "/User/user-delete";
+    }
+
+    /**
+     * Perform the deletion.
      *
      * @param userId the unique User Id.
      * @param model the Model object to pass data to the view.
      * @return the updated list of Users.
      */
-    @DeleteMapping("/delete/{userId}")
+    @PostMapping("/delete/{userId}")
     public String deleteUser(@PathVariable int userId, Model model) {
         userService.deleteUser(userId);
         model.addAttribute("users", userService.getAllUsers());
-        return "/User/user-list";
+        return "redirect:/users/all";
     }
 
     /**
-     * Update an existing User object.
+     * Show the update form.
      * http://localhost:8080/users/update/{userId}
      *
      * @param userId the unique User Id.
-     * @param user the new updated User details.
      * @param model the Model object to pass data to the view.
+     */
+    @GetMapping("/update/{userId}")
+    public String updateUser(@PathVariable int userId, Model model) {
+        model.addAttribute("user", userService.getUserById(userId));
+        return "/User/user-update";
+    }
+
+    /**
+     * Perform the update.
+     *
+     * @param user the new updated User details.
      * @return the view displaying the updated user's details.
      */
-    @PostMapping("/update/{userId}")
-    public String updateUser(@PathVariable int userId, @ModelAttribute User user, Model model) {
-        userService.updateUser(userId, user);
-        model.addAttribute("user", userService.getUserById(userId));
-        return "/User/user-details";
+    @PostMapping("/update")
+    public String updateUser(User user) {
+        userService.saveUser(user);
+        return "redirect:/users/" + user.getId();
     }
 }

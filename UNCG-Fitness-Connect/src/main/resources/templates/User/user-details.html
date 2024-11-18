@@ -1,10 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link data-th-href="@{/Styles/template.css}" type="text/css" rel="stylesheet">
+    <link data-th-href="@{/Styles/inst_view.css}" type="text/css" rel="stylesheet">
+    <title>User Details</title>
 </head>
 <body>
+<!-- Header -->
+<div class="header">
+    <!-- Profile & Login Section -->
+    <div class="user-options">
+        <div id="profile-container"><a href="/Instructor/html_insc/profile_inc.html">Profile</a></div>
+        <div id="login-container"><a href="/index.html">Sign Out</a></div>
+    </div>
+    <!-- Logo Section -->
+    <h2 class="logo">Spartan Motion</h2>
+
+    <!-- Search Section -->
+    <div class="search-container">
+        <form>
+            <input type="text" placeholder="Search.." name="search">
+            <button type="submit"><i class="fa fa-search">Search</i></button>
+        </form>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="row">
+    <!-- Navigation column -->
+    <div id="nav" class="column_side">
+        <ul id="links">
+            <li><a href="customer_home.html">Home</a></li>
+            <li><a href="classes.html">Classes</a></li>
+            <li><a href="../about.html">About</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../privacypolicy.html">Privacy Policy</a></li>
+        </ul>
+    </div>
+
+    <!-- User Details Section -->
+    <div class="column_middle">
+        <h1>User Details</h1>
+        <div class="container">
+            <div class="class-card">
+                <div class="class-header">
+                    <h3 th:text="${user.firstName} + ' ' + ${user.lastName}"></h3>
+                    <p th:text="${user.role}"></p>
+                    <p><span>Email:</span> <span th:text="${user.email}"></span></p>
+                    <p><span>Username:</span> <span th:text="${user.userName}"></span></p>
+                    <p><span>Role:</span> <span th:text="${user.role}"></span></p>
+                </div>
+                <!-- Delete User Button -->
+                <div class="delete-section">
+                    <a th:href="@{/users/delete/{userId}(userId=${user.id})}">
+                        <button type="button">Delete User</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <div th:replace="~{/fragments/_footer :: footer}"></div>
+</footer>
 
 </body>
 </html>
