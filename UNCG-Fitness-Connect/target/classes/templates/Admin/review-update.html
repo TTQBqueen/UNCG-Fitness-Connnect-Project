@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link data-th-href="@{/Styles/template.css}" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../../style/nav.css"> 
+    <title>Update Review Status</title>
+</head>
+<body>
+
+<!-- Header Section -->
+<div class="header">
+    <h2>Update Review Status</h2>
+    <!-- Profile & Login Section -->
+    <div class="user-options">
+        <div id="profile-container"><a href="/profile">Profile</a></div>
+        <div id="login-container"><a href="/">Logout</a></div>
+    </div>
+</div>
+
+<!-- Navigation Bar -->
+<div id="nav" class="column_side">
+    <ul id="links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/reviews">Reviews</a></li>
+    </ul>
+</div>
+
+<!-- Main Content -->
+<div class="column middle">
+    <form th:action="@{'/reviews/update/status/' + ${review.reviewId}}" method="post">
+        <div class="form-group">
+            <p><strong>Review ID:</strong> <span th:text="${review.reviewId}"></span></p>
+            <p><strong>Current Status:</strong> <span th:text="${review.status}"></span></p>
+
+            <label for="status">New Status:</label>
+            <input type="text" id="status" name="status" required>
+        </div>
+
+        <button type="submit">Update</button>
+    </form>
+</div>

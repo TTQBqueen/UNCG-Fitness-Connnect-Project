@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link data-th-href="@{/Styles/template.css}" type="text/css" rel="stylesheet">
+    <title>Report Details</title>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+    <!-- Profile & Login Section -->
+    <div class="user-options">
+        <div id="profile-container"><a href="/profile">Profile</a></div>
+        <div id="login-container"><a href="/login">Sign Out</a></div>
+    </div>
+    <!-- Logo Section -->
+    <h2 class="logo">Spartan Motion</h2>
+
+    <!-- Search Section -->
+    <div class="search-container">
+        <form >
+            <input type="text" placeholder="Search.." name="search">
+            <button type="submit"><i class="fa fa-search">Search</i></button>
+        </form>
+    </div>
+</div>
+
+<!-- All the column sections -->
+<div class="row">
+
+    <!-- Navigation column -->
+    <div id="nav" class="column_side">
+        <!-- Navigation Menu -->
+        <ul id="links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/reports/all">Reports</a></li>
+        </ul>
+    </div>
+
+    <!-- Middle Section -->
+    <div class="column_middle">
+        <div id="text">
+            <!-- CONTENT -->
+            <div class="the_report-details">
+                <h1>Report Details</h1>
+                
+                <p><strong>ID:</strong> <span th:text="${report.reportId}"></span></p>
+                <p><strong>Type:</strong> <span th:text="${report.reportType}"></span></p>
+                <p><strong>Reason:</strong> <span th:text="${report.reason}"></span></p>
+                <p><strong>Status:</strong> <span th:text="${report.status}"></span></p>
+                <p><strong>Created At:</strong> <span th:text="${#dates.format(report.createdAt, 'yyyy-MM-dd HH:mm:ss')}"></span></p>
+                <p><strong>Updated At:</strong> <span th:text="${#dates.format(report.updatedAt, 'yyyy-MM-dd HH:mm:ss')}"></span></p>
+
+                <a href="/reports/all" class="btn-back">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <div th:replace="~{/fragments/_footer :: footer}"></div>
+</footer>
+
+</body>
+</html>

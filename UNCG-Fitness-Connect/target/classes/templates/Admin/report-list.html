@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="../../style/nav.css">
+    <link data-th-href="@{/Styles/template.css}" type="text/css" rel="stylesheet">
+    <title>Report List</title>
+</head>
+<body>
+    <h1>Report List</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Type</th>
+                <th>Reason</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="report : ${reportsList}">
+                <td th:text="${report.reportId}"></td>
+                <td th:text="${report.reportType}"></td>
+                <td th:text="${report.reason}"></td>
+                <td th:text="${report.status}"></td>
+                <td>
+                    <a th:href="@{/reports/{id}(id=${report.reportId})}">View</a> |
+                    <a th:href="@{/reports/update/status/{id}(id=${report.reportId})}">Update</a> 
+                    <form th:action="@{/reports/delete/{id}(id=${report.reportId})}" method="post">
+                        <button type="submit">Delete</button>
+                    </form>
+                    
+                    <!--<a th:href="@{/reports/delete/{id}(id=${report.reportId})}" 
+                       onclick="return confirm('Are you sure?')">Delete</a> -->
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="/reports/new">Add New Report</a>
+</body>
+</html>
+

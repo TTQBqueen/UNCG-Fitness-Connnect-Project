@@ -20,14 +20,14 @@ public class ReportController{
     //public List<Report> getAllReports() { 
     public String getAllReports(Model model) { 
         model.addAttribute("reportsList", reportService.getAllReports());
-        return "report-list";
+        return "/Admin/report-list";
         //return reportService.getAllReports();
     } 
     // this will get a report by id
     @GetMapping("/{reportId}")
     public String getReportById(@PathVariable int reportId, Model model) {
         model.addAttribute("report", reportService.getReportById(reportId));
-        return "report-detail";
+        return "/Admin/report-detail";
         //return reportService.getReportById(reportId);
     } 
 
@@ -39,27 +39,46 @@ public class ReportController{
             reportList = reportService.getReportByType(reportType);
         } else reportList = reportService.getAllReports();
         model.addAttribute("reportsList", reportList); 
-        return "report-list";
+        return "/Admin/report-list";
         //return reportService.getReportByType(reportType);
-    } 
+    }  
+    @GetMapping("/new") 
+    public String showNewReportForm(Model model) { 
+        model.addAttribute("report", new Report());
+        return "/Admin/report-new";
+        //return reportService.addNewReport(report);
+    }
     // this will add a new report
     @PostMapping("/new")
     public String addNewReport(Report report){
         reportService.addNewReport(report);
         return "redirect:/reports/all";
         //return reportService.addNewReport(report);
-    } 
+    }  
+    
+    @GetMapping("/update/status/{reportId}")
+    public String showUpdateReportForm(@PathVariable int reportId, Model model) {
+        Report report = reportService.getReportById(reportId);
+        model.addAttribute("report", report);
+        return "/Admin/report-update";
+    }
+
+    @PostMapping("/update/status/{reportId}")
+public String updateReportStatus(@PathVariable int reportId, @RequestParam("status") String status) {
+    reportService.updateReportStatus(reportId, status);
+    return "redirect:/reports/all";
+}
 
     // this will update a report
-    @PutMapping("/update/status/{reportId}")
-    public String updateReportStatus(@PathVariable int reportId, @RequestBody String status, Model model) {
-        model.addAttribute("status", reportService.getReportById(reportId));
-        return "report-update";
-        // return reportService.updateReportStatus(reportId, status);
-    } 
+    /**@PutMapping("/update/status/{reportId}")
+    public String updateReportStatus(@PathVariable int reportId, @RequestParam("status") String status) {
+        reportService.updateReportStatus(reportId, status);
+        return "redirect:/reports/all";
+    }  
+        **/
 
     // this will delete a report
-    @DeleteMapping("/delete/{reportId}")
+    @PostMapping("/delete/{reportId}")
     public String deleteReportById(@PathVariable int reportId){
         reportService.deleteReportById(reportId);
         return "redirect:/reports/all";

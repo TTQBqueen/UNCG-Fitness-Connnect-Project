@@ -35,8 +35,12 @@
             <li><a href="/">Home</a></li>
             <li><a href="/login">Manage Users</a></li>
             <li><a href="/Admin/manage_classes">Manage Classes</a></li>
-            <li><a href="/SysAdmin/html_SysAdmin/Manage_Reviews.html">Manage Reviews</a></li> 
-            <li><a href="/SysAdmin/html_SysAdmin/Manage_Services.html">Manage Services</a></li>
+            <li><a href="/Admin/Manage_Reviews.html">Manage Reviews</a></li> 
+            <li><a href="/Admin/Manage_Services.html">Manage Services</a></li> 
+            <li><a href="/Admin/report.html">Manage Reports</a></li> 
+            <li><a href="/Admin/report-new.html">Add New Report</a></li>  
+            <li><a href="/Admin/review-add.html">Add New Review</a></li>
+
           </ul>
       </div>
       <!-- Middle Section -->
@@ -45,50 +49,11 @@
                 <h1> Manage Reviews</h1>
                 <p> Here the Sys Admin will have access to the review page and its functionalities.</p>
             </div>
-        </div>
-    </div>  
-    
-    <!-- Reviews section -->
-     <div class="reviews"> 
-        <h2>All Reviews</h2> 
-        <table> 
-            <thead>  
-                <tr>
-                    <th>Review ID</th>
-                    <th>User ID</th>
-                    <th>Review Title</th>
-                    <th>Review Content</th>
-                    <th>Rating</th>
-                    <th>Flagged</th>
-                </tr>
-            </thead> 
-            <tbody> 
-                <tr th:each="review : ${reviewList}"> 
-                    <td th:text="${review.review_id}"></td>
-                    <td th:text="${review.user_id}"></td>
-                    <td th:text="${review.title}"></td>
-                    <td th:text="${review.content}"></td>
-                    <td th:text="${review.rating}"></td>
-                    <td th:if="${review.flagged} == true">Yes</td>
-                    <td th:if="${!review.flagged} == false">No</td> 
-                    <td> 
-                        <a th:href="@{'/reviews/' + ${review.reviewId}}" class="button">View</a> 
-                        <form th:action="@{'/reviews/delete/' + ${review.reviewId}}" method="post" style="display:inline;"> 
-                            <input type="hidden" name="_method" value="DELETE" /> 
-                            <button type="submit" class="button delete">Delete</button>
-                        </form> 
-                        <form th:action="@{'/reviews/update/status/' + ${review.reviewId}}" method="post" style="display:inline;">  
-                            <input type="text" name="status" placeholder="New status" /> 
-                            <button type="submit" name="button update">Update</button> 
-                        </form>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-     </div> 
-    
+        </div> 
+    </div>   
 
-
+    
+<!-- CONTENT 
     <div class="reviews">
         <p><span>Reviews:</span></p>
         <p><span class="rating">★★★★★</span> - "Loved the intensity!"</p>
@@ -96,15 +61,31 @@
         <p class = "flagged"><span class="rating">★★☆☆☆</span> - "Too crowded and noisy!" <span class="flag">[Flagged]</span></p>
     </div>
 
-<!-- CONTENT -->
-    <!--Bottom  Section  -->
-      <div class="column-bottom">
+   
+       <div class="column-bottom">
        <img src="/SysAdmin/Sys_Admin_Images/Fitness_girl_image.jpg" alt="running" style="width:100%">
-      </div>
+      </div> 
+
+    -->
       
     
+<!-- Footer --> 
 <!-- Footer -->
+<footer>
+    <div th:replace="~{/fragments/_footer :: footer}"></div>
+</footer>
 
+
+</body>
+<style>
+    .column_middle{
+        width: 100%;
+      margin-right: 5%;
+    }
+</style>
+</html>
+
+<!-- Footer 
    <footer> 
     <div class="footer">
         <div class="footer-content">
@@ -144,7 +125,8 @@
             <p>&copy; 2024 Your Website. All Rights Reserved.</p>
         </div>
     </div>
-   </footer>
+   </footer> 
+   -->
    
 
 </body>

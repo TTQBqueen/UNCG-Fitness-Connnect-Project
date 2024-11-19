@@ -25,7 +25,7 @@ public class ReviewController {
     @GetMapping("/{reviewId}")
     public String getReviewById(@PathVariable int reviewId, Model model){
         model.addAttribute("review", reviewService.getReviewById(reviewId));
-        return "review-details";
+        return "/Admin/review-details";
         //return reviewService.getReviewById(reviewId);
     } 
 
@@ -42,7 +42,7 @@ public class ReviewController {
     @PutMapping("/update/status/{reviewId}")
     public String updateReviewStatus(@PathVariable int reviewId, @RequestBody String status, Model model){ 
         model.addAttribute("review", reviewService.getReviewById(reviewId)); 
-        return "review-update"; 
+        return "/Admin/review-update"; 
         //return reviewService.updateReviewStatus(reviewId, status);
     } 
 

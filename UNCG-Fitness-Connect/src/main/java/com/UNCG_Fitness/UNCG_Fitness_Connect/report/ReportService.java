@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @Service
 public class ReportService {
-    
+
     @Autowired
     private ReportRepository reportRepository;
 
@@ -34,9 +34,8 @@ public class ReportService {
             report.setStatus(status);
             report.setUpdatedAt(new Date());
             return reportRepository.save(report);
-
-        }
-        return null;
+    }
+    return null; 
     }
     public void deleteReportById(int reportId){
         reportRepository.deleteById(reportId);

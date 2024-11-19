@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="../../style/nav.css">
+    <link data-th-href="@{/Styles/template.css}" type="text/css" rel="stylesheet">
+    <title>Create New Report</title>
+</head>
+<body>
+    <h1>Create New Report</h1>
+    <form th:action="@{/reports/new}" method="post">
+        <label for="contentId">Content ID:</label>
+        <input type="number" name="contentId" id="contentId" required />
+        <br>
+        <label for="reporterId">Reporter ID:</label>
+        <input type="number" name="reporterId" id="reporterId" required />
+        <br>
+        <label for="reportType">Report Type:</label>
+        <input type="text" name="reportType" id="reportType" required />
+        <br>
+        <label for="reason">Reason:</label>
+        <textarea name="reason" id="reason" required></textarea>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+    <a href="/reports/all">Cancel</a>
+</body>
+</html>

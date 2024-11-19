@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Report</title>
+</head>
+<body>
+    <h1>Update Report Status</h1> 
+    <form th:action="@{/reports/update/status/{id}(id=${report.reportId})}" method="post">
+        <label for="status">Status:</label>
+        <select name="status" id="status">
+            <option value="Pending" th:selected="${report.status == 'Pending'}">Pending</option>
+            <option value="Resolved" th:selected="${report.status == 'Resolved'}">Resolved</option>
+            <option value="Rejected" th:selected="${report.status == 'Rejected'}">Rejected</option>
+        </select>
+        <button type="submit">Update</button>
+    </form>
+    
+    <!--<form th:action="@{/reports/update/status/{id}(id=${report.reportId})}" method="post">
+        <input type="hidden" name="_method" value="PUT" />
+        <label for="status">Status:</label>
+        <select name="status" id="status" th:value="${report.status}">
+            <option value="Pending" th:selected="${report.status == 'Pending'}">Pending</option>
+            <option value="Resolved" th:selected="${report.status == 'Resolved'}">Resolved</option>
+            <option value="Rejected" th:selected="${report.status == 'Rejected'}">Rejected</option>
+        </select>
+        <button type="submit">Update</button>
+    </form> 
+-->
+    <a href="/reports/all">Cancel</a>
+</body>
+</html>
