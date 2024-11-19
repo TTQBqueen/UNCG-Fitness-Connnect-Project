@@ -60,8 +60,7 @@
                 enjoying the classes.
 
         </div>
-        <h1> Created Fitness Classes</h1>
-        <a class="create-class" href="classes/creatForm">Create New Class </a>
+        <h1> All Instructors</h1>
     </div>
 </div>
 
@@ -78,7 +77,6 @@
             <th>Email</th>
             <th>Username</th>
             <th>Password</th>
-            <th>Join Date</th>
             <th>Role</th>
             <th>Flag</th>
         </tr>
@@ -89,10 +87,8 @@
             <td th:text="${user.email}"></td>
             <td th:text="${user.userName}"></td>
             <td th:text="${user.password}"></td>
-            <td th:text="${user.joinDate}"></td>
             <td th:text="${user.role}"></td>
             <td th:text="${user.flagged}"></td>
-            <td><a th:href="@{/classes/createForm/{userId}(userId=${user.id})}" >Create Class</a></td>
         </tr>
         </tbody>
 

@@ -47,8 +47,7 @@
         <ul id="links">
             <li><a href="/">Home</a></li>
             <li><a href="/classes/all">Classes</a></li>
-<!--            <li><a href="@{/classes/createForm/{creatorId}(creatorId=${user.id})}">Create</a></li>-->
-<!--           <li> <a th:href="@{/classes/createForm/{userId}(userId=${user.id})}" >Create Class</a></li>-->
+
         </ul>
     </div>
 
@@ -57,15 +56,19 @@
     <!-- Middle Section -->
     <div class="column_middle">
         <div id = "text">
-            <h1 data-th-text="${class.title}"></h1>
-
+            
 
 
             <!-- CONTENT -->
             <!--Bottom  Section  -->
-            <img data-th-src="@{class.imagePath}" alt="Class Image" class="class-img">
-            <p data-th-text="${class.details}"></p>
+
+
             <div class="the_class-details">
+                <h1 data-th-text="${class.title}"></h1>
+                <img data-th-src="@{class.imagePath}" alt="Class Image" class="class-img"><br></br>
+                <img th:src="@{/Images/gym_girl1.jpeg}" alt="Image 1">
+
+                <p data-th-text="${class.details}"></p>
 
                 <p data-th-text="'Instructor Name : '+ ${class.instructorName}"></p>
                 <p data-th-text="'Duration : ' + ${class.duration}"></p>
@@ -75,7 +78,7 @@
                 <p data-th-text="'Status : ' + ${class.status}"></p>
 
                 <div class="signups">
-                    <p><span>People Signed Up:</span> 18</p>
+                    <p><span>People Signed Up:</span> 10</p>
 
                     <div class="reviews">
                         <p><span>Reviews:</span></p>
@@ -117,77 +120,83 @@
 
 <style>
 
-    .column_middle{
-        width: 100%;
-      margin-right: 5%;
-    }
-
-    .btn-delete{
-        display: inline-block;
-        padding: 10px 15px;
-        background-color: #f399a2;
-        color: white;
-        border-radius: 4px;
-        text-decoration: none;
-        font-size: 16px;
-        transition: background-color 0.3s ease;
-        margin-top: 10px;
-    }
     .column_middle {
-     display: flex;
-     flex-direction: column;
-     align-items: center;
-     max-width: 800px;
-     width: 100%;
+     width: 60%; /* Center the main content and make it wider */
+     margin: 0 auto; /* Center it horizontally */
      padding: 20px;
-     background-color: #f9f9f9;
-     border-radius: 10px;
+     background: #fff;
+     border-radius: 8px;
      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
  }
 
- .class-img {
-     width: 100%;
-     height: auto;
-     max-height: 300px;
-     border-radius: 8px;
-     object-fit: cover;
-     margin-bottom: 20px;
- }
 
- .the_class-details {
-     text-align: left;
-     color: #272855;
-     font-size: 20px;
+
+     .btn-delete{
+         display: inline-block;
+         padding: 10px 15px;
+         background-color: #f399a2;
+         color: white;
+         border-radius: 4px;
+         text-decoration: none;
+         font-size: 16px;
+         transition: background-color 0.3s ease;
+         margin-top: 10px;
+     }
+     .column_middle {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 800px;
+      width: 100%;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .class-img {
+      width: 100%;
+      height: auto;
+      max-height: 300px;
+      border-radius: 8px;
+      object-fit: cover;
+      margin-bottom: 20px;
+  }
+
+  .the_class-details {
+     font-size: 18px; /* Increase font size for readability */
+     color: #333;
+     line-height: 1.6; /* Add more spacing between lines */
  }
 
  .the_class-details p {
-     margin: 5px 0;
+     margin: 10px 0; /* Add more space between paragraphs */
  }
 
- .signups {
-     margin-top: 20px;
-     font-size: 16px;
-     color: #272855;
-     background-color: #e9eaf5;
-     padding: 10px;
-     border-radius: 5px;
- }
+  .signups {
+      margin-top: 20px;
+      font-size: 16px;
+      color: #272855;
+      background-color: #e9eaf5;
+      padding: 10px;
+      border-radius: 5px;
+  }
 
- .reviews {
-     margin-top: 15px;
- }
+  .reviews {
+      margin-top: 15px;
+  }
 
- .reviews span {
-     font-weight: bold;
-     color: #272855;
- }
+  .reviews span {
+      font-weight: bold;
+      color: #272855;
+  }
 
- .reviews p {
-     margin: 5px 0;
-     font-size: 14px;
-     color: #555;
- }
+  .reviews p {
+      margin: 5px 0;
+      font-size: 14px;
+      color: #555;
+  }
 
->>>>>>> Stashed changes
+ >>>>>>> Stashed changes
 </style>
 </html>

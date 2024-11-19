@@ -11,7 +11,7 @@
 
 <h1>Create a New Class</h1>
 
-    <form th:action="@{/classes/createForm/{userId}(userId=${userId})}" method="post" th:object="${class}">
+    <form th:action="@{/classes/createForm/{creatorId}(creatorId=${creator})}" method="post" th:object="${class}">
 
 <!--        <label for="creator">Creator:</label>-->
 

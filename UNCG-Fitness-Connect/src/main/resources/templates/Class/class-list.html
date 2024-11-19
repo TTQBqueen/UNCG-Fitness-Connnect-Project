@@ -27,10 +27,23 @@
 
     <!-- Search Section -->
     <div class="search-container">
-        <form action="/classes">
-            <input type="text" placeholder="Search.." name="title">
-            <button type="submit" class="fa fa-search" placeholder="Search By Name &#128270">Search</button>
-        </form>
+        <div class="search-item">
+            <form action="/classes">
+                <input type="text" placeholder="Search.." name="title">
+                <button type="submit" class="fa fa-search" placeholder="Search By Name &#128270">Search</button>
+            </form>
+        </div>
+        <div class="search-item">
+            <form action="/classes/levels" method="get">
+                <label for="level">Filter by Level:</label>
+                <select id="level" name="level">
+                    <option value="Beginner">Beginner</option>
+                    <option value="Intermediate">Intermediate</option>
+                    <option value="Advanced">Advanced</option>
+                </select>
+                <button type="submit">Search</button>
+            </form>
+        </div>
     </div>
 </div>
 
@@ -75,9 +88,10 @@
     <div th:each="class: ${classList}" class="class-card">
 
         <img th:src="@{class.imagePath}" alt="Class Image" class="class-img">
+        <img th:src="@{/Images/gym_girl1.jpeg}" alt="Image 1">
+
         <div class="class-details">
             <h3 th:text="${class.title}"></h3>
-            <p th:text="'Creator: ' + ${class.creator}"></p>
             <p th:text="'Date: ' + ${class.date}"></p>
             <p th:text="'Time : ' + ${class.startTime} +'-'+ ${class.endTime} "></p>
             <p th:text="'Level: ' + ${class.level}"></p>
@@ -98,6 +112,50 @@
 
 
 </body>
+<style>
+    .search-container {
+    display: flex;
+    flex-direction: column; /* Stack the forms vertically */
+    gap: 15px; /* Add space between the forms */
+    padding: 10px; /* Add padding inside the container */
+    background-color: #f4f4f4; /* Optional: Background color for better visibility */
+    border-radius: 8px; /* Optional: Rounded corners */
+}
+
+.search-item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Space between elements inside each form */
+}
+
+.search-item form {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Add space between the input/select and button */
+}
+
+input[type="text"], select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+button {
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        padding: 10px;
+        background-color: #5e6098;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+        }
+
+button:hover {
+  opacity: 0.8;
+}
+
+</style>
 
 </html>
 
