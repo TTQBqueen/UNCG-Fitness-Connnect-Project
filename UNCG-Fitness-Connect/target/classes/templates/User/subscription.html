@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link data-th-href="@{/Styles/template.css}" type="text/css" rel="stylesheet">
+    <link data-th-href="@{/Styles/inst_view.css}" type="text/css" rel="stylesheet">
+    <link data-th-href="@{/Styles/template.css}" type="text/css" rel="stylesheet">
+    <link data-th-href="@{/Class/card.css}" type="text/css" rel="stylesheet">
+
+    <title>User Details</title>
+</head>
+<body>
+<!-- Header -->
+<div class="header">
+    <!-- Profile & Login Section -->
+    <div class="user-options">
+        <div id="profile-container"><a href="/users/all">Profile</a></div>
+        <div id="login-container"><a href="/">Sign Out</a></div>
+    </div>
+    <!-- Logo Section -->
+    <h2 class="logo">Spartan Motion</h2>
+
+    <!-- Search Section -->
+    <div class="search-container">
+        <form>
+            <input type="text" placeholder="Search.." name="search">
+            <button type="submit"><i class="fa fa-search">Search</i></button>
+        </form>
+    </div>
+</div>
+
+<!-- All the column sections -->
+<div class="row">
+
+    <!-- Navigation column -->
+    <div id="nav" class="column_side">
+        <ul id="links">
+            <li><a href="customer_home.html">Home</a></li>
+            <li><a href="classes.html">Classes</a></li>
+            <li><a href="../about.html">About</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../privacypolicy.html">Privacy Policy</a></li>
+        </ul>
+    </div>
+
+    <!-- Middle Section -->
+    <div class="column middle">
+        <h1> Welcome to Spartan Motion</h1>
+        <div id="text">
+            <p>Here you can view and register for available fitness classes at UNCG.</p>
+        </div>
+        <h1>Available Group Fitness Classes</h1>
+    </div>
+
+</div>
+
+<!-- CONTENT -->
+<!-- Bottom Section -->
+<div class="container">
+    <!-- Display classes dynamically -->
+    <div th:each="fitnessClass : ${classList}" class="class-card">
+        <img th:src="@{${fitnessClass.imagePath}}" alt="Class Image" class="class-img">
+        <div class="class-details">
+            <h3 th:text="${fitnessClass.title}">Class Name</h3>
+            <p th:text="'Date: ' + ${fitnessClass.date}">Date</p>
+            <p th:text="'Time: ' + ${fitnessClass.startTime} + ' - ' + ${fitnessClass.endTime}">Time</p>
+            <p th:text="'Level: ' + ${fitnessClass.level}">Level</p>
+            <p class="instructor" th:text="'Instructor: ' + ${fitnessClass.instructorName}">Instructor</p>
+
+            <!-- Register button -->
+            <form th:action="@{/subs/add/{classId}/{userId}(classId=${fitnessClass.classId}, userId=${user.id})}" method="post">
+                <button type="submit" class="btn-signup">Register</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <div th:replace="~{/fragments/_footer :: footer}"></div>
+</footer>
+
+</body>
+
+</html>

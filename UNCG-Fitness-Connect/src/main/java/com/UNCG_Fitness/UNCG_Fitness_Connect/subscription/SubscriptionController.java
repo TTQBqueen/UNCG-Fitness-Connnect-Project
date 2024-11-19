@@ -1,11 +1,14 @@
 package com.UNCG_Fitness.UNCG_Fitness_Connect.subscription;
 
+import com.UNCG_Fitness.UNCG_Fitness_Connect.fitnessClass.Class;
+import com.UNCG_Fitness.UNCG_Fitness_Connect.fitnessClass.ClassService;
 import com.UNCG_Fitness.UNCG_Fitness_Connect.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -17,6 +20,9 @@ public class SubscriptionController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    ClassService classService;
 
     /**
      * Create a new Subscription for a Class.
@@ -31,7 +37,7 @@ public class SubscriptionController {
         subscriptionService.addNewSubscription(classId, userId);
         List<Subscription> subscriptions = subscriptionService.getSubscriptionByClassId(classId);
         model.addAttribute("subscriptions", subscriptions);
-        return "subscription-list";
+        return "User/subscription";
     }
 
     /**
@@ -44,7 +50,7 @@ public class SubscriptionController {
     String getAllSubscriptions(Model model) {
         List<Subscription> subscriptions = subscriptionService.getAllSubscriptions();
         model.addAttribute("subscriptions", subscriptions);
-        return "subscription-list";
+        return "User/subscription";
     }
 
     /**
@@ -58,7 +64,7 @@ public class SubscriptionController {
     public String getSubscription(@PathVariable int subs_id, Model model) {
         Subscription subscription = subscriptionService.getSubscriptionById(subs_id);
         model.addAttribute("subscription", subscription);
-        return "subscription-details";
+        return "User/subscription";
     }
 
     /**
@@ -72,7 +78,7 @@ public class SubscriptionController {
     public String getSubscriptionsByUser(@PathVariable int userId, Model model) {
         List<Subscription> subscriptions = subscriptionService.getSubscriptionsByUser(userId);
         model.addAttribute("subscriptions", subscriptions);
-        return "subscription-list";
+        return "User/subscription";
     }
 
     /**
@@ -84,6 +90,6 @@ public class SubscriptionController {
     @DeleteMapping("/remove/{subs_id}")
     public String removeSubscription(@PathVariable int subs_id) {
         subscriptionService.removeSub(subs_id);
-        return "redirect:/subs/all"; // Redirects to the list of all subscriptions after deletion
+        return "redirect:/User/all"; // Redirects to the list of all subscriptions after deletion
     }
 }

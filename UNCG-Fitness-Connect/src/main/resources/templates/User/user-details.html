@@ -52,6 +52,19 @@
                     <p><span>Email:</span> <span th:text="${user.email}"></span></p>
                     <p><span>Username:</span> <span th:text="${user.userName}"></span></p>
                     <p><span>Role:</span> <span th:text="${user.role}"></span></p>
+
+                    <h3>Your Subscriptions</h3>
+                    <div class="subscriptions-list">
+                        <ul>
+                            <li th:each="subscription : ${userSubscriptions}">
+                                <div>
+                                    <h4 th:text="${subscription.fitnessClass.name}"></h4>
+                                    <p th:text="${subscription.fitnessClass.description}"></p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
                 </div>
                 <!-- Delete User Button -->
                 <div class="delete-section">

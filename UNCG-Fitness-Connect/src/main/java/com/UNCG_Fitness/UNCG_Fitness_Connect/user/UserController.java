@@ -1,5 +1,6 @@
 package com.UNCG_Fitness.UNCG_Fitness_Connect.user;
 
+import com.UNCG_Fitness.UNCG_Fitness_Connect.subscription.Subscription;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +21,7 @@ public class UserController {
      *
      * @return the updated list of Users.
      */
-    @GetMapping("/createUser")
+    @GetMapping("/createForm")
     public String showSignupForm() { return "signup.html"; }
     @PostMapping("/new")
     public String addNewUser(User user) {
