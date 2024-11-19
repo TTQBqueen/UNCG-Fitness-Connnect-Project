@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="../../style/nav.css">
+    <link th:href="@{/Styles/template.css}" type="text/css" rel="stylesheet">
+
+    <title>Review Details</title>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div id="login-container"><a href="/index.html">Logout</a></div>
+        <h2 class="logo">Spartan Motion</h2>
+        <div class="search-container">
+            <form action="/action_page.php">
+                <input type="text" placeholder="Search.." name="search">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="row">
+        <div id="nav" class="column_side">
+            <ul id="links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/login">Manage Users</a></li>
+                <li><a href="/Admin/manage_classes">Manage Classes</a></li>
+                <li><a href="/reviews/all">Manage Reviews</a></li>
+                <li><a href="/SysAdmin/html_SysAdmin/Manage_Services.html">Manage Services</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="column middle">
+            <h1>Review Details</h1>
+            <div id="review-details">
+                <h2 th:text="'Review ID: ' + ${review.reviewId}"></h2>
+                <p><strong>User ID:</strong> <span th:text="${review.userId}"></span></p>
+                <p><strong>Title:</strong> <span th:text="${review.title}"></span></p>
+                <p><strong>Content:</strong> <span th:text="${review.content}"></span></p>
+                <p><strong>Rating:</strong> <span th:text="${review.rating}"></span></p>
+                <p><strong>Flagged:</strong> <span th:if="${review.flagged}">Yes</span><span th:if="${!review.flagged}">No</span></p>
+
+                <!-- Update Status Form -->
+                <form th:action="@{'/reviews/update/status/' + ${review.reviewId}}" method="post">
+                    <label for="status">Update Status:</label>
+                    <input type="text" id="status" name="status" placeholder="Enter new status" required>
+                    <button type="submit">Update</button>
+                </form>
+
+                <!-- Back to All Reviews -->
+                <p><a th:href="@{/reviews/all}" class="button">Back to Reviews</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer">
+            <div class="footer-content">
+                <div class="footer-section about">
+                    <h3>About Us</h3>
+                    <p>We are dedicated to providing the best services and products for our customers. Stay connected for updates and special offers.</p>
+                </div>
+
+                <div class="footer-section links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section contact">
+                    <h3>Contact Us</h3>
+                    <p>+1 (234) 567-890</p>
+                    <p>info@example.com</p>
+                    <p>1234 Street Name, City, Country</p>
+                </div>
+
+                <div class="footer-section social">
+                    <h3>Follow Us</h3>
+                    <a href="#">Facebook</a>
+                    <a href="#">Twitter</a>
+                    <a href="#">Instagram</a>
+                    <a href="#">LinkedIn</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Your Website. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
