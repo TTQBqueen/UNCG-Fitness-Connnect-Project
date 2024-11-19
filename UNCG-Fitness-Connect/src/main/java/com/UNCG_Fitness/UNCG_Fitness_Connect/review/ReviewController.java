@@ -43,7 +43,7 @@ public class ReviewController {
     public String updateReviewStatus(@PathVariable int reviewId, @RequestBody String status, Model model){ 
         model.addAttribute("review", reviewService.getReviewById(reviewId)); 
         return "review-update"; 
-        //return re viewService.updateReviewStatus(reviewId, status);
+        //return reviewService.updateReviewStatus(reviewId, status);
     } 
 
     // this will delete the review by its name/ID
