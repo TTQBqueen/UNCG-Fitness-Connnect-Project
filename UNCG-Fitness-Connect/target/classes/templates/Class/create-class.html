@@ -13,7 +13,6 @@
 
     <form th:action="@{/classes/createForm/{creatorId}(creatorId=${creator})}" method="post" th:object="${class}">
 
-<!--        <label for="creator">Creator:</label>-->
 
 
         <input type="hidden" name="creatorId" th:value="${userId}" />
@@ -75,7 +74,7 @@
 
         <div  class="form-group">
         <label for="imagePath">Image Path:</label>
-        <input type="file" id="imagePath" name="imagePath"><br><br>
+        <input type="url" id="imagePath" name="imagePath"><br><br>
         </div>
 
         <div  class="form-group">
