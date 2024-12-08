@@ -81,21 +81,18 @@
                     <p><span>People Signed Up:</span> 10</p>
 
                     <div class="reviews">
-                        <p><span>Reviews:</span></p>
-                        <th:block th:each="review : ${reviews}">
-                            <!-- Display Review -->
+                        <h2>Reviews</h2>
+                        <div th:each="review : ${reviews}">
                             <div class="review">
-                                <p th:text="'Class ID: ' + ${review.classId}"></p>
-                                <p>
-                                    <span th:text="${review.details}"></span>
-                                    <span th:text="'Rating: ' + ${review.rating}"> </span>
-                                </p>
-                                <!-- Display Existing Reply (if any) -->
-                                <div class="reply" th:if="${review.reply}">
-                                    <p><strong>Instructor Reply:</strong></p>
-                                    <p th:text="${review.reply}"></p>
+                                <!-- Display stars for the rating -->
+                                <div class="stars">
+                                    <span th:each="star : ${#numbers.sequence(1, review.rating)}" class="star">★</span>
+                                    <span th:each="star : ${#numbers.sequence(review.rating + 1, 5)}" class="star empty">☆</span>
                                 </div>
-
+                                <p th:text="'Review: ' + ${review.details}"></p>
+                            </div>
+                        </div>
+                    </div>
                                 <!-- Form to Add Reply (Visible to Instructors Only) -->
                                 <div class="reply-form" th:if="${isInstructor}">
                                     <form th:action="@{/reviews/reply}" method="post">
@@ -236,6 +233,15 @@
 
 .reply-form button:hover {
     background-color: #4cae4c;
+}
+    .stars {
+    display: inline-block;
+    color: gold;
+    font-size: 1.5rem;
+}
+
+.star.empty {
+    color: lightgray;
 }
 
 </style>

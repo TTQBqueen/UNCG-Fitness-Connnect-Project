@@ -1,10 +1,13 @@
 package com.UNCG_Fitness.UNCG_Fitness_Connect.review;
 
+import com.UNCG_Fitness.UNCG_Fitness_Connect.user.User;
 import com.UNCG_Fitness.UNCG_Fitness_Connect.fitnessClass.Class;
+
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import java.util.Date;
 
-import com.UNCG_Fitness.UNCG_Fitness_Connect.user.User;
-import jakarta.persistence.*;
 
 
 @Entity
@@ -16,14 +19,16 @@ public class Review {
     private int reviewId;
 
     @ManyToOne
-    @JoinColumn(name = "classId")
+    @JoinColumn(name = "classId", nullable = false)
     private Class classId;
+
 
     @Column(nullable = false)
     private int rating;
 
-    @Column(nullable = false)
-    private int userId;
+    @ManyToOne
+    @JoinColumn(name = "userId")
+    private User userId;
 
     @Column(nullable = false)
     private String details;
@@ -34,7 +39,7 @@ public class Review {
 
     private String status;
 
-    public Review(int reviewId, Class classId, int rating, int userId, String details, Date createdAt, Date updatedAt, String status) {
+    public Review(int reviewId, Class classId, int rating, User userId, String details, Date createdAt, Date updatedAt, String status) {
         this.reviewId = reviewId;
         this.classId = classId;
         this.rating = rating;
@@ -44,7 +49,7 @@ public class Review {
         this.updatedAt = updatedAt;
         this.status = status;
     }
-    public Review(String reviewId, Class classId, String userId, String details, Date created, Date updated, String status) {
+    public Review(String reviewId, Class classId, User userId, String details, Date created, Date updated, String status) {
     }
     public Review(){
     }
@@ -65,10 +70,10 @@ public class Review {
     public void setRating(int rating) {
         this.rating = rating;
     }
-    public int getUserId() {
+    public User getUserId() {
         return userId;
     }
-    public void setUserId(int userId) {
+    public void setUserId(User userId) {
         this.userId = userId;
     }
     public String getDetails() {

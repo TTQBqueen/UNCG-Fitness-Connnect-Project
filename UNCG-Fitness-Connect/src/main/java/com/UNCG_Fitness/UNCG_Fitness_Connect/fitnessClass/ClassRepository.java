@@ -10,13 +10,13 @@ import java.util.List;
 //All the  live here some are alread built in with using the api that on this file
 public interface ClassRepository extends JpaRepository<Class, Integer> {
 
-    //returns animals with name
+    //returns Class with name
     List<Class> getClassesByTitle(String name);
 
-    //returns animals with classification
+    //returns Class with Level
     List<Class> getClassesByLevel(String level);
 
-    //returns animals with part of title
+    //returns Class with part of nmae
     List<Class> findByTitleContainingIgnoreCase(String title);
 
     List<Class> getClassesByCreatorId(int creatorId);

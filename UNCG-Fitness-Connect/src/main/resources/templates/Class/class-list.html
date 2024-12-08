@@ -83,7 +83,6 @@
 
 <!-- CONTENT -->
 <!--Bottom  Section  -->
-
 <div class="container">
     <div th:each="class: ${classList}" class="class-card">
 
@@ -96,6 +95,30 @@
             <p th:text="'Level: ' + ${class.level}"></p>
             <p class="instructor" th:text="'Instructor: ' + ${class.instructorName}"></p>
             <a class="btn-signup" th:href="@{/classes/{classId}(classId=${class.classId})}">View More</a>
+
+            <!-- Leave Review Form -->
+            <button class="btn-review" onclick="toggleReviewForm()">Leave Review</button>
+            <form id="leave-review-form" th:action="@{/reviews}" method="post" class="leave-review-form" style="display: none;">
+                <input type="hidden" th:name="classId" th:value="${class.classId}" />
+
+                <div>
+                    <label for="rating">Rating (1-5):</label>
+                    <select name="rating" id="rating" required>
+                        <option value="1">1 - Poor</option>
+                        <option value="2">2 - Fair</option>
+                        <option value="3">3 - Good</option>
+                        <option value="4">4 - Very Good</option>
+                        <option value="5">5 - Excellent</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="details">Review:</label>
+                    <textarea name="details" id="details" rows="4" placeholder="Write your review here..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit">Submit Review</button>
+            </form>
         </div>
 
     </div>
@@ -152,9 +175,36 @@ button {
 
 button:hover {
   opacity: 0.8;
+
+  .leave-review-form {
+    margin-top: 20px;
 }
 
+.btn-review button {
+    color: white;
+    display: inline-block;
+    padding: 10px 1px;
+    background-color: #869De9;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+
 </style>
+
+<script>
+    function toggleReviewForm() {
+        const form = document.getElementById('leave-review-form');
+        if (form.style.display === 'none') {
+            form.style.display = 'block'; // Show the form
+        } else {
+            form.style.display = 'none'; // Hide the form
+        }
+    }
+</script>
 
 </html>
 

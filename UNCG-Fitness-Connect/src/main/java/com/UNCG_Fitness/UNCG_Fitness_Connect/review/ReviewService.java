@@ -1,4 +1,6 @@
 package com.UNCG_Fitness.UNCG_Fitness_Connect.review;
+
+import com.UNCG_Fitness.UNCG_Fitness_Connect.fitnessClass.ClassService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,9 @@ public class ReviewService {
 
     @Autowired
     ReviewRepository reviewRepository;
+
+    @Autowired
+    private ClassService classService;
 
     public List<Review> getAllReviews(){
         return reviewRepository.findAll();
@@ -35,6 +40,8 @@ public class ReviewService {
     public void deleteReviewById(int reviewId){
         reviewRepository.deleteById(reviewId);
     }
-
+    public List<Review> getReviewByClassId(int classId) {
+        return reviewRepository.getReviewByClassId(classId);
+    }
 
 }

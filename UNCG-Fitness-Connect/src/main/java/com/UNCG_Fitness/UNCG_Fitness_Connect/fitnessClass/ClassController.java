@@ -38,12 +38,20 @@ public class ClassController {
     }
 
     //Class by ID
+
+
     @GetMapping("/{classId}")
     public String getClassesById(@PathVariable int classId, Model model) {
+        // Fetch class details
         model.addAttribute("class", classService.getClassById(classId));
-        model.addAttribute("title", "Class # "+classId+" Details");
+        // Fetch reviews related to the class
+        model.addAttribute("reviews", reviewService.getReviewByClassId(classId));
+        // Set the page title
+        model.addAttribute("title", "Class # " + classId + " Details");
         return "/Class/class-details";
     }
+
+
 
     //  Look up User class based on UserId
     @GetMapping("/INSTRUCTOR/{creatorId}")

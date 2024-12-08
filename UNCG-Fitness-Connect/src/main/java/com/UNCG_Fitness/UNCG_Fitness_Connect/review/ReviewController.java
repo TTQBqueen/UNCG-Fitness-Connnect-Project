@@ -30,10 +30,10 @@ public class ReviewController {
     }
 
     //This will add a new review
-    @PostMapping("/add")
+    @PostMapping("/add/{classId}")
     public String addReview(@ModelAttribute Review review) {
         reviewService.createReview(review);
-        return "redirect:/reviews/all";
+        return "redirect:/classes/all";
 
         //return reviewService.createReview(review);
     }
