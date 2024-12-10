@@ -25,8 +25,8 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authorize) -> authorize
-                        .dispatcherTypeMatchers(DispatcherType.FORWARD,
-                                DispatcherType.ERROR).permitAll()
+                        .dispatcherTypeMatchers(DispatcherType.FORWARD, DispatcherType.ERROR).permitAll()
+                        .requestMatchers("/static/**", "/Styles/**", "/Class/**", "/User/**").permitAll() // Allow access to static files
                         .requestMatchers("/INSTRUCTOR/**").hasAuthority("INSTRUCTOR")
                         .requestMatchers("/ADMIN/**").hasAuthority("ADMIN")
                         .anyRequest().authenticated()
@@ -35,7 +35,8 @@ public class SecurityConfig {
                         .loginPage("/login")
                         .successHandler(new CustomAuthenticationSuccessHandler())
                         .permitAll()
-                ).exceptionHandling((x) -> x.accessDeniedPage("/403"))
+                )
+                .exceptionHandling((x) -> x.accessDeniedPage("/403"))
                 .logout((logout) -> logout.permitAll())
                 .requestCache((cache) -> cache
                         .requestCache(requestCache)
@@ -53,4 +54,6 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+
 }

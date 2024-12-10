@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link data-th-href="@{/Styles/template.css}" type="text/css" rel="stylesheet">
+    <link data-th-href="@{/Styles/inst_view.css}" type="text/css" rel="stylesheet">
+    <link data-th-href="@{/Styles/template.css}" type="text/css" rel="stylesheet">
+    <link data-th-href="@{/Class/card.css}" type="text/css" rel="stylesheet">
+
+</head>
+<body>
+<nav th:insert="~{./fragments/navigation :: #global-nav}"></nav>
+<div class="container">
+
+    <h1 data-th-text="${title}"></h1>
+
+    <div style="align-content: center;">
+
+        <table class="table table-striped rounded-3 overflow-hidden">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Class Title</th>
+                <th>Class Instructor</th>
+                <th>Preview</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-th-each="subscription : ${subsList}">
+                <td data-th-text=" ${sub.Id}"></td>
+                <td><a data-th-href="@{/articles/{articleId} (articleId=${sub.article.articleId})}"
+                       data-th-text=" ${subscription.class.title}"> </a></td>
+                <td data-th-text=" ${sub.article.writer.userName}"></td>
+                <td data-th-text=" ${sub.article.preview}"></td>
+                <td data-th-if="${isSubscriber}"><a data-th-href="@{/subs/remove/{id} (id=${sub.id})}"
+                                                    class="btn btn-sm btn-outline-danger">Unsubscribe</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <a href="/classes/all" class="btn btn-outline-primary">Classes List</a>
+</div>
+</body>
+</html>

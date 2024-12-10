@@ -26,12 +26,12 @@ public class SubscriptionController {
      * @param classId the class for the subscription to be assigned to
      * @return redirect to the current user's subscriptions.
      */
-    @PostMapping("/add/{classId}")
+    @PostMapping("/subs/add/{classId}")
     public String createNewSubscription(@PathVariable int classId) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         int currentUserId = userService.getUserByUserName(username).getId();
         subscriptionService.addNewSubscription(classId, currentUserId);
-        return "Subscription/subscription";
+        return "redirect:/subs/current";
     }
 
     /**
@@ -41,11 +41,11 @@ public class SubscriptionController {
      * @param model  the model to hold subscription data.
      * @return the subscription list view.
      */
-    @GetMapping("/{userId}")
+    @GetMapping("/subs/{userId}")
     public String getSubscriptionsByUser(@PathVariable int userId, Model model) {
         model.addAttribute("subscriptions", subscriptionService.getSubscriptionsByUser(userId));
         model.addAttribute("title", "User #" + userId + " Subscriptions");
-        return "Subscription/subscription";
+        return "Subscription/subscription-list";
     }
 
     /**
@@ -54,7 +54,7 @@ public class SubscriptionController {
      * @param model the model to hold subscription data.
      * @return the subscription list view.
      */
-    @GetMapping("/current")
+    @GetMapping("/subs/current")
     public String getSubscriptionsByCurrentUser(Model model) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         int currentUserId = userService.getUserByUserName(username).getId();
@@ -69,7 +69,7 @@ public class SubscriptionController {
      * @param subs_id the unique ID of the subscription to remove.
      * @return redirect to the current user's subscriptions.
      */
-    @GetMapping("/remove/{subs_id}")
+    @GetMapping("/subs/remove/{subs_id}")
     public String removeSubscription(@PathVariable int subs_id) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         int currentUserId = userService.getUserByUserName(username).getId();
@@ -83,7 +83,7 @@ public class SubscriptionController {
      * @param classId the ID of the class for which to remove the subscription.
      * @return redirect to the current user's subscriptions.
      */
-    @GetMapping("/removeByClass/{classId}")
+    @GetMapping("/subs/removeByClass/{classId}")
     public String removeSubscriptionByClass(@PathVariable int classId) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         int currentUserId = userService.getUserByUserName(username).getId();
