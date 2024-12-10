@@ -33,7 +33,6 @@ public class Report {
         this.reason = reason;
     }
 
-
     public int getId() {
         return reportId;
     }
