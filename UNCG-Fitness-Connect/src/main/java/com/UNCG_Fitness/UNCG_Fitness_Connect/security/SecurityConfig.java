@@ -26,16 +26,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authorize) -> authorize
                         .dispatcherTypeMatchers(DispatcherType.FORWARD, DispatcherType.ERROR).permitAll()
-                        .requestMatchers(
-                                "/login",          // Allow login page
-                                "/signup",         // Allow signup page
-                                "/Styles/**",      // Allow all CSS files
-                                "/Class/**",       // Allow class-related resources
-                                "/User/**",        // Allow user-related resources
-                                "/static/**",      // Allow static folder resources
-                                "/favicon.ico",    // Allow favicon
-                                "/resources/**"    // Allow resources
-                        ).permitAll() // Public access to the specified paths
+                        .requestMatchers("/static/**", "/Styles/**", "/Class/**", "/User/**").permitAll() // Allow access to static files
                         .requestMatchers("/INSTRUCTOR/**").hasAuthority("INSTRUCTOR")
                         .requestMatchers("/ADMIN/**").hasAuthority("ADMIN")
                         .anyRequest().authenticated()
