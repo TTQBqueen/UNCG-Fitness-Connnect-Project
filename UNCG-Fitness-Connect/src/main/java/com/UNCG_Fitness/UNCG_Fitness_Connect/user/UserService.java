@@ -2,6 +2,8 @@ package com.UNCG_Fitness.UNCG_Fitness_Connect.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 
@@ -10,6 +12,9 @@ public class UserService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     /**
      * Get all Users.
@@ -55,6 +60,7 @@ public class UserService {
         existing.setFirstName(user.getFirstName());
         existing.setLastName(user.getLastName());
         existing.setRole(user.getRole());
+
         userRepository.save(existing);
     }
 
@@ -85,5 +91,4 @@ public class UserService {
         return userRepository.findByUserName(userName)
                 .orElseThrow(() -> new IllegalArgumentException("User not found with username: " + userName));
     }
-
 }

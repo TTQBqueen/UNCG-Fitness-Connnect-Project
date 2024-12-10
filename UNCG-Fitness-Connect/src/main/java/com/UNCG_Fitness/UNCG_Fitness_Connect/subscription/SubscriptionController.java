@@ -1,18 +1,16 @@
 package com.UNCG_Fitness.UNCG_Fitness_Connect.subscription;
 
-import com.UNCG_Fitness.UNCG_Fitness_Connect.fitnessClass.Class;
-import com.UNCG_Fitness.UNCG_Fitness_Connect.fitnessClass.ClassService;
 import com.UNCG_Fitness.UNCG_Fitness_Connect.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/subs")
 public class SubscriptionController {
 
     @Autowired
@@ -21,75 +19,76 @@ public class SubscriptionController {
     @Autowired
     UserService userService;
 
-    @Autowired
-    ClassService classService;
-
     /**
      * Create a new Subscription for a Class.
-     * http://localhost:8080/subs/add/{classId}/{userId}
+     * http://localhost:8080/subs/add/{classId}
      *
      * @param classId the class for the subscription to be assigned to
-     * @param userId  the user for whom the subscription is created
-     * @return the updated list of subscriptions.
+     * @return redirect to the current user's subscriptions.
      */
-    @PostMapping("/add/{classId}/{userId}")
-    public String createNewSubscription(@PathVariable int classId, @PathVariable int userId, Model model) {
-        subscriptionService.addNewSubscription(classId, userId);
-        List<Subscription> subscriptions = subscriptionService.getSubscriptionByClassId(classId);
-        model.addAttribute("subscriptions", subscriptions);
-        return "Subscription/subscription";
-    }
-
-    /**
-     * Get a list of all Subscriptions in the database.
-     * http://localhost:8080/subs/all
-     *
-     * @return a list of Subscription objects.
-     */
-    @GetMapping("/all")
-    String getAllSubscriptions(Model model) {
-        List<Subscription> subscriptions = subscriptionService.getAllSubscriptions();
-        model.addAttribute("subscriptions", subscriptions);
-        return "Subscription/subscription";
-    }
-
-    /**
-     * Get a specific Subscription by Subscription Id.
-     * http://localhost:8080/subs/{subs_id}
-     *
-     * @param subs_id the unique Id for a Student.
-     * @return One Subscription object.
-     */
-    @GetMapping("/{subs_id}")
-    public String getSubscription(@PathVariable int subs_id, Model model) {
-        Subscription subscription = subscriptionService.getSubscriptionById(subs_id);
-        model.addAttribute("subscription", subscription);
+    @PostMapping("/add/{classId}")
+    public String createNewSubscription(@PathVariable int classId) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        int currentUserId = userService.getUserByUserName(username).getId();
+        subscriptionService.addNewSubscription(classId, currentUserId);
         return "Subscription/subscription";
     }
 
     /**
      * Get all subscriptions for a specific user.
-     * http://localhost:8080/subs/user/{userId}
      *
-     * @param userId the unique Id for a subscription.
-     * @return all Users connected to the subs_id.
+     * @param userId the unique Id of the user.
+     * @param model  the model to hold subscription data.
+     * @return the subscription list view.
      */
-    @GetMapping("/user/{userId}")
+    @GetMapping("/{userId}")
     public String getSubscriptionsByUser(@PathVariable int userId, Model model) {
-        List<Subscription> subscriptions = subscriptionService.getSubscriptionsByUser(userId);
-        model.addAttribute("subscriptions", subscriptions);
+        model.addAttribute("subscriptions", subscriptionService.getSubscriptionsByUser(userId));
+        model.addAttribute("title", "User #" + userId + " Subscriptions");
         return "Subscription/subscription";
     }
 
     /**
-     * Remove subscription by Subscription Id.
-     * http://localhost:8080/subs/all/{subs_id}
+     * Get all subscriptions for the current authenticated user.
      *
-     * @param subs_id the unique Id for a subscription.
+     * @param model the model to hold subscription data.
+     * @return the subscription list view.
      */
-    @DeleteMapping("/remove/{subs_id}")
+    @GetMapping("/current")
+    public String getSubscriptionsByCurrentUser(Model model) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        int currentUserId = userService.getUserByUserName(username).getId();
+        model.addAttribute("subscriptions", subscriptionService.getSubscriptionsByUser(currentUserId));
+        model.addAttribute("title", "Your Subscriptions");
+        return "Subscription/subscription-list";
+    }
+
+    /**
+     * Remove a subscription by its ID.
+     *
+     * @param subs_id the unique ID of the subscription to remove.
+     * @return redirect to the current user's subscriptions.
+     */
+    @GetMapping("/remove/{subs_id}")
     public String removeSubscription(@PathVariable int subs_id) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        int currentUserId = userService.getUserByUserName(username).getId();
         subscriptionService.removeSub(subs_id);
-        return "redirect:/User/all"; // Redirects to the list of all subscriptions after deletion
+        return "redirect:/subs/" + currentUserId;
+    }
+
+    /**
+     * Remove a subscription by class ID for the current user.
+     *
+     * @param classId the ID of the class for which to remove the subscription.
+     * @return redirect to the current user's subscriptions.
+     */
+    @GetMapping("/removeByClass/{classId}")
+    public String removeSubscriptionByClass(@PathVariable int classId) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        int currentUserId = userService.getUserByUserName(username).getId();
+        Subscription subscription = subscriptionService.getOneSubscription(classId, currentUserId);
+        subscriptionService.removeSub(subscription.getId());
+        return "redirect:/subs/" + currentUserId;
     }
 }

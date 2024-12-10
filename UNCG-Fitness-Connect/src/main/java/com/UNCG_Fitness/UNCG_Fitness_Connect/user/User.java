@@ -2,8 +2,6 @@ package com.UNCG_Fitness.UNCG_Fitness_Connect.user;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
-
 @Entity
 @Table(name = "users")
 public class User {
@@ -21,8 +19,6 @@ public class User {
     private String firstName;
 
     private String lastName;
-
-    private Date joinDate;
 
     private String role;
 
@@ -72,14 +68,6 @@ public class User {
         this.lastName = lastName;
     }
 
-    public Date getJoinDate() {
-        return joinDate;
-    }
-
-    public void setJoinDate(Date joinDate) {
-        this.joinDate = joinDate;
-    }
-
     public String getRole() {
         return role;
     }
@@ -96,24 +84,22 @@ public class User {
         this.flagged = flagged;
     }
 
-    public User(String userName, String password, String email, String firstName, String lastName, Date joinDate, String role) {
+    public User(String userName, String password, String email, String firstName, String lastName, String role) {
         this.userName = userName;
         this.password = password;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.joinDate = joinDate;
         this.role = role;
     }
 
-    public User(int userId, String userName, String password, String email, String firstName, String lastName, Date joinDate, String role) {
+    public User(int userId, String userName, String password, String email, String firstName, String lastName, String role) {
         this.userId = userId;
         this.userName = userName;
         this.password = password;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.joinDate = joinDate;
         this.role = role;
     }
 
