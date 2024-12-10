@@ -15,6 +15,11 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @GetMapping({"","/"})
+    public String userMenu(@RequestParam(name = "continue", required = false) String cont) {
+        return "index";
+    }
+
     /**
      * Create a new User entry.
      * http://localhost:8080/users/new
@@ -22,7 +27,7 @@ public class UserController {
      * @return the updated list of Users.
      */
     @GetMapping("/createForm")
-    public String showSignupForm() {
+    public String newUserForm(Model model) {
         return "signup.html";
     }
     @PostMapping("/new")

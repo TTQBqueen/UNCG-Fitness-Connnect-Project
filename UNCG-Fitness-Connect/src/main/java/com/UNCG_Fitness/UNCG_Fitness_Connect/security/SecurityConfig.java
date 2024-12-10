@@ -26,9 +26,10 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authorize) -> authorize
                         .dispatcherTypeMatchers(DispatcherType.FORWARD, DispatcherType.ERROR).permitAll()
-                        .requestMatchers("/static/**", "/Styles/**", "/Class/**", "/User/**").permitAll() // Allow access to static files
+                        .requestMatchers("/static/**", "/Styles/**", "/Class/**", "/User/**","/users/createForm").permitAll() // Allow access to static files
+                        .requestMatchers("/signup").permitAll()
                         .requestMatchers("/INSTRUCTOR/**").hasAuthority("INSTRUCTOR")
-                        .requestMatchers("/ADMIN/**").hasAuthority("ADMIN")
+                        .requestMatchers("/users/**").hasAuthority("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
