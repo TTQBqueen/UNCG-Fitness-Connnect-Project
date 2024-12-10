@@ -22,7 +22,9 @@ public class UserController {
      * @return the updated list of Users.
      */
     @GetMapping("/createForm")
-    public String showSignupForm() { return "signup.html"; }
+    public String showSignupForm() {
+        return "signup.html";
+    }
     @PostMapping("/new")
     public String addNewUser(User user) {
         userService.addNewUser(user);

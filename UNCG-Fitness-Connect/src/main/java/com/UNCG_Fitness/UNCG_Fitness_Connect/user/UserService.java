@@ -33,7 +33,7 @@ public class UserService {
      *
      */
     public User getUserById(int id) {
-        return userRepository.findById(id).orElse(null);
+        return userRepository.getReferenceById(id);
     }
 
     /**
@@ -50,18 +50,9 @@ public class UserService {
      *
      * @param user the User details.
      */
-    public void updateUser(int userId, User user) {
-        User existing = getUserById(userId);
-        if (existing == null) {
-            throw new IllegalArgumentException("User not found with ID: " + userId);
-        }
-        existing.setUserName(user.getUserName());
-        existing.setEmail(user.getEmail());
-        existing.setFirstName(user.getFirstName());
-        existing.setLastName(user.getLastName());
-        existing.setRole(user.getRole());
-
-        userRepository.save(existing);
+    public void updateUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
     }
 
     /**
@@ -70,6 +61,8 @@ public class UserService {
      * @param user the User details.
      */
     public void saveUser(User user) {
+        user.setFlagged(false);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 
@@ -88,7 +81,7 @@ public class UserService {
      * @param userName the unique User username
      */
     public User getUserByUserName(String userName) {
-        return userRepository.findByUserName(userName)
-                .orElseThrow(() -> new IllegalArgumentException("User not found with username: " + userName));
+        return userRepository.findByUserName(userName).orElseThrow(()
+                -> new UsernameNotFoundException(userName + "not found"));
     }
 }
