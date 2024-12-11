@@ -1,30 +1,24 @@
-
-<!--Landing page for all users-->
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <link data-th-href="@{/Styles/template.css}" type="text/css" rel="stylesheet">
+    <link data-th-href="@{/User/user-card.css}" type="text/css" rel="stylesheet">
 
     <meta charset="UTF-8">
-    <title>Customer Homepage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>User List</title>
 </head>
 <body>
 
-
-
 <!-- Header -->
 <div class="header">
-    <!-- Profile & Login Section -->
     <div class="user-options">
         <div id="profile-container"><a href="/services/profile.html">Profile</a></div>
         <div id="login-container"><a href="../index.html">Logout</a></div>
     </div>
-    <!-- Logo Section -->
     <h2 class="logo">Spartan Motion</h2>
-
-    <!-- Search Section -->
     <div class="search-container">
-        <form >
+        <form>
             <input type="text" placeholder="Search.." name="search">
             <button type="submit"><i class="fa fa-search">Search</i></button>
         </form>
@@ -34,8 +28,8 @@
 <!-- All the column sections -->
 <div class="row">
     <!-- Navigation column -->
-    <div id ="nav" class="column_side" >
-        <ul id ="links">
+    <div id="nav" class="column_side">
+        <ul id="links">
             <li><a href="customer_home.html">Home</a></li>
             <li><a href="classes.html">Classes</a></li>
             <li><a href="../about.html">About</a></li>
@@ -43,38 +37,28 @@
             <li><a href="../privacypolicy.html">Privacy Policy</a></li>
         </ul>
     </div>
+
     <!-- Middle Section -->
     <div class="column middle">
-        <div id = "text">
-            <h1> Welcome to Spartan Motion, Student!</h1>
-            <p> To see the most recent classes available, click <a href="classes.html">here</a>! </p>
-            <h2> Train like a Spartan today! </h2>
-            <p> We appreciate each and every one of our hard working Spartan Students! </p>
+        <div id="text">
+            <h1>Welcome to Spartan Motion, Admin!</h1>
         </div>
     </div>
-</div>
+    </div>
 
 <!-- CONTENT -->
-<!--Bottom  Section  -->
-
-<p></p>
-<div class="column-bottom"> Visit Our Facility Today!
-    <p></p>
-    <img src="../image/uncg gym.jpeg" alt="running" style="width:100%">
-
-<h1>User</h1>
-
+<!-- Bottom Section -->
+<div class="column middle">
+    <h1>All Users:</h1>
     <div class="container">
-
         <div th:each="user : ${userList}" class="user-card">
             <div class="user-details">
                 <h3 th:text="${user.firstName} + ' ' + ${user.lastName}"></h3>
                 <p>Email: <span th:text="${user.email}"></span></p>
                 <p>Role: <span th:text="${user.role}"></span></p>
-                <a th:href="@{/users/{id}(id=${user.id})}">View Details</a>
+                <a class="btn" th:href="@{/admin/users/{id}(id=${user.id})}">View Details</a>
             </div>
         </div>
-
     </div>
 </div>
 

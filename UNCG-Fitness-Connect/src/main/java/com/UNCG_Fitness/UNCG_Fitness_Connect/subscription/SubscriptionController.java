@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("/subs")
+@RequestMapping("/subscription")
 public class SubscriptionController {
 
     @Autowired
@@ -32,64 +32,51 @@ public class SubscriptionController {
      * @param userId  the user for whom the subscription is created
      * @return the updated list of subscriptions.
      */
-    @PostMapping("/add/{classId}/{userId}")
-    public String createNewSubscription(@PathVariable int classId, @PathVariable int userId, Model model) {
+    @PostMapping("/subs/add/{classId}")
+    public String createNewSubscription(@PathVariable int classId, @RequestParam int userId) {
         subscriptionService.addNewSubscription(classId, userId);
-        List<Subscription> subscriptions = subscriptionService.getSubscriptionByClassId(classId);
-        model.addAttribute("subscriptions", subscriptions);
-        return "Subscription/subscription";
-    }
-
-    /**
-     * Get a list of all Subscriptions in the database.
-     * http://localhost:8080/subs/all
-     *
-     * @return a list of Subscription objects.
-     */
-    @GetMapping("/all")
-    String getAllSubscriptions(Model model) {
-        List<Subscription> subscriptions = subscriptionService.getAllSubscriptions();
-        model.addAttribute("subscriptions", subscriptions);
-        return "Subscription/subscription";
-    }
-
-    /**
-     * Get a specific Subscription by Subscription Id.
-     * http://localhost:8080/subs/{subs_id}
-     *
-     * @param subs_id the unique Id for a Student.
-     * @return One Subscription object.
-     */
-    @GetMapping("/{subs_id}")
-    public String getSubscription(@PathVariable int subs_id, Model model) {
-        Subscription subscription = subscriptionService.getSubscriptionById(subs_id);
-        model.addAttribute("subscription", subscription);
-        return "Subscription/subscription";
+        return "redirect:/subs/" + userId;
     }
 
     /**
      * Get all subscriptions for a specific user.
-     * http://localhost:8080/subs/user/{userId}
      *
-     * @param userId the unique Id for a subscription.
-     * @return all Users connected to the subs_id.
+     * @param userId the unique ID of the user.
+     * @param model  the model to hold subscription data.
+     * @return the subscription list view.
      */
-    @GetMapping("/user/{userId}")
+    @GetMapping("/subs/{userId}")
     public String getSubscriptionsByUser(@PathVariable int userId, Model model) {
-        List<Subscription> subscriptions = subscriptionService.getSubscriptionsByUser(userId);
-        model.addAttribute("subscriptions", subscriptions);
+        model.addAttribute("subscriptions", subscriptionService.getSubscriptionsByUser(userId));
+        model.addAttribute("title", "User #" + userId + " Subscriptions");
+        model.addAttribute("User Id", userId);
         return "Subscription/subscription";
     }
 
     /**
-     * Remove subscription by Subscription Id.
-     * http://localhost:8080/subs/all/{subs_id}
+     * Remove a subscription by its ID.
      *
-     * @param subs_id the unique Id for a subscription.
+     * @param subsId the unique ID of the subscription to remove.
+     * @param userId the ID of the current user.
+     * @return redirect to the current user's subscriptions.
      */
-    @DeleteMapping("/remove/{subs_id}")
-    public String removeSubscription(@PathVariable int subs_id) {
-        subscriptionService.removeSub(subs_id);
-        return "redirect:/User/all"; // Redirects to the list of all subscriptions after deletion
+    @GetMapping("/subs/remove/{subsId}")
+    public String removeSubscription(@PathVariable int subsId, @RequestParam int userId) {
+        subscriptionService.removeSub(subsId);
+        return "redirect:/subs/" + userId;
+    }
+
+    /**
+     * Remove a subscription by class ID for the current user.
+     *
+     * @param classId the ID of the class for which to remove the subscription.
+     * @param userId  the ID of the current user.
+     * @return redirect to the current user's subscriptions.
+     */
+    @GetMapping("/subs/removeByClass/{classId}")
+    public String removeSubscriptionByClass(@PathVariable int classId, @RequestParam int userId) {
+        Subscription subscription = subscriptionService.getOneSubscription(classId, userId);
+        subscriptionService.removeSub(subscription.getId());
+        return "redirect:/subs/" + userId;
     }
 }

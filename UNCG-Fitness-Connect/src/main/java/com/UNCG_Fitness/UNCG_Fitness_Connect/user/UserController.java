@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/users")
 public class UserController {
 
     @Autowired
@@ -21,7 +20,7 @@ public class UserController {
      *
      * @return the updated list of Users.
      */
-    @GetMapping("/createForm")
+    @GetMapping("/users/createForm")
     public String showSignupForm() { return "signup.html"; }
     @PostMapping("/new")
     public String addNewUser(User user) {
@@ -35,7 +34,7 @@ public class UserController {
      *
      * @return a list of User objects.
      */
-    @GetMapping("/all")
+    @GetMapping("/admin/users/all")
     public String getAllUsers(Model model) {
         model.addAttribute("userList", userService.getAllUsers());
         model.addAttribute("title", "All Users");
@@ -51,7 +50,7 @@ public class UserController {
      * @param model the Model object to pass data to the view.
      * @return the view displaying the user's details.
      */
-    @GetMapping("/{userId}")
+    @GetMapping("/admin/users/{userId}")
     public String getUser(@PathVariable int userId, Model model) {
         User user = userService.getUserById(userId);
         if (user == null) {
@@ -69,7 +68,7 @@ public class UserController {
      * @param model the Model object to pass data to the view.
      *
      */
-    @GetMapping("/delete/{userId}")
+    @GetMapping("/users/delete/{userId}")
     public String confirmDelete(@PathVariable int userId, Model model) {
         User user = userService.getUserById(userId);
         model.addAttribute("user", user);
@@ -83,7 +82,7 @@ public class UserController {
      * @param model the Model object to pass data to the view.
      * @return the updated list of Users.
      */
-    @PostMapping("/delete/{userId}")
+    @PostMapping("/users/delete/{userId}")
     public String deleteUser(@PathVariable int userId, Model model) {
         userService.deleteUser(userId);
         model.addAttribute("users", userService.getAllUsers());
@@ -97,7 +96,7 @@ public class UserController {
      * @param userId the unique User Id.
      * @param model the Model object to pass data to the view.
      */
-    @GetMapping("/update/{userId}")
+    @GetMapping("/users/update/{userId}")
     public String updateUser(@PathVariable int userId, Model model) {
         model.addAttribute("user", userService.getUserById(userId));
         return "/User/user-update";
@@ -109,9 +108,49 @@ public class UserController {
      * @param user the new updated User details.
      * @return the view displaying the updated user's details.
      */
-    @PostMapping("/update")
+    @PostMapping("/users/update")
     public String updateUser(User user) {
         userService.saveUser(user);
         return "redirect:/users/" + user.getId();
     }
+
+    // USER SPECIFIC HOME, PROFILE, AND CLASSES
+
+    /**
+     * Show the user's home page.
+     *
+     * @param userId the unique User Id.
+     * @param model the Model object to pass data to the view.
+     * @return the view displaying the user's home page.
+     */
+    @GetMapping("/users/{userId}/home")
+    public String viewUserHome(@PathVariable int userId, Model model) {
+        model.addAttribute("user", userService.getUserById(userId));
+        return "/User/user-home";
+    }
+
+    /**
+     * Show the user's settings page.
+     *
+     * @param userId the unique User Id.
+     * @param model the Model object to pass data to the view.
+     * @return the view displaying the user's settings page.
+     */
+    @GetMapping("/users/{userId}/profile")
+    public String viewUserSettings(@PathVariable int userId, Model model) {
+        model.addAttribute("user", userService.getUserById(userId));
+        return "/User/user-profile";
+    }
+
+    /**
+     * Redirect the user to their home page.
+     *
+     * @param userId the unique User Id.
+     * @return the view displaying the user's home page.
+     */
+    @GetMapping("/user/{userId}")
+    public String redirectToUserHome(@PathVariable int userId) {
+        return "redirect:/user/" + userId + "/home";
+    }
+
 }

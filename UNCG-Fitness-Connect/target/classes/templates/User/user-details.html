@@ -6,6 +6,7 @@
 
     <link data-th-href="@{/Styles/template.css}" type="text/css" rel="stylesheet">
     <link data-th-href="@{/Styles/inst_view.css}" type="text/css" rel="stylesheet">
+    <link data-th-href="@{/User/user-card.css}" type="text/css" rel="stylesheet">
     <title>User Details</title>
 </head>
 <body>
@@ -53,7 +54,7 @@
                     <p><span>Username:</span> <span th:text="${user.userName}"></span></p>
                     <p><span>Role:</span> <span th:text="${user.role}"></span></p>
 
-                    <h3>Your Subscriptions</h3>
+                    <h3>User's Subscriptions:</h3>
                     <div class="subscriptions-list">
                         <ul>
                             <li th:each="subscription : ${userSubscriptions}">
@@ -66,10 +67,10 @@
                     </div>
 
                 </div>
-                <!-- Delete User Button -->
-                <div class="delete-section">
+                <div class="button-group">
+                    <!-- Delete User Button -->
                     <a th:href="@{/users/delete/{userId}(userId=${user.id})}">
-                        <button type="button">Delete User</button>
+                        <button type="button" class="action-btn">Delete User</button>
                     </a>
                 </div>
             </div>

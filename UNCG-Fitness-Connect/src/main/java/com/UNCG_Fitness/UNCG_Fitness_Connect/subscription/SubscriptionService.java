@@ -17,7 +17,7 @@ import java.util.List;
 public class SubscriptionService {
 
     @Autowired
-    private SubscriptionRepository subscribedRepository;
+    SubscriptionRepository subscriptionRepository;
 
     @Autowired
     ClassRepository classRepository;
@@ -25,41 +25,34 @@ public class SubscriptionService {
     @Autowired
     UserRepository userRepository;
 
-    @Autowired
-    SubscriptionRepository subscriptionRepository;
-
     public List<Subscription> getAllSubscriptions() {
-        return subscribedRepository.findAll();
+        return subscriptionRepository.findAll();
     }
 
     public Subscription getSubscriptionById(int subs_id) {
-        return subscribedRepository.getReferenceById(subs_id);
+        return subscriptionRepository.getReferenceById(subs_id);
     }
 
     public List<Subscription> getSubscriptionByClassId(int classId) {
-        return subscribedRepository.getSubscriptionsByClass(classId);
+        return subscriptionRepository.getSubscriptionsByClass(classId);
+    }
+
+    public Subscription getOneSubscription(int classId, int userId) {
+        return subscriptionRepository.getOneSubscription(classId, userId);
     }
 
     public void addNewSubscription(int classId, int userId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("User no found with Id: " + userId));
-        Class fitnessClass = classRepository.findById(classId)
-                .orElseThrow(() -> new IllegalArgumentException("Class not found with Id: " + classId));
+        Subscription sub = new Subscription(userRepository.getReferenceById(userId),
+                classRepository.getReferenceById(classId));
 
-        if (subscriptionRepository.getOneSubscription(classId, userId) == null) {
-            Subscription sub = new Subscription(user, fitnessClass);
-            subscriptionRepository.save(sub);
-        } else {
-            throw new IllegalArgumentException("Subscription already exists for user ID " + userId + " and class ID " + classId);
-        }
+        subscriptionRepository.save(sub);
     }
 
     public List<Subscription> getSubscriptionsByUser(int userId) {
-        return subscribedRepository.getSubscriptionsByUser(userId);
+        return subscriptionRepository.getSubscriptionsByUser(userId);
     }
 
     public void removeSub(int subs_id) {
-        subscribedRepository.deleteById(subs_id);
+        subscriptionRepository.deleteById(subs_id);
     }
-
 }

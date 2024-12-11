@@ -86,4 +86,17 @@ public class UserService {
                 .orElseThrow(() -> new IllegalArgumentException("User not found with username: " + userName));
     }
 
+    /**
+     * Ban an existing User.
+     *
+     * @param user the User details.
+     */
+    public void banUser(int userId, User user) {
+        User existing = getUserById(userId);
+        if (existing == null) {
+            throw new IllegalArgumentException("User not found with ID: " + userId);
+        }
+        existing.setFlagged(true);
+        userRepository.save(existing);
+    }
 }
