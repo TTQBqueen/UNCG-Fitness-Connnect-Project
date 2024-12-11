@@ -91,6 +91,8 @@
                                     <span th:each="star : ${#numbers.sequence(1, review.rating)}" class="star">&#9733;</span>
                                     <span th:each="star : ${#numbers.sequence(review.rating + 1, 5)}" class="star empty">&#9734;</span>
                                 </div>
+                                <!-- Display reviewer username -->
+                                <p class="review-creator" th:text="${review.userId.userName}"></p>
 
                                 <!-- Review details -->
                                 <p class="review-details" th:text="'Review: ' + ${review.details}"></p>
@@ -105,7 +107,8 @@
 
                                 <!-- Display reply if it exists -->
                                 <div class="reply" th:if="${review.reply != null}">
-                                    <p th:text="'Reply: ' + ${review.reply}"></p>
+                                    <!-- Display reviewer username -->
+                                    <p th:text="'Instructor: ' + ${review.reply}"></p>
                                 </div>
 
                                 <!-- Reply form -->
@@ -116,12 +119,17 @@
                                     </form>
                                 </div>
                             </div>
+                            <!-- Creating a new review -->
+
                         </div>
 
-                        <!-- Creating a new review -->
-                        <form sec:authorize="hasAuthority('STUDENT')" th:action="@{/reviews/STUDENT/add}" method="post">
-                            <input type="hidden" name="classId" th:value="${class.classId}" />
-                            <input type="number" name="rating" placeholder="Rate 1-5" min="1" max="5" required />
+                    </div>
+                    <div class="reply-form" sec:authorize="hasAuthority('STUDENT')">
+                        <form th:action="@{/reviews/STUDENT/add}" method="post">
+                            <input type="hidden" name="classId" th:value="${class.classId}"/>
+                            <label>Rating</label>
+                            <input class="classRatting" type="range" name="rating" min="1" max="5" step="1" value="3" required />
+                            <span id="ratingValue">3</span>
                             <textarea name="details" rows="2" placeholder="Write your Review here..." required></textarea>
                             <button type="submit">Submit</button>
                         </form>
@@ -134,6 +142,11 @@
     </div>
 </div>
 </body>
+<script>
+    document.querySelector('.classRatting').addEventListener('input', function(e) {
+        document.getElementById('ratingValue').textContent = e.target.value;
+    });
+</script>
 
 <style>
 
@@ -228,7 +241,7 @@
     }
 
     .btn-flag {
-        background-color: #f399a2;
+        background-color: #e9eaf5;
         color: white;
         border: none;
         padding: 8px 12px;
@@ -238,7 +251,7 @@
     }
 
     .btn-flag:hover {
-        background-color: #d17282;
+        background-color: #db6470;
     }
 
     .reply {
@@ -266,7 +279,7 @@
     }
 
     .reply-form button {
-        background-color: #5cb85c;
+        background-color: #f399a2;
         color: white;
         border: none;
         padding: 8px 12px;
@@ -276,7 +289,7 @@
     }
 
     .reply-form button:hover {
-        background-color: #4cae4c;
+        background-color: #f399a2;
     }
 
     .stars .star {
@@ -287,6 +300,9 @@
 
     .stars .star.empty {
         color: lightgray;
+    }
+    .classRatting{
+     background-color: #f399a2;
     }
 
 </style>
