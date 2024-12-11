@@ -83,71 +83,57 @@
 
                     <div class="reviews">
                         <h2>Reviews</h2>
-                        <div th:each="review : ${reviews}">
+                        <div th:each="review : ${reviews}" th:if="${!review.status}" class="review-container">
                             <div class="review">
 
                                 <!-- Display stars for the rating -->
                                 <div class="stars">
-                                    <span th:each="star : ${#numbers.sequence(1, review.rating)}" class="star">★</span>
-                                    <span th:each="star : ${#numbers.sequence(review.rating + 1, 5)}" class="star empty">☆</span>
+                                    <span th:each="star : ${#numbers.sequence(1, review.rating)}" class="star">&#9733;</span>
+                                    <span th:each="star : ${#numbers.sequence(review.rating + 1, 5)}" class="star empty">&#9734;</span>
                                 </div>
-                                <p th:text="'Review: ' + ${review.details}"></p>
-                                <!-- Display reply if it exists -->
-                                <p th:if="${review.reply != null}" th:text="'Reply: ' + ${review.reply}"></p>
 
-                                <!-- Leave Review form -->
+                                <!-- Review details -->
+                                <p class="review-details" th:text="'Review: ' + ${review.details}"></p>
+
+                                <!-- Flag form -->
+                                <div class="flag-form" data-th-if="${isOwner}">
+                                    <form th:action="@{/reviews/update/status/{reviewId}(reviewId=${review.reviewId})}" method="post">
+                                        <input type="hidden" name="status" value="true" />
+                                        <button type="submit" class="btn-flag">Flag</button>
+                                    </form>
+                                </div>
+
+                                <!-- Display reply if it exists -->
+                                <div class="reply" th:if="${review.reply != null}">
+                                    <p th:text="'Reply: ' + ${review.reply}"></p>
+                                </div>
 
                                 <!-- Reply form -->
-                                <form data-th-if="${isOwner}" th:action="@{/reviews/reply/{reviewId}(reviewId=${review.reviewId})}" method="post">
-                                    <textarea name="reply" rows="2" placeholder="Write your reply here..." required></textarea>
-                                    <button type="submit">Reply</button>
-                                </form>
-
+                                <div class="reply-form" data-th-if="${isOwner}">
+                                    <form th:action="@{/reviews/reply/{reviewId}(reviewId=${review.reviewId})}" method="post">
+                                        <textarea name="reply" placeholder="Write your reply here..." required></textarea>
+                                        <button type="submit">Submit Reply</button>
+                                    </form>
+                                </div>
                             </div>
-
                         </div>
 
-
-
-<!--Creating a new review-->
-                    </div>
-                    <form sec:authorize="hasAuthority('STUDENT')" th:action="@{/reviews/add}" method="post">
-                        <input type="hidden" name="classId" th:value="${class.classId}" />
-                        <input type="number" name="rating" placeholder="Rate 1-5" min="1" max="5" required />
-                        <textarea name="details" rows="2" placeholder="Write your Review here..." required></textarea>
-                        <button type="submit">Reply</button>
-                    </form>
-                            </div>
-
-
-                        </th:block>
+                        <!-- Creating a new review -->
+                        <form sec:authorize="hasAuthority('STUDENT')" th:action="@{/reviews/STUDENT/add}" method="post">
+                            <input type="hidden" name="classId" th:value="${class.classId}" />
+                            <input type="number" name="rating" placeholder="Rate 1-5" min="1" max="5" required />
+                            <textarea name="details" rows="2" placeholder="Write your Review here..." required></textarea>
+                            <button type="submit">Submit</button>
+                        </form>
                     </div>
                 </div>
-
-                <a class="btn-signup" data-th-if="${isOwner}" th:href="@{/classes/update/{classId}(classId=${class.classId})}">Modify</a>
-
-                <a class="btn-delete" data-th-if="${isOwner}" th:href="@{/classes/delete/{classId}(classId=${class.classId})}" onclick="confirmDeletion()">Delete</a>
-
             </div>
         </div>
+        <a class="btn-signup" data-th-if="${isOwner}" th:href="@{/classes/update/{classId}(classId=${class.classId})}">Modify</a>
+        <a class="btn-delete" data-th-if="${isOwner}" th:href="@{/classes/delete/{classId}(classId=${class.classId})}" onclick="confirmDeletion()">Delete</a>
     </div>
-
 </div>
-
-
-
-
-
-<
-<!-- Footer -->
-<footer>
-    <div th:replace="~{/fragments/_footer :: footer}"></div>
-</footer>
-
-
 </body>
-
-
 
 <style>
 
@@ -204,64 +190,104 @@
      margin: 10px 0; /* Add more space between paragraphs */
  }
 
-  .signups {
-      margin-top: 20px;
-      font-size: 16px;
-      color: #272855;
-      background-color: #e9eaf5;
-      padding: 10px;
-      border-radius: 5px;
-  }
+   .signups {
+        margin-top: 20px;
+        font-size: 16px;
+        color: #272855;
+        background-color: #e9eaf5;
+        padding: 10px;
+        border-radius: 5px;
+    }
 
-  .reviews {
-      margin-top: 15px;
-  }
+    .reviews {
+        margin-top: 15px;
+        font-family: Arial, sans-serif;
+        color: #333;
+    }
 
-  .reviews span {
-      font-weight: bold;
-      color: #272855;
-  }
+    .review-container {
+        margin-bottom: 20px;
+        padding: 15px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+    }
 
-  .reviews p {
-      margin: 5px 0;
-      font-size: 14px;
-      color: #555;
-  }
-
-.reply {
-    margin-top: 10px;
-    padding: 10px;
-    background-color: #f0f0f0;
-    border-left: 4px solid #ddd;
-}
-
-.reply-form textarea {
-    width: 100%;
-    min-height: 50px;
-    margin-bottom: 10px;
-}
-
-.reply-form button {
-    background-color: #5cb85c;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 3px;
-    cursor: pointer;
-}
-
-.reply-form button:hover {
-    background-color: #4cae4c;
-}
     .stars {
-    display: inline-block;
-    color: gold;
-    font-size: 1.5rem;
-}
+        margin-bottom: 10px;
+    }
 
-.star.empty {
-    color: lightgray;
-}
+    .review-details {
+        font-size: 1rem;
+        margin-bottom: 10px;
+        color: #555;
+    }
+
+    .flag-form {
+        margin-top: 10px;
+    }
+
+    .btn-flag {
+        background-color: #f399a2;
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-flag:hover {
+        background-color: #d17282;
+    }
+
+    .reply {
+        margin-top: 10px;
+        padding: 10px;
+        background-color: #f0f0f0;
+        border-left: 4px solid #ddd;
+        font-size: 0.9rem;
+        color: #555;
+    }
+
+    .reply-form {
+        margin-top: 15px;
+    }
+
+    .reply-form textarea {
+        width: 100%;
+        min-height: 50px;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        resize: vertical;
+    }
+
+    .reply-form button {
+        background-color: #5cb85c;
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .reply-form button:hover {
+        background-color: #4cae4c;
+    }
+
+    .stars .star {
+        font-size: 1.5rem;
+        color: gold;
+        margin-right: 2px;
+    }
+
+    .stars .star.empty {
+        color: lightgray;
+    }
 
 </style>
 </html>

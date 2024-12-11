@@ -148,7 +148,6 @@ public class ClassController {
 
 
 
-    //    Extra methods
 //    getting all users that have the instructor role
 
     @GetMapping("/instructors")
@@ -171,38 +170,5 @@ public class ClassController {
         classService.saveClass(fitnessClass);
         return "redirect:/classes/all";
     }
-
-
-
-
-//    @GetMapping("/createForm/{creatorId}")
-//    public String showCreateClassForm(@PathVariable int creatorId, Model model) {
-//        // Fetch the user to verify the userId is valid
-//        User creator = userService.getUserById(creatorId);
-//        if (creator == null) {
-//            throw new IllegalArgumentException("Invalid user ID: " + creatorId);
-//        }
-//
-//        // Pass the userId and an empty class object to the model
-//        model.addAttribute("creator", creatorId);
-//        model.addAttribute("class", new Class());
-//        return "Class/create-class";
-//    }
-
-
-//    @PostMapping("/createForm/{creatorId}")
-//    public String createClass(@ModelAttribute Class fitnessClass, @PathVariable int creatorId) {
-//        // Fetch the user to associate with the class
-//        User creator = userService.getUserById(creatorId);
-//        if (creator == null) {
-//            throw new IllegalArgumentException("Invalid user ID: " + creatorId);
-//        }
-//        //  the user with the class
-//        fitnessClass.setCreator(creator);
-//        // Save the class
-//        classService.saveClass(fitnessClass);
-//        // Redirect to the instructor's class list
-//        return "redirect:/classes/INSTRUCTOR/" + creatorId;
-//    }
 
 }
