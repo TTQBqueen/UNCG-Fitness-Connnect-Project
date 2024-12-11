@@ -1,10 +1,17 @@
 package com.UNCG_Fitness.UNCG_Fitness_Connect.subscription;
 
+import com.UNCG_Fitness.UNCG_Fitness_Connect.fitnessClass.Class;
+import com.UNCG_Fitness.UNCG_Fitness_Connect.fitnessClass.ClassService;
+import com.UNCG_Fitness.UNCG_Fitness_Connect.review.Review;
 import com.UNCG_Fitness.UNCG_Fitness_Connect.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -17,63 +24,76 @@ public class SubscriptionController {
     @Autowired
     UserService userService;
 
-    /**
-     * Create a new Subscription for a Class.
-     * http://localhost:8080/subs/new/{classId} --data '{ "classId": }'
-     *
-     * @param classId the class for the subscription to be assigned to
-     * @return the updated list of subscriptions.
-     */
-    @PostMapping("/add/{classId}")
-    public List<Subscription> createNewSubscription(@PathVariable int classId, @PathVariable int userId) {
-        subscriptionService.addNewSubscription(classId, userId);
-        return subscriptionService.getSubscriptionByClassId(classId);
-    }
+    @Autowired
+    ClassService classService;
 
+    @Autowired
+    private SubscriptionRepository subscriptionRepository;
 
     /**
-     * Get a list of all Subscriptions in the database.
+     * Get all subscriptions.
      * http://localhost:8080/subs/all
      *
-     * @return a list of Subscription objects.
      */
     @GetMapping("/all")
-    public List<Subscription> getAllStudents() {
-        return subscriptionService.getAllSubscriptions();
+    public String getAllReviews(Model model) {
+        model.addAttribute("subscriptionList", subscriptionService.getAllSubscriptions());
+        return "/Subscription/subscription";
     }
 
     /**
-     * Get a specific Subscription by Subscription Id.
-     * http://localhost:8080/subs/2
+     * Create a new Subscription for a Class.
+     * http://localhost:8080/subs/add/{classId}
      *
-     * @param subs_id the unique Id for a Student.
-     * @return One Subscription object.
+     * @param classId the class for the subscription to be assigned to
+     * @param userId  the user for whom the subscription is created
+     * @return the updated list of subscriptions.
      */
-    @GetMapping("/{subs_id}")
-    public Subscription getSubs(@PathVariable int subs_id) {
-        return subscriptionService.getSubscriptionById(subs_id);
+    @PostMapping("/subs/add/{classId}")
+    public String createNewSubscription(@PathVariable int classId, @RequestParam int userId) {
+        subscriptionService.addNewSubscription(classId, userId);
+        return "redirect:/subs/" + userId;
     }
 
     /**
-     * Get all users subscribed to a subscription.
-     * http://localhost:8080/subs/all/{subs_id}
+     * Get all subscriptions for a specific user.
      *
-     * @param userId the unique Id for a subscription.
-     * @return all Users connected to the subs_id.
+     * @param userId the unique ID of the user.
+     * @param model  the model to hold subscription data.
+     * @return the subscription list view.
      */
-    @GetMapping("/{userId}")
-    public List<Subscription> getUsersBySubs(@RequestParam int userId) {
-        return subscriptionService.getSubscriptionsByUser(userId);
+    @GetMapping("/subs/{userId}")
+    public String getSubscriptionsByUser(@PathVariable int userId, Model model) {
+        model.addAttribute("subscriptions", subscriptionService.getSubscriptionsByUser(userId));
+        model.addAttribute("title", "User #" + userId + " Subscriptions");
+        model.addAttribute("User Id", userId);
+        return "Subscription/subscription";
     }
 
     /**
-     * Remove subscription by Subscription Id.
-     * http://localhost:8080/subs/all/{subs_id}
+     * Remove a subscription by its ID.
      *
-     * @param subs_id the unique Id for a subscription.
+     * @param subsId the unique ID of the subscription to remove.
+     * @param userId the ID of the current user.
+     * @return redirect to the current user's subscriptions.
      */
-    @DeleteMapping("/remove/{subs_id}")
-    public void removeSub(@PathVariable int subs_id) {
-        subscriptionService.removeSub(subs_id);
+    @GetMapping("/subs/remove/{subsId}")
+    public String removeSubscription(@PathVariable int subsId, @RequestParam int userId) {
+        subscriptionService.removeSub(subsId);
+        return "redirect:/subs/" + userId;
+    }
+
+    /**
+     * Remove a subscription by class ID for the current user.
+     *
+     * @param classId the ID of the class for which to remove the subscription.
+     * @param userId  the ID of the current user.
+     * @return redirect to the current user's subscriptions.
+     */
+    @GetMapping("/subs/removeByClass/{classId}")
+    public String removeSubscriptionByClass(@PathVariable int classId, @RequestParam int userId) {
+        Subscription subscription = subscriptionService.getOneSubscription(classId, userId);
+        subscriptionService.removeSub(subscription.getId());
+        return "redirect:/subs/" + userId;
     }
 }

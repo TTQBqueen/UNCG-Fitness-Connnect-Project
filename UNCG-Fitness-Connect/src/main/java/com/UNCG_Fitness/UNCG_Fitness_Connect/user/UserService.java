@@ -70,8 +70,6 @@ public class UserService {
      * @param user the User details.
      */
     public void saveUser(User user) {
-
-//        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 
@@ -83,7 +81,6 @@ public class UserService {
     public void deleteUser(int userId) {
         userRepository.deleteById(userId);
     }
-
 
     public List<User> getUsersByRole(String role) {
         return userRepository.findByRole(role);

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <link data-th-href="@{/Styles/template.css}" type="text/css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>About Us</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+    <div class="user-options">
+        <div id="profile-container"><a href="/">Home</a></div>
+        <div id="login-container"><a href="/login">Sign Out</a></div>
+        <div id="login-container"><a href="/classes/all">Classes</a></div>
+    </div>
+    <h2 class="logo">Spartan Motion</h2>
+</div>
+
+<div class="row">
+    <div class="column_middle">
+        <div id="text">
+            <h1>About Spartan Motion</h1>
+            <p>Spartan Motion is a leading platform designed to help users achieve their fitness goals through structured programs, community support, and advanced tracking tools. Founded with the vision to inspire a healthier world, Spartan Motion empowers its users to train like Spartans and conquer their personal fitness battles.</p>
+            <p>Our mission is to provide a space where fitness enthusiasts, beginners, and professionals alike can connect, grow, and excel together. Join our community today!</p>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <div th:replace="~{/fragments/_footer :: footer}"></div>
+</footer>
+
+</body>
+</html>

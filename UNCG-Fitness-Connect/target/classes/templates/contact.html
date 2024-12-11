@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <link data-th-href="@{/Styles/template.css}" type="text/css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Contact Us</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+    <div class="user-options">
+        <div id="profile-container"><a href="/">Home</a></div>
+        <div id="login-container"><a href="/login">Sign Out</a></div>
+        <div id="login-container"><a href="/classes/all">Classes</a></div>
+    </div>
+    <h2 class="logo">Spartan Motion</h2>
+</div>
+
+<div class="row">
+    <div class="column_middle">
+        <div id="text">
+            <h1>Contact Us</h1>
+            <p>We would love to hear from you! If you have any questions, feedback, or concerns, feel free to reach out to us.</p>
+            <p>Email: <a href="mailto:support@spartanmotion.com">support@spartanmotion.com</a></p>
+            <p>Phone: +1 (800) 123-4567</p>
+            <p>Address: 123 Spartan Lane, Fitness City, Health State, USA</p>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <div th:replace="~{/fragments/_footer :: footer}"></div>
+</footer>
+
+</body>
+</html>

@@ -13,11 +13,11 @@ public class Subscription {
     private int subs_id;
 
     @ManyToOne
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "userId", nullable = false)
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "classId")
+    @JoinColumn(name = "classId", nullable = false)
     private Class fitnessClass;
 
     public Subscription(int subs_id, User user, Class fitnessClass) {

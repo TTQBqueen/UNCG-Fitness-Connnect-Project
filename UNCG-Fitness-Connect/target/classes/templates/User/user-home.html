@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/xhtml">
+<head>
+    <link data-th-href="@{/Styles/template.css}" type="text/css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+    <!-- Profile & Login Section -->
+    <div class="user-options">
+        <div id="profile-container"><a href="/user/${user.id}/home">Home</a></div>
+        <div id="login-container"><a href="/user/${user.id}/profile"><i class="fa fa-user"></i> Profile</a></div>
+        <div id="login-container"><a href="/index">Logout</a></div>
+        <div id="login-container"><a href="/classes/all">Classes</a></div>
+    </div>
+    <!-- Logo Section -->
+    <h2 class="logo">Spartan Motion</h2>
+</div>
+
+<!-- All the column sections -->
+<div class="row">
+    <!-- Navigation column -->
+    <header>
+        <div th:replace="~{/fragments/home-side-nav :: header}"></div>
+    </header>
+
+    <!-- Middle Section -->
+    <div class="column_middle">
+        <div id="text">
+            <h1>Welcome to Spartan Motion</h1>
+            <p>Spartan Motion is a platform that allows users to track their physical activity and set goals for themselves. Users can track their progress and see how they are improving over time.</p>
+            <p>Users can also connect with other users and see how they are doing.</p>
+            <p><a href="/users/createForm">Sign up</a> to train like a Spartan today!</p>
+        </div>
+    </div>
+</div>
+
+<!-- CONTENT -->
+<!-- Bottom Section -->
+<!-- Image Section -->
+<div class="image_container">
+    <!-- Display multiple images at once -->
+    <img src="/image/gym_girl1.jpeg" alt="Image 1">
+    <img src="/image/gym_girl2.jpeg" alt="Image 2">
+    <img src="/image/gym_guy.jpg" alt="Image 3">
+    <img src="/image/gym_person.jpg" alt="Image 4">
+</div>
+
+<!-- Footer -->
+<footer>
+    <div th:replace="~{/fragments/_footer :: footer}"></div>
+</footer>
+
+</body>
+<style>
+    /* Image Container */
+    .image_container {
+        display: grid; /* Use grid layout */
+        grid-template-columns: repeat(4, 1fr); /* Create 4 equal columns */
+        width: 100%; /* Full width */
+        height: 500px; /* Fixed height */
+        gap: 10px; /* Space between images */
+        overflow: hidden; /* Hide any overflow */
+        margin: auto;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        padding: 5px;
+    }
+
+    /* Image Styling */
+    .image_container img {
+        width: 100%; /* Full width of grid cell */
+        height: 100%; /* Full height of grid cell */
+        object-fit: cover; /* Ensure image covers the entire space */
+        border-radius: 10px;
+    }
+
+    /* Profile Icon Styling */
+    .fa-user {
+        font-size: 24px;
+        color: #333;
+        text-decoration: none;
+    }
+</style>
+</html>

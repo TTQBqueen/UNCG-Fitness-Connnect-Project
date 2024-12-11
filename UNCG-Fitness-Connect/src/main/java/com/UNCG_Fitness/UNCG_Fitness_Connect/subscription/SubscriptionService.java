@@ -16,7 +16,7 @@ import java.util.List;
 public class SubscriptionService {
 
     @Autowired
-    private SubscriptionRepository subscribedRepository;
+    private SubscriptionRepository subscriptionRepository;
 
     @Autowired
     ClassRepository classRepository;
@@ -25,30 +25,33 @@ public class SubscriptionService {
     UserRepository userRepository;
 
     public List<Subscription> getAllSubscriptions() {
-        return subscribedRepository.findAll();
+        return subscriptionRepository.findAll();
     }
 
     public Subscription getSubscriptionById(int subs_id) {
-        return subscribedRepository.getReferenceById(subs_id);
+        return subscriptionRepository.getReferenceById(subs_id);
     }
 
     public List<Subscription> getSubscriptionByClassId(int classId) {
-        return subscribedRepository.getSubscriptionsByClass(classId);
+        return subscriptionRepository.getSubscriptionsByClass(classId);
+    }
+
+    public Subscription getOneSubscription(int classId, int userId) {
+        return subscriptionRepository.getOneSubscription(classId, userId);
     }
 
     public void addNewSubscription(int classId, int userId) {
         Subscription sub = new Subscription(userRepository.getReferenceById(userId),
                 classRepository.getReferenceById(classId));
 
-        subscribedRepository.save(sub);
+        subscriptionRepository.save(sub);
     }
 
     public List<Subscription> getSubscriptionsByUser(int userId) {
-        return subscribedRepository.getSubscriptionsByUser(userId);
+        return subscriptionRepository.getSubscriptionsByUser(userId);
     }
 
     public void removeSub(int subs_id) {
-        subscribedRepository.deleteById(subs_id);
+        subscriptionRepository.deleteById(subs_id);
     }
-
 }

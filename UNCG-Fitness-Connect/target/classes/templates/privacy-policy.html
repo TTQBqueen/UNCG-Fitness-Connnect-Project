@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <link data-th-href="@{/Styles/template.css}" type="text/css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Privacy Policy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+    <div class="user-options">
+        <div id="profile-container"><a href="/">Home</a></div>
+        <div id="login-container"><a href="/login">Sign Out</a></div>
+        <div id="login-container"><a href="/classes/all">Classes</a></div>
+    </div>
+    <h2 class="logo">Spartan Motion</h2>
+</div>
+
+<div class="row">
+    <div class="column_middle">
+        <div id="text">
+            <h1>Privacy Policy</h1>
+            <p>Your privacy is important to us at Spartan Motion. This policy explains how we collect, use, and protect your personal information.</p>
+            <h3>Information Collection</h3>
+            <p>We collect data when you sign up for our platform, including your name, email, and fitness goals.</p>
+            <h3>Usage</h3>
+            <p>Your data is used to improve your experience, track your progress, and connect you with relevant classes and instructors.</p>
+            <h3>Protection</h3>
+            <p>We implement secure measures to protect your information from unauthorized access and ensure your data remains confidential.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <div th:replace="~{/fragments/_footer :: footer}"></div>
+</footer>
+
+</body>
+</html>
