@@ -2,7 +2,10 @@ package com.UNCG_Fitness.UNCG_Fitness_Connect.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.security.core.userdetails.UsernameNotFoundException;
+//import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
@@ -10,6 +13,8 @@ public class UserService {
 
     @Autowired
     UserRepository userRepository;
+//    @Autowired
+//    PasswordEncoder passwordEncoder;
 
     /**
      * Get all Users.
@@ -53,7 +58,9 @@ public class UserService {
         existing.setFirstName(user.getFirstName());
         existing.setLastName(user.getLastName());
         existing.setRole(user.getRole());
+//        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(existing);
+
     }
 
     /**
@@ -62,6 +69,8 @@ public class UserService {
      * @param user the User details.
      */
     public void saveUser(User user) {
+
+//        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 
@@ -74,15 +83,13 @@ public class UserService {
         userRepository.deleteById(userId);
     }
 
-    /**
-     * Get a User by username
-     *
-     * @param userName the unique User username
-     */
-    public User getUserByUserName(String userName) {
-        return userRepository.findByUserName(userName).orElseThrow();
-    }
+
     public List<User> getUsersByRole(String role) {
         return userRepository.findByRole(role);
     }
+
+//    public User getUserByUserName(String userName) {
+//        return userRepository.findByUserName(userName).orElseThrow(()
+//                -> new UsernameNotFoundException(userName + "not found"));
+//    }
 }

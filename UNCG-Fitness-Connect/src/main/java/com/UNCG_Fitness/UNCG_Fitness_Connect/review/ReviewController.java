@@ -1,4 +1,7 @@
 package com.UNCG_Fitness.UNCG_Fitness_Connect.review;
+import com.UNCG_Fitness.UNCG_Fitness_Connect.fitnessClass.Class;
+import com.UNCG_Fitness.UNCG_Fitness_Connect.user.User;
+import com.UNCG_Fitness.UNCG_Fitness_Connect.user.UserService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +15,8 @@ public class ReviewController {
 
     @Autowired
     ReviewService reviewService;
+    @Autowired
+    UserService userService;
 
     //This will get all the reviews
     @GetMapping("/all")
@@ -29,9 +34,12 @@ public class ReviewController {
         //return reviewService.getReviewById(reviewId);
     }
 
+
+
     //This will add a new review
     @PostMapping("/add/{classId}")
     public String addReview(@ModelAttribute Review review) {
+
         reviewService.createReview(review);
         return "redirect:/classes/all";
 
@@ -40,7 +48,7 @@ public class ReviewController {
 
     //This will update the status of a review
     @PutMapping("/update/status/{reviewId}")
-    public String updateReviewStatus(@PathVariable int reviewId, @RequestBody String status, Model model){
+    public String updateReviewStatus(@PathVariable int reviewId, @RequestBody boolean status, Model model){
         model.addAttribute("review", reviewService.getReviewById(reviewId));
         return "review-update";
         //return re viewService.updateReviewStatus(reviewId, status);
@@ -53,4 +61,6 @@ public class ReviewController {
         return "redirect:/reviews/all";
         //reviewService.deleteReviewById(reviewId);
     }
+
+
 }

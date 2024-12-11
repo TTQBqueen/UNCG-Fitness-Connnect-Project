@@ -24,24 +24,27 @@ public class ReviewService {
         return reviewRepository.findById(reviewId).orElse(null);
     }
     public Review createReview(Review review){
-        review.setCreatedAt(new Date());
         return reviewRepository.save(review);
     }
-    public Review updateReviewStatus(int reviewId, String status){
+    public Review updateReviewStatus(int reviewId, boolean status){
         Optional<Review> reviewOptional = reviewRepository.findById(reviewId);
         if(reviewOptional.isPresent()){
             Review review = reviewOptional.get();
             review.setStatus(status);
-            review.setUpdatedAt(new Date());
             return reviewRepository.save(review);
         }
         return null;
     }
+
     public void deleteReviewById(int reviewId){
         reviewRepository.deleteById(reviewId);
     }
     public List<Review> getReviewByClassId(int classId) {
         return reviewRepository.getReviewByClassId(classId);
     }
+
+
+
+
 
 }

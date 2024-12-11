@@ -84,12 +84,19 @@
                         <h2>Reviews</h2>
                         <div th:each="review : ${reviews}">
                             <div class="review">
+
                                 <!-- Display stars for the rating -->
                                 <div class="stars">
                                     <span th:each="star : ${#numbers.sequence(1, review.rating)}" class="star">★</span>
                                     <span th:each="star : ${#numbers.sequence(review.rating + 1, 5)}" class="star empty">☆</span>
                                 </div>
                                 <p th:text="'Review: ' + ${review.details}"></p>
+                                <!-- Button to toggle flag status -->
+<!--                                <form th:action="@/{update/status/{reviewId}(reviewId=${review.reviewId})}" method="post">-->
+<!--                                    <button type="submit" class="btn-flag">-->
+<!--                                        <span th:text="${review.status == '1' ? 'Unflag' : 'Flag'}"></span>-->
+<!--                                    </button>-->
+<!--                                </form>-->
                             </div>
                         </div>
                     </div>

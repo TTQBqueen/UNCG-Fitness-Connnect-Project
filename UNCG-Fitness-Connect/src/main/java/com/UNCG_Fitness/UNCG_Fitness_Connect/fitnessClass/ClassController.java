@@ -1,5 +1,6 @@
 package com.UNCG_Fitness.UNCG_Fitness_Connect.fitnessClass;
 
+import com.UNCG_Fitness.UNCG_Fitness_Connect.review.Review;
 import com.UNCG_Fitness.UNCG_Fitness_Connect.review.ReviewService;
 import com.UNCG_Fitness.UNCG_Fitness_Connect.user.User;
 import com.UNCG_Fitness.UNCG_Fitness_Connect.user.UserRepository;

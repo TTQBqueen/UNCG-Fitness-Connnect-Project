@@ -33,23 +33,21 @@ public class Review {
     @Column(nullable = false)
     private String details;
 
-    private Date createdAt;
+    @Column
+    private boolean status;
 
-    private Date updatedAt;
-
-    private String status;
-
-    public Review(int reviewId, Class classId, int rating, User userId, String details, Date createdAt, Date updatedAt, String status) {
+    public Review(int reviewId, Class classId, int rating, User userId, String details, boolean status) {
         this.reviewId = reviewId;
         this.classId = classId;
         this.rating = rating;
         this.userId = userId;
         this.details = details;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
         this.status = status;
     }
-    public Review(String reviewId, Class classId, User userId, String details, Date created, Date updated, String status) {
+    public Review( boolean status) {
+        this.status = status;
+    }
+    public Review(String reviewId, Class classId, User userId, String details, Date created, Date updated, boolean status) {
     }
     public Review(){
     }
@@ -82,22 +80,11 @@ public class Review {
     public void setDetails(String details) {
         this.details = details;
     }
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-    public String getStatus() {
+
+    public boolean getStatus() {
         return status;
     }
-    public void setStatus(String status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 }
