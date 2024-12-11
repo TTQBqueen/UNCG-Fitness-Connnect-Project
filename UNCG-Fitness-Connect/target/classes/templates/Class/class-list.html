@@ -70,7 +70,7 @@
         <!-- Navigation Menu -->
         <ul id="links">
             <li><a href="/classes/all ">Home</a></li>
-            
+
 
             <li sec:authorize="hasAuthority('INSTRUCTOR')">
                 <a th:href="@{/classes/INSTRUCTOR/fitnessClass/createForm}">Create</a>

@@ -1,6 +1,9 @@
 package com.UNCG_Fitness.UNCG_Fitness_Connect.review;
 
+import com.UNCG_Fitness.UNCG_Fitness_Connect.user.User;
+import com.UNCG_Fitness.UNCG_Fitness_Connect.fitnessClass.Class;
 import com.UNCG_Fitness.UNCG_Fitness_Connect.fitnessClass.ClassService;
+import com.UNCG_Fitness.UNCG_Fitness_Connect.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +19,9 @@ public class ReviewService {
 
     @Autowired
     private ClassService classService;
+
+    @Autowired
+    private UserService userService;
 
     public List<Review> getAllReviews(){
         return reviewRepository.findAll();
@@ -43,7 +49,24 @@ public class ReviewService {
         return reviewRepository.getReviewByClassId(classId);
     }
 
+    public Review createReview(int classId, int userId, int rating, String details) {
+        // Fetch the associated Class entity
+        Class fitnessClass = classService.getClassById(classId);
 
+        // Fetch the associated User entity
+        User user = userService.getUserById(userId);
+
+        // Create and save the Review
+        Review review = new Review();
+        review.setClassId(fitnessClass);
+        review.setUserId(user);
+        review.setRating(rating);
+        review.setDetails(details);
+        review.setStatus(false); // Default status
+        review.setReply(null); // No reply initially
+
+        return reviewRepository.save(review);
+    }
 
 
 

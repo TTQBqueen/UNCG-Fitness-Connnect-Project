@@ -1,7 +1,9 @@
 package com.UNCG_Fitness.UNCG_Fitness_Connect.review;
 import com.UNCG_Fitness.UNCG_Fitness_Connect.fitnessClass.Class;
+import com.UNCG_Fitness.UNCG_Fitness_Connect.fitnessClass.ClassService;
 import com.UNCG_Fitness.UNCG_Fitness_Connect.user.User;
 import com.UNCG_Fitness.UNCG_Fitness_Connect.user.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ public class ReviewController {
     ReviewService reviewService;
     @Autowired
     UserService userService;
+    @Autowired
+    ClassService classService;
+
 
     @Autowired
     private ReviewRepository reviewRepository;
@@ -38,17 +43,24 @@ public class ReviewController {
         //return reviewService.getReviewById(reviewId);
     }
 
-
-
-    //This will add a new review
-    @PostMapping("/add/{classId}")
-    public String addReview(@ModelAttribute Review review) {
-
-        reviewService.createReview(review);
-        return "redirect:/classes/all";
-
-        //return reviewService.createReview(review);
+    @PostMapping("/add")
+    public ResponseEntity<String> addReview(
+            @RequestParam int classId,
+            @RequestParam int userId,
+            @RequestParam int rating,
+            @RequestParam String details
+    ) {
+        try {
+            // Call the service to create a new review
+            Review review = reviewService.createReview(classId, userId, rating, details);
+            return ResponseEntity.ok("Review added successfully with ID: " + review.getReviewId());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Error creating review: " + e.getMessage());
+        }
     }
+
+
 
     //This will update the status of a review
     @PutMapping("/update/status/{reviewId}")
@@ -66,18 +78,17 @@ public class ReviewController {
         //reviewService.deleteReviewById(reviewId);
     }
 
-//    @PostMapping("/reply/{reviewId}")
-//    public ResponseEntity<String> addReply(@PathVariable int reviewId, @RequestParam String reply) {
-//        // Fetch the review by ID
-//        Review review = reviewRepository.findById(reviewId)
-//                .orElseThrow(() -> new IllegalArgumentException("Review not found"));
-//
-//        // Update the reply field
-//        review.setReply(reply);
-//        reviewRepository.save(review);
-//
-//        return ResponseEntity.ok("Reply added successfully");
-//    }
+    @PostMapping("/reply/{reviewId}")
+    public String addReply(@PathVariable int reviewId, @RequestParam String reply) {
+        Review review = reviewRepository.findById(reviewId)
+                .orElseThrow(() -> new IllegalArgumentException("Review not found"));
+
+        review.setReply(reply);
+        reviewRepository.save(review);
+
+        // Redirect to the same page (or a specific one)
+        return "redirect:/classes/" + review.getClassId().getClassId();
+    }
 
 
 }

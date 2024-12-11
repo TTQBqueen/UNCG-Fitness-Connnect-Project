@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -91,16 +92,34 @@
                                     <span th:each="star : ${#numbers.sequence(review.rating + 1, 5)}" class="star empty">☆</span>
                                 </div>
                                 <p th:text="'Review: ' + ${review.details}"></p>
-                                <!-- Button to toggle flag status -->
-<!--                                <form th:action="@/{update/status/{reviewId}(reviewId=${review.reviewId})}" method="post">-->
-<!--                                    <button type="submit" class="btn-flag">-->
-<!--                                        <span th:text="${review.status == '1' ? 'Unflag' : 'Flag'}"></span>-->
-<!--                                    </button>-->
-<!--                                </form>-->
+                                <!-- Display reply if it exists -->
+                                <p th:if="${review.reply != null}" th:text="'Reply: ' + ${review.reply}"></p>
+
+                                <!-- Leave Review form -->
+
+                                <!-- Reply form -->
+                                <form data-th-if="${isOwner}" th:action="@{/reviews/reply/{reviewId}(reviewId=${review.reviewId})}" method="post">
+                                    <textarea name="reply" rows="2" placeholder="Write your reply here..." required></textarea>
+                                    <button type="submit">Reply</button>
+                                </form>
+
                             </div>
+
                         </div>
+
+
+
+<!--Creating a new review-->
                     </div>
+                    <form sec:authorize="hasAuthority('STUDENT')" th:action="@{/reviews/add}" method="post">
+                        <input type="hidden" name="classId" th:value="${class.classId}" />
+                        <input type="number" name="rating" placeholder="Rate 1-5" min="1" max="5" required />
+                        <textarea name="details" rows="2" placeholder="Write your Review here..." required></textarea>
+                        <button type="submit">Reply</button>
+                    </form>
                             </div>
+
+
                         </th:block>
                     </div>
                 </div>

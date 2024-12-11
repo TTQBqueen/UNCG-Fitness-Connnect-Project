@@ -36,18 +36,18 @@ public class Review {
     @Column(nullable = false)
     private boolean status;
 
-//    @Column(nullable = true)
-//    private String reply;
+    @Column(nullable = true)
+    private String reply;
 
 
-    public Review(int reviewId, Class classId, int rating, User userId, String details, boolean status) {
+    public Review(int reviewId, Class classId, int rating, User userId, String details, boolean status, String reply) {
         this.reviewId = reviewId;
         this.classId = classId;
         this.rating = rating;
         this.userId = userId;
         this.details = details;
         this.status = status;
-//        this.reply = reply;
+        this.reply = reply;
     }
     public Review( boolean status) {
         this.status = status;
@@ -93,19 +93,19 @@ public class Review {
         this.status = status;
     }
 
-//    public String getReply() {
-//        return reply;
-//    }
-//
-//    public void setReply(String reply) {
-//        this.reply = reply;
-//    }
-//
-//    public void setClassId(Class classId) {
-//        this.classId = classId;
-//    }
-//
-//    public boolean isStatus() {
-//        return status;
-//    }
+    public String getReply() {
+        return reply;
+    }
+
+    public void setReply(String reply) {
+        this.reply = reply;
+    }
+
+    public void setClassId(Class classId) {
+        this.classId = classId;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
 }

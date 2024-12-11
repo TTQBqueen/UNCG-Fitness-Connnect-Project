@@ -41,7 +41,6 @@ public class ClassController {
 
     //Class by ID
 
-
     @GetMapping("/{classId}")
     public String getClassesById(@PathVariable int classId, Model model) {
 
@@ -50,8 +49,6 @@ public class ClassController {
 
         Class fitnessClass = classService.getClassById(classId);
         model.addAttribute("isOwner", fitnessClass.getCreator().getId() == currentUserId);
-
-
 
         // Fetch class details
         model.addAttribute("class", classService.getClassById(classId));
