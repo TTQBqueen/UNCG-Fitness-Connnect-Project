@@ -3,8 +3,8 @@ package com.UNCG_Fitness.UNCG_Fitness_Connect.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.core.userdetails.UsernameNotFoundException;
-//import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -13,8 +13,8 @@ public class UserService {
 
     @Autowired
     UserRepository userRepository;
-//    @Autowired
-//    PasswordEncoder passwordEncoder;
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     /**
      * Get all Users.
@@ -43,6 +43,7 @@ public class UserService {
      * @param user the new User to add
      */
     public void addNewUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 
@@ -58,7 +59,7 @@ public class UserService {
         existing.setFirstName(user.getFirstName());
         existing.setLastName(user.getLastName());
         existing.setRole(user.getRole());
-//        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(existing);
 
     }
@@ -88,8 +89,12 @@ public class UserService {
         return userRepository.findByRole(role);
     }
 
-//    public User getUserByUserName(String userName) {
-//        return userRepository.findByUserName(userName).orElseThrow(()
-//                -> new UsernameNotFoundException(userName + "not found"));
-//    }
+    public User getUserByUserName(String userName) {
+        return userRepository.findByUserName(userName).orElseThrow(()
+                -> new UsernameNotFoundException(userName + "not found"));
+    }
+
+    public User getUser(int id) {
+        return userRepository.getReferenceById(id);
+    }
 }

@@ -1,7 +1,8 @@
 <!--Landing page for all users-->
 <!DOCTYPE html>
 <!--need this to get the java-->
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
 
@@ -20,8 +21,16 @@
     <!-- Profile & Login Section -->
     <div class="user-options">
         <div id="profile-container"><a href="/prfoile">Profile</a></div>
-        <div id="login-container"><a href="/login">Sign Out</a></div>
+
+        <form class="form-inline" action="/logout" method="post">
+            <button id="login-container" type="submit">Sign Out</button>
+        </form>
+
     </div>
+
+
+
+
     <!-- Logo Section -->
     <h2 class="logo">Spartan Motion</h2>
 
@@ -60,9 +69,12 @@
 
         <!-- Navigation Menu -->
         <ul id="links">
-            <li><a href=" ">Home</a></li>
-            <li><a th:href="@{/classes/createForm/{creatorId}(creatorId=${creatorId})}">Create</a></li>
+            <li><a href="/classes/all ">Home</a></li>
 
+
+            <li sec:authorize="hasAuthority('INSTRUCTOR')">
+                <a th:href="@{/classes/INSTRUCTOR/fitnessClass/createForm}">Create</a>
+            </li>
         </ul>
     </div>
 
@@ -129,6 +141,7 @@
 
 
     </div>
+</div>
 
 <!-- Footer -->
 <footer>

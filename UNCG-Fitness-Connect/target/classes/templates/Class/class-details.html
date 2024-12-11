@@ -100,21 +100,14 @@
                             </div>
                         </div>
                     </div>
-                                <!-- Form to Add Reply (Visible to Instructors Only) -->
-                                <div class="reply-form" th:if="${isInstructor}">
-                                    <form th:action="@{/reviews/reply}" method="post">
-                                        <input type="hidden" name="reviewId" th:value="${review.id}" />
-                                        <textarea name="reply" placeholder="Write your reply here..." required></textarea>
-                                        <button type="submit">Reply</button>
-                                    </form>
-                                </div>
                             </div>
                         </th:block>
                     </div>
                 </div>
-                <a class="btn-signup" th:href="@{/classes/update/{classId}(classId=${class.classId})}">Modify</a>
 
-                <a class="btn-delete" th:href="@{/classes/delete/{classId}(classId=${class.classId})}" onclick="confirmDeletion()">Delete</a>
+                <a class="btn-signup" data-th-if="${isOwner}" th:href="@{/classes/update/{classId}(classId=${class.classId})}">Modify</a>
+
+                <a class="btn-delete" data-th-if="${isOwner}" th:href="@{/classes/delete/{classId}(classId=${class.classId})}" onclick="confirmDeletion()">Delete</a>
 
             </div>
         </div>

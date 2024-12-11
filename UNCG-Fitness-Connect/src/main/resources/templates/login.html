@@ -25,18 +25,26 @@
     </div>
 </div>
 
-
+<!--Login Form-->
 <div class ="login_container">
 
 
     <section>
     </section>
 
-    <!-- Login in form -->
-    <form  method="post">
+
+        <form th:action="@{/login}" method="post">
         <div class="imgcontainer">
             <h2>Login</h2>
         </div>
+
+
+            <div th:if="${param.error}">
+                Invalid username and password.
+            </div>
+            <div th:if="${param.logout}">
+                You have been logged out.
+            </div>
 
         <div class="container">
             <label for="username"><b>Username</b></label>
@@ -56,6 +64,9 @@
         </div>
 
     </form>
+
+
+
 
 
     <section></section>

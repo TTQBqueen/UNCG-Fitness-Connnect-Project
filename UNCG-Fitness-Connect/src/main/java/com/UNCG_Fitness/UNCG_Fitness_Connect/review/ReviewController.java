@@ -2,6 +2,7 @@ package com.UNCG_Fitness.UNCG_Fitness_Connect.review;
 import com.UNCG_Fitness.UNCG_Fitness_Connect.fitnessClass.Class;
 import com.UNCG_Fitness.UNCG_Fitness_Connect.user.User;
 import com.UNCG_Fitness.UNCG_Fitness_Connect.user.UserService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,9 @@ public class ReviewController {
     ReviewService reviewService;
     @Autowired
     UserService userService;
+
+    @Autowired
+    private ReviewRepository reviewRepository;
 
     //This will get all the reviews
     @GetMapping("/all")
@@ -61,6 +65,19 @@ public class ReviewController {
         return "redirect:/reviews/all";
         //reviewService.deleteReviewById(reviewId);
     }
+
+//    @PostMapping("/reply/{reviewId}")
+//    public ResponseEntity<String> addReply(@PathVariable int reviewId, @RequestParam String reply) {
+//        // Fetch the review by ID
+//        Review review = reviewRepository.findById(reviewId)
+//                .orElseThrow(() -> new IllegalArgumentException("Review not found"));
+//
+//        // Update the reply field
+//        review.setReply(reply);
+//        reviewRepository.save(review);
+//
+//        return ResponseEntity.ok("Reply added successfully");
+//    }
 
 
 }
