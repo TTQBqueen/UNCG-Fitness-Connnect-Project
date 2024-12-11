@@ -46,8 +46,12 @@
 
         <!-- Navigation Menu -->
         <ul id="links">
-            <li><a href="/">Home</a></li>
-            <li><a href="/classes/all">Classes</a></li>
+            <li><a href="/classes/all">Home</a></li>
+
+            <li sec:authorize="hasAuthority('INSTRUCTOR')">
+                <a id="viewClassLink" th:href="@{/classes/INSTRUCTOR/}">View Classes</a>
+                <a th:href="@{/classes/INSTRUCTOR/fitnessClass/createForm}">Create</a>
+            </li>
 
         </ul>
     </div>

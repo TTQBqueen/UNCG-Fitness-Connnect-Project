@@ -61,14 +61,20 @@ public class ClassController {
 
 
 
-    //  Look up User class based on UserId
-    @GetMapping("/INSTRUCTOR/{creatorId}")
-    public String getClassesByCreatorId(@PathVariable int creatorId, Model model) {
+    @GetMapping("/INSTRUCTOR/")
+    public String getClassesByLoggedInUser(Model model) {
+        // Get the currently logged-in user's ID
+        String name = SecurityContextHolder.getContext().getAuthentication().getName();
+        int currentUserId = userService.getUserByUserName(name).getId();
 
+        // Fetch all classes created by the logged-in user
+        List<Class> fitnessClasses = classService.getClassesByCreatorId(currentUserId);
 
-        model.addAttribute("classList", classService.getClassesByCreatorId(creatorId));
-        model.addAttribute("title", "Your Classes: " + creatorId);
-        model.addAttribute("creatorId",  creatorId);
+        // Add attributes to the model
+        model.addAttribute("isOwner", true); // Always true for the logged-in user
+        model.addAttribute("classList", fitnessClasses);
+        model.addAttribute("title", "Your Classes");
+        model.addAttribute("creatorId", currentUserId);
 
         return "/Class/class-list";
     }
@@ -113,10 +119,7 @@ public class ClassController {
     }
 
 
-
-
 //Update
-
 
     @GetMapping("/update/{classId}")
     public String showUpdateForm(@PathVariable int classId, Model model) {
@@ -159,8 +162,20 @@ public class ClassController {
 
 
     @GetMapping("/INSTRUCTOR/fitnessClass/createForm")
-    public String showCreateClassForm() {
+    public String showCreateClassForm(Model model) {
+
+        // Get the currently logged-in user's name
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        User currentUser = userService.getUserByUserName(username);
+
+        // Add an empty Class object and the current user to the model
+        model.addAttribute("class", new Class());
+        model.addAttribute("instructorName", currentUser.getUserName());
+
         return "Class/create-class";
+
+
+
     }
 
     @PostMapping("/INSTRUCTOR/fitnessClass/new")
