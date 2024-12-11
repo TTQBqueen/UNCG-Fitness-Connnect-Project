@@ -6,40 +6,82 @@
 
     <link rel="stylesheet" type="text/css" href="../../style/nav.css">
     <link data-th-href="@{/Styles/template.css}" type="text/css" rel="stylesheet">
+    <link data-th-href="@{/Admin/report-list.html/card.css}" type ="text/css" rel="stylesheet">
+
     <title>Report List</title>
 </head>
 <body>
+<div class="header">
     <h1>Report List</h1>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Type</th>
-                <th>Reason</th>
-                <th>Status</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="report : ${reportsList}">
-                <td th:text="${report.reportId}"></td>
-                <td th:text="${report.reportType}"></td>
-                <td th:text="${report.reason}"></td>
-                <td th:text="${report.status}"></td>
-                <td>
-                    <a th:href="@{/reports/{id}(id=${report.reportId})}">View</a> |
-                    <a th:href="@{/reports/update/status/{id}(id=${report.reportId})}">Update</a> 
-                    <form th:action="@{/reports/delete/{id}(id=${report.reportId})}" method="post">
-                        <button type="submit">Delete</button>
-                    </form>
-                    
-                    <!--<a th:href="@{/reports/delete/{id}(id=${report.reportId})}" 
-                       onclick="return confirm('Are you sure?')">Delete</a> -->
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <a href="/reports/new">Add New Report</a>
+</div>
+
+<div class="container">
+    <div th:each="report : ${reportsList}" class="class-card">
+        <div class="report-details">
+            <h3 th:text="'Report ID: ' + ${report.reportId}"></h3>
+            <p th:text="'Type: ' + ${report.reportType}"></p>
+            <p th:text="'Reason: ' + ${report.reason}"></p>
+            <p th:text="'Status: ' + ${report.status}"></p>
+            <div class="actions">
+                <a class="btn" th:href="@{/reports/{id}(id=${report.reportId})}">View</a>
+                <a class="btn" th:href="@{/reports/update/status/{id}(id=${report.reportId})}">Update</a>
+                <form th:action="@{/reports/delete/{id}(id=${report.reportId})}" method="post" style="display:inline;">
+                    <button type="submit" class="btn-delete">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add New Report Card -->
+<div class="class-card">
+    <div class="class-details">
+        <h3>Add New Report</h3>
+        <p>Click below to create a new report.</p>
+        <a class="btn-add" href="/reports/new">Add Report</a>
+    </div>
+</div>
+</div>
+
+<footer>
+    <div th:replace="~{/fragments/_footer :: footer}"></div>
+</footer>
 </body>
 </html>
+<!--    <title>Report List</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <h1>Report List</h1>-->
+<!--    <table border="1">-->
+<!--        <thead>-->
+<!--            <tr>-->
+<!--                <th>ID</th>-->
+<!--                <th>Type</th>-->
+<!--                <th>Reason</th>-->
+<!--                <th>Status</th>-->
+<!--                <th>Actions</th>-->
+<!--            </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--            <tr th:each="report : ${reportsList}">-->
+<!--                <td th:text="${report.reportId}"></td>-->
+<!--                <td th:text="${report.reportType}"></td>-->
+<!--                <td th:text="${report.reason}"></td>-->
+<!--                <td th:text="${report.status}"></td>-->
+<!--                <td>-->
+<!--                    <a th:href="@{/reports/{id}(id=${report.reportId})}">View</a> |-->
+<!--                    <a th:href="@{/reports/update/status/{id}(id=${report.reportId})}">Update</a> -->
+<!--                    <form th:action="@{/reports/delete/{id}(id=${report.reportId})}" method="post">-->
+<!--                        <button type="submit">Delete</button>-->
+<!--                    </form>-->
+<!--                    -->
+<!--                    &lt;!&ndash;<a th:href="@{/reports/delete/{id}(id=${report.reportId})}" -->
+<!--                       onclick="return confirm('Are you sure?')">Delete</a> &ndash;&gt;-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
+<!--    <a href="/reports/new">Add New Report</a>-->
+<!--</body>-->
+<!--</html>-->
 

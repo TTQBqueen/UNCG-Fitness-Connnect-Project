@@ -11,11 +11,8 @@
 <body>
     <h1>Create New Report</h1>
     <form th:action="@{/reports/new}" method="post">
-        <label for="contentId">Content ID:</label>
-        <input type="number" name="contentId" id="contentId" required />
-        <br>
-        <label for="reporterId">Reporter ID:</label>
-        <input type="number" name="reporterId" id="reporterId" required />
+        <label for="Id"> ID:</label>
+        <input type="number" name="Id" id="Id" required />
         <br>
         <label for="reportType">Report Type:</label>
         <input type="text" name="reportType" id="reportType" required />
