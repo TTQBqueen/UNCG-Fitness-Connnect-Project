@@ -32,6 +32,10 @@ public class SubscriptionService {
         return subscriptionRepository.getReferenceById(subs_id);
     }
 
+    public Subscription createSubscription(Subscription subscription) {
+        return subscriptionRepository.save(subscription);
+    }
+
     public List<Subscription> getSubscriptionByClassId(int classId) {
         return subscriptionRepository.getSubscriptionsByClass(classId);
     }
