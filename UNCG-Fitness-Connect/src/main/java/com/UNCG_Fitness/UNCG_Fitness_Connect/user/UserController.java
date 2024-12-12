@@ -3,6 +3,8 @@ package com.UNCG_Fitness.UNCG_Fitness_Connect.user;
 import com.UNCG_Fitness.UNCG_Fitness_Connect.fitnessClass.Class;
 import com.UNCG_Fitness.UNCG_Fitness_Connect.fitnessClass.ClassService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/users")
 public class UserController {
 
     @Autowired
@@ -24,20 +25,16 @@ public class UserController {
      * @param model the Model object to pass data to the view.
      * @return the updated list of Users.
      */
-    @PostMapping("/new")
+    @PostMapping("/users/new")
     public String addNewUser(@ModelAttribute User user, Model model) {
         userService.addNewUser(user);
         model.addAttribute("users", userService.getAllUsers());
         return "redirect:/classes/all";
     }
-
-    //    Create Class
-    @GetMapping("/createForm")
+    @GetMapping("/users/createForm")
     public String showCreateForm(){
         return "signup";
     }
-
-
 
     /**
      * Get a list of all Users in the database.
@@ -45,7 +42,7 @@ public class UserController {
      *
      * @return a list of User objects.
      */
-    @GetMapping("/all")
+    @GetMapping("admin/users/all")
     public String getAllUsers(Model model) {
         model.addAttribute("userList", userService.getAllUsers());
         model.addAttribute("title", "All Users");
@@ -61,7 +58,7 @@ public class UserController {
      * @param model the Model object to pass data to the view.
      * @return the view displaying the user's details.
      */
-    @GetMapping("/{userId}")
+    @GetMapping("/admin/users/{userId}")
     public String getUser(@PathVariable int userId, Model model) {
         User user = userService.getUserById(userId);
         model.addAttribute("user", user);
@@ -76,11 +73,25 @@ public class UserController {
      * @param model the Model object to pass data to the view.
      * @return the updated list of Users.
      */
-    @DeleteMapping("/delete/{userId}")
+    @DeleteMapping("/users/delete/{userId}")
+    public String confirmDelete(@PathVariable int userId, Model model) {
+        User user = userService.getUserById(userId);
+        model.addAttribute("user", user);
+        return "/User/user-delete";
+    }
+
+    /**
+     * Perform the deletion.
+     *
+     * @param userId the unique User Id.
+     * @param model the Model object to pass data to the view.
+     * @return the updated list of Users.
+     */
+    @PostMapping("/users/delete/{userId}")
     public String deleteUser(@PathVariable int userId, Model model) {
         userService.deleteUser(userId);
         model.addAttribute("users", userService.getAllUsers());
-        return "/User/user-list";
+        return "redirect:/users/all";
     }
 
     /**
@@ -92,10 +103,33 @@ public class UserController {
      * @param model the Model object to pass data to the view.
      * @return the view displaying the updated user's details.
      */
-    @PostMapping("/update/{userId}")
+    @PostMapping("admin/update/{userId}")
     public String updateUser(@PathVariable int userId, @ModelAttribute User user, Model model) {
         userService.updateUser(userId, user);
         model.addAttribute("user", userService.getUserById(userId));
         return "/User/user-details";
     }
+
+    // view profile to update
+    @GetMapping("/profile")
+    public String showUpdateProfile(Model model) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        User currentUser = userService.getUserByUserName(username);
+
+        model.addAttribute("user", currentUser);
+
+        return "fragments/profile";
+    }
+    @PostMapping("/profile/update")
+    public String updateProfile(User user) {
+        String name = SecurityContextHolder.getContext().getAuthentication().getName();
+        User currentUser = userService.getUserByUserName(name);
+
+        user.setUserName(currentUser.getUserName());
+
+        userService.saveUser(user);
+
+        return "redirect:/profile";
+    }
+
 }

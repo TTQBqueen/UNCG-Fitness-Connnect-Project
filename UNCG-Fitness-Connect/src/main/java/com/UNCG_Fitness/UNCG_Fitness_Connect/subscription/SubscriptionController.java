@@ -4,11 +4,14 @@ import com.UNCG_Fitness.UNCG_Fitness_Connect.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/subs")
 public class SubscriptionController {
 
     @Autowired
@@ -24,32 +27,28 @@ public class SubscriptionController {
      * @param classId the class for the subscription to be assigned to
      * @return the updated list of subscriptions.
      */
-    @PostMapping("/add/{classId}")
-    public List<Subscription> createNewSubscription(@PathVariable int classId, @PathVariable int userId) {
-        subscriptionService.addNewSubscription(classId, userId);
-        return subscriptionService.getSubscriptionByClassId(classId);
-    }
-
-
-    /**
-     * Get a list of all Subscriptions in the database.
-     * http://localhost:8080/subs/all
-     *
-     * @return a list of Subscription objects.
-     */
-    @GetMapping("/all")
-    public List<Subscription> getAllStudents() {
-        return subscriptionService.getAllSubscriptions();
+    @PostMapping("/subs/add/{classId}")
+    public String createNewSubscription(@PathVariable int classId) {
+        String name = SecurityContextHolder.getContext().getAuthentication().getName();
+        int currentUserId = userService.getUserByUserName(name).getId();
+        return "redirect:/classes/all";
     }
 
     /**
-     * Get a specific Subscription by Subscription Id.
+     * Get a user's subscriptions.
      * http://localhost:8080/subs/2
      *
      * @param subs_id the unique Id for a Student.
      * @return One Subscription object.
      */
-    @GetMapping("/{subs_id}")
+    @GetMapping("/subs/{userId}")
+    public String getSubsByUser(@PathVariable int userId, Model model) {
+        model.addAttribute("subsList", subscriptionService.getSubscriptionsByUser(userId));
+        model.addAttribute("class", "User #" + userId + " Favorites");
+        model.addAttribute("isSubscriber", false);
+        return "Class/class-list";
+    }
+
     public Subscription getSubs(@PathVariable int subs_id) {
         return subscriptionService.getSubscriptionById(subs_id);
     }

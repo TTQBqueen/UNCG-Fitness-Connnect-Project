@@ -1,10 +1,85 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Update User</title>
+    <link data-th-href="@{/Styles/template.css}" type="text/css" rel="stylesheet">
+    <link data-th-href="@{/Styles/service.css}" type="text/css" rel="stylesheet">
+    <link data-th-href="@{/Class/card.css}" type="text/css" rel="stylesheet">
+
 </head>
 <body>
 
+<div class="header">
+    <!-- Profile & Login Section -->
+    <div class="user-options">
+        <div id="profile-container"><a href="/">Home</a></div>
+
+    </div>
+</div>
+
+<div class="form-container">
+
+    <h1>User Profile</h1>
+
+    <!-- The form submits to /profile/update (POST) -->
+    <form action="/profile/update" method="POST">
+
+        <!-- Hidden input to preserve userId in the form -->
+        <input type="hidden" th:value="${user.id}" name="id"/>
+
+        <!-- First Name -->
+        <div class="form-group">
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName" th:value="${user.firstName}" required><br><br>
+        </div>
+
+        <!-- Last Name -->
+        <div class="form-group">
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" th:value="${user.lastName}" required><br><br>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email" th:value="${user.email}" required><br><br>
+        </div>
+
+        <!-- Username -->
+        <div class="form-group">
+            <label for="userName">Username:</label>
+            <input type="text" id="userName" name="userName" th:value="${user.userName}" required><br><br>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" th:value="${user.password}" required><br><br>
+        </div>
+
+        <!-- Role -->
+        <div class="form-group">
+            <label for="role">Role:</label>
+            <select id="role" name="role" th:value="${user.role}" required>
+                <option value="STUDENT" th:selected="${user.role == 'STUDENT'}">Student</option>
+                <option value="INSTRUCTOR" th:selected="${user.role == 'INSTRUCTOR'}">Instructor</option>
+            </select>
+        </div>
+
+        <!-- Terms Agreement -->
+        <div class="form-group">
+            <label for="flagged">By clicking the button you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a></label>
+            <input type="checkbox" id="flagged" name="flagged" th:checked="${user.flagged}" value="0" required><br><br>
+        </div>
+
+        <!-- Submit and Cancel buttons -->
+        <div class="form-group">
+            <button type="button" class="cancelbtn" onclick="window.location.href='/home'">Cancel</button>
+            <button type="submit" class="signupbtn">Update User</button>
+        </div>
+    </form>
+</div>
+
 </body>
 </html>
+
