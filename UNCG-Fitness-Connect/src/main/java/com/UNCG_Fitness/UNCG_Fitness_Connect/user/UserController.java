@@ -49,6 +49,22 @@ public class UserController {
         return "/User/user-list";
     }
 
+    @GetMapping("ADMIN/users/instructors")
+    public String getUsersByRole(Model model) {
+        List<User> instructors = userService.getUsersByRole("INSTRUCTOR");
+        model.addAttribute("userList", instructors);
+        return "/User/user-list";
+    }
+
+    @GetMapping("/roles")
+    public String findByRole(@RequestParam(name = "role", defaultValue = "STUDENT") String role, Model model) {
+        model.addAttribute("userList", userService.getUsersByRole(role));
+        model.addAttribute("title", "Class Name: " + role);
+        return "/User/user-list";
+    }
+
+
+
 
     /**
      * Get a specific User by Id.

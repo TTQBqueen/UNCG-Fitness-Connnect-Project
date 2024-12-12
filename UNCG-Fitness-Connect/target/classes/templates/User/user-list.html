@@ -24,10 +24,18 @@
 
     <!-- Search Section -->
     <div class="search-container">
-        <form >
-            <input type="text" placeholder="Search.." name="search">
-            <button type="submit"><i class="fa fa-search">Search</i></button>
-        </form>
+
+        <div class="search-item">
+            <form action="/roles" method="get">
+                <label for="role">Filter by Role:</label>
+                <select id="role" name="role">
+                    <option value="STUDENT">STUDENT</option>
+                    <option value="INSTRUCTOR">INSTRUCTOR</option>
+                    <option value="ADMIN">ADMIN</option>
+                </select>
+                <button type="submit">Search</button>
+            </form>
+        </div>
     </div>
 </div>
 
@@ -37,7 +45,6 @@
     <div id ="nav" class="column_side" >
         <ul id ="links">
             <li><a href="/">Home</a></li>
-            <li><a href="classes/instructors">Classes</a></li>
 
         </ul>
     </div>
@@ -45,7 +52,7 @@
     <div class="column middle">
         <div id = "text">
             <h1> Welcome to Spartan Motion, Student!</h1>
-            <p> To see see the most recent classes available, click <a href="classes.html">here</a>! </p>
+            <p> To see see the most recent classes available, click <a href="/classes/all">here</a>! </p>
             <h2> Train like a Spartan today! </h2>
             <p> We apprecitate each and every one of our hard working Spartan Students! </p>
         </div>
@@ -58,7 +65,6 @@
 <p></p>
 <div class="column-bottom"> Visit Our Facility Today!
     <p></p>
-    <img src="../image/uncg gym.jpeg" alt="running" style="width:100%">
 
     <h1>User</h1>
 
@@ -160,6 +166,26 @@
     border-bottom: 2px solid #ddd;
   }
 
+.search-container {
+    display: flex;
+    flex-direction: column; /* Stack the forms vertically */
+    gap: 15px; /* Add space between the forms */
+    padding: 10px; /* Add padding inside the container */
+    background-color: #f4f4f4; /* Optional: Background color for better visibility */
+    border-radius: 8px; /* Optional: Rounded corners */
+}
+
+.search-item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Space between elements inside each form */
+}
+
+.search-item form {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Add space between the input/select and button */
+}
 
 </style>
 </html>

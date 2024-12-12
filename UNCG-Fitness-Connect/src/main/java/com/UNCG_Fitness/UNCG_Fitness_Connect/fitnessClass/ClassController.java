@@ -155,7 +155,7 @@ public class ClassController {
 
     @GetMapping("/instructors")
     public String getInstructors(Model model) {
-        List<User> instructors = userRepository.findByRole("INSTRUCTOR");
+        List<User> instructors = userRepository.getUsersByRole("INSTRUCTOR");
         model.addAttribute("userList", instructors);
         return "/Class/inst_view";
     }

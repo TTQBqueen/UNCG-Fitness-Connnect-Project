@@ -288,3 +288,24 @@ h1{
 .column_middle{
     margin: 5%;
 }
+
+.profile-container, #login-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .profile-container a, #login-container a {
+        color: #F5F7FA;
+        text-decoration: none;
+        font-size: 18px;
+        padding: 10px;
+        background-color: #5e6098;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .profile-container a:hover, #login-container a:hover{
+        background-color: #869De9;
+        transform: translateY(-3px);
+    }
