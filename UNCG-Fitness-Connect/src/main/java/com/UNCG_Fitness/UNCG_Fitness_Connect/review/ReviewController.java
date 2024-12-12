@@ -27,22 +27,34 @@ public class ReviewController {
         model.addAttribute("review", reviewService.getReviewById(reviewId));
         return "/Admin/review-details";
         //return reviewService.getReviewById(reviewId);
-    } 
+    }
+    @GetMapping("/add")
+    public String showAddReview(Model model){
+        model.addAttribute("review", new Review());
+        return "Admin/review-add";
+    }
 
     //This will add a new review
     @PostMapping("/add")
     public String addReview(@ModelAttribute Review review) {
         reviewService.createReview(review);
-        return "/Admin/review-add";
+        return "redirect:/reviews/all";
 
         //return reviewService.createReview(review);
-    }  
+    }
+    @GetMapping("update/status/{reviewId}")
+    public String showUpdateReviewForm(@PathVariable int reviewId, Model model){
+        Review review = reviewService.getReviewById(reviewId);
+        model.addAttribute("review", review);
+        return "/Admin/review-update";
+    }
 
     //This will update the status of a review
-    @PutMapping("/update/status/{reviewId}")
-    public String updateReviewStatus(@PathVariable int reviewId, @RequestBody String status, Model model){ 
-        model.addAttribute("review", reviewService.getReviewById(reviewId)); 
-        return "/Admin/review-update"; 
+    @PostMapping("/update/status/{reviewId}")
+    public String updateReviewStatus(@PathVariable int reviewId, @RequestParam("status") String status){
+        reviewService.updateReviewStatus(reviewId, status);
+        //model.addAttribute("review", reviewService.getReviewById(reviewId));
+        return "redirect:/reviews/all";
         //return reviewService.updateReviewStatus(reviewId, status);
     } 
 
@@ -50,7 +62,7 @@ public class ReviewController {
     @DeleteMapping("/delete/{reviewId}")
     public String deleteReviewById(@PathVariable int reviewId){ 
         reviewService.deleteReviewById(reviewId);
-        return "/Admin/review-update";
+        return "redirect:reviews/all";
         //reviewService.deleteReviewById(reviewId);
     }
 }

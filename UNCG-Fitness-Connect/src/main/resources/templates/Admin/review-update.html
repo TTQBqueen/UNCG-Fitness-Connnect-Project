@@ -23,14 +23,14 @@
 <div id="nav" class="column_side">
     <ul id="links">
         <li><a href="/">Home</a></li>
-        <li><a href="/reviews">Reviews</a></li>
+        <li><a href="/reviews/all">Reviews</a></li>
     </ul>
 </div>
 
 <!-- Main Content -->
 <div class="column middle">
     <form th:action="@{/reviews/update/status/{id}(id=${review.reviewId})}" method="post">
-        <div class="form-group">
+    <div class="form-group">
             <p><strong>Review ID:</strong> <span th:text="${review.reviewId}"></span></p>
             <p><strong>Current Status:</strong> <span th:text="${review.status}"></span></p>
 
@@ -44,7 +44,7 @@
 
         <button type="submit">Update</button>
     </form>
-    <a href="/reviews" class="btn-cancel">Cancel</a>
+    <a href="reviews/all" class="btn-cancel">Cancel</a>
 </div>
 
 </body>
