@@ -103,7 +103,7 @@
             <p th:text="'Level: ' + ${class.level}"></p>
             <p class="instructor" th:text="'Instructor: ' + ${class.instructorName}"></p>
             <a class="btn-signup" th:href="@{/classes/{classId}(classId=${class.classId})}">View More</a>
-            <a class="btn-signup" th:href="@{/subs/add/{classId}(classId=${class.classId})}">Sign Up</a>
+            <a sec:authorize="hasAuthority('STUDENT')" class="btn-signup" th:href="@{/subs/add/{classId}(classId=${class.classId})}">Sign Up</a>
 <!--            <form th:action="@{/subs/add/{classId}(classId=${class.classId})}" method="post" style="display: inline;">-->
 <!--                <button type="submit" class="btn-signup">Sign Up</button>-->
 <!--            </form>-->
