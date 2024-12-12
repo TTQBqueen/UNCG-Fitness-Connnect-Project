@@ -23,6 +23,8 @@ The UNCG Group Fitness App will help to solve the issue of availability issues. 
 - Click on MySQL admin, to open the database dashboard on your browser.
 - create a database with the name "uncg-fitness-connect"
 - import "uncg-fitness-connect.sql"
+- For admin, in order to get all of the reviews insert: http://localhost:8080/reviews/all
+- For admin, in order to get all of the reports insert:http://localhost:8080/reports/all
 
 
 
