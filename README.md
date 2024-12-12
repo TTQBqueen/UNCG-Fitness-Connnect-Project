@@ -25,18 +25,9 @@ The UNCG Group Fitness App will help to solve the issue of availability issues. 
 ![Alt text](FitnessULMFinal.png)
 
 ---
-> Clone the repo and make sure you have a database named UNCG-Fitness-Connect and upload the UNCG-Connect-SQL file to the database.
-> 
-> All passwords are password
-> 
-> STUDENT: Username = StudentTest
-> 
-> INSTRUCTOR Username = InstructorTest
-> 
-> ADMIN  Username = AdminTest
 
-- Clone the project and open in an IDE.
-- Open XAMPP Control Panel Dashboard.
+- Clone the project and open it in an IDE.
+- Open the XAMPP Control Panel Dashboard.
 - Start Apache.
 - Start MySQL.
 - Click on MySQL Admin, to open the database dashboard on your browser.
@@ -44,10 +35,10 @@ The UNCG Group Fitness App will help to solve the issue of availability issues. 
 - Import 'UNCG-Fitness-Connect.sql'.
 - Clean and Build the project.
 
-Run->Set Project Configuration->Customize->Run->Main Class->Browse->Select com.UNCG_Fitness.UNCG_Fitness_Connect.UncgFitnessConnectApplication.
+Run -> com.UNCG_Fitness.UNCG_Fitness_Connect.UncgFitnessConnectApplication
 
 - Run the main method.
-- On web browser: http://localhost:8080
+- On a web browser: http://localhost:8080
 Login with three user types with username below:
 
 > STUDENT: Username = StudentTest
@@ -59,7 +50,7 @@ Login with three user types with username below:
 > All passwords are password
 > 
 
-when creating a class url must be a image adress.
+when creating a class URL must be an image address.
 
 
 
