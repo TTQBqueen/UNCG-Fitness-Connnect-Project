@@ -5,6 +5,12 @@
 ## Team Members
 
 > Trinity Boler, Jennifer Galicia-Torres, and Natalie Hildreth
+>
+> Trinity Boler: Instructor/provider
+>
+> Jennifer Galicia-Torres: Student/user
+>
+> Natalie Hildreth: Admin
 
 
 ## Description
