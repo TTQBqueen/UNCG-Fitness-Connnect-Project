@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="../../style/nav.css">
+  <link data-th-href="@{/Styles/template.css}" type="text/css" rel="stylesheet">
+  <link data-th-href="@{/Admin/review-list.css}" type="text/css" rel="stylesheet">
+    <title>Review list</title>
+</head>
+<body>
+<div class="header">
+  <h1>Review List</h1>
+</div>
+
+<div class="container">
+  <!-- Loop through each review -->
+  <div th:each="review : ${reviewList}" class="class-card">
+    <div class="review-details">
+      <h3 th:text="'Review ID: ' + ${review.reviewId}"></h3>
+      <p th:text="'Class ID: ' + ${review.classId}"></p>
+      <p th:text="'User ID: ' + ${review.userId}"></p>
+      <p th:text="'Rating: ' + ${review.rating}"></p>
+      <p th:text="'Details: ' + ${review.details}"></p>
+      <p th:text="'Status: ' + ${review.status}"></p>
+      <div class="actions">
+        <a class="btn" th:href="@{/reviews/{reviewId}(reviewId=${review.reviewId})}">View</a>
+        <a class="btn" th:href="@{/reviews/update/status/{reviewId}(reviewId=${review.reviewId})}">Update</a>
+        <form th:action="@{/reviews/delete/{reviewId}(reviewId=${review.reviewId})}" method="post" style="display:inline;">
+          <button type="submit" class="btn-delete">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add New Review Card -->
+<div class="class-card">
+  <div class="class-details">
+    <h3>Add New Review</h3>
+    <p>Click below to create a new review.</p>
+    <a class="btn-add" href="/reviews/add">Add Review</a>
+  </div>
+</div>
+
+<footer>
+  <div th:replace="~{/fragments/_footer :: footer}"></div>
+</footer>
+</body>
+</html>

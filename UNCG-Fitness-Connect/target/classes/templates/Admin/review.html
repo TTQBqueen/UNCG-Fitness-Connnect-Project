@@ -6,118 +6,192 @@
 
     <link rel="stylesheet" type="text/css" href="../../style/nav.css">
     <link data-th-href="@{/Styles/template.css}" type="text/css" rel="stylesheet">
-<!--    <link data-th-href="@/Admin/card.css" type="text/css" rel="stylesheet"> -->
+    <!-- Uncomment and verify the path if required -->
+    <!-- <link data-th-href="@{/Admin/card.css}" type="text/css" rel="stylesheet"> -->
 
-    <title>Welcome</title>
+    <title>Manage Reviews</title>
 </head>
 
-    <body>
-    
-    <!-- Header -->
-    <div class="header">
-        <!-- Logoin icon -->
-        <div id = "login-container"><a href="/index.html">Logout</a></div>
-        <!-- Logo -->
-        <h2 class="logo">Spartan Motion</h2>
-    <!-- search button -->
-      <div class="search-container">
+<body>
+<!-- Header -->
+<div class="header">
+    <!-- Login Icon -->
+    <div id="login-container"><a href="/index.html">Logout</a></div>
+    <!-- Logo -->
+    <h2 class="logo">Spartan Motion</h2>
+    <!-- Search Button -->
+    <div class="search-container">
         <form action="/action_page.php">
-          <input type="text" placeholder="Search.." name="search">
-          <button type="submit"><i class="fa fa-search">Search</i></button>
+            <input type="text" placeholder="Search.." name="search">
+            <button type="submit">
+                <i class="fa fa-search"></i>
+            </button>
         </form>
-        </div>
     </div>
-    
-    <!-- All the column sections -->
-    <div class="row">
-        <!-- Navigation column -->
-      <div id ="nav", class="column_side" >
+</div>
+
+<!-- Main Content -->
+<div class="row">
+    <!-- Navigation Column -->
+    <div id="nav" class="column_side">
         <ul id="links">
             <li><a href="/">Home</a></li>
             <li><a href="/Admin/Manage_Reviews.html">Manage Reviews</a></li>
             <li><a href="/Admin/report.html">Manage Reports</a></li>
-          </ul>
-      </div>
-      <!-- Middle Section -->
-        <div class="column middle">
-            <div id = "text">
-                <h1> Manage Reviews</h1>
-                <p> Here the Admin will have access to the review page and its functionalities.</p>
-            </div>
-        </div> 
+        </ul>
     </div>
 
-    <!-- Main Content -->
+    <!-- Middle Section -->
     <div class="column middle">
-        <!-- Add Review Section -->
-        <div th:if="${action == 'add'}">
-            <div class="form-container">
-                <a id="cancel_button" href="/reviews/all">X</a>
-                <h1>Add a New Review</h1>
-                <form action="/reviews/add" method="POST">
-                    <div class="form-group">
-                        <label for="classId">Class ID:</label>
-                        <input type="text" id="classId" name="classId" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="userId">User ID:</label>
-                        <input type="text" id="userId" name="userId" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="rating">Rating (1-5):</label>
-                        <input type="number" id="rating" name="rating" min="1" max="5" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="details">Details:</label>
-                        <textarea id="details" name="details" rows="4" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit">Submit Review</button>
-                    </div>
-                </form>
-            </div>
+        <div id="text">
+            <h1>Manage Reviews</h1>
+            <p>Here the Admin will have access to the review page and its functionalities.</p>
+        </div>
+        <div class="header">
+            <h1>Review List</h1>
         </div>
 
-        <!-- Review Details Section -->
-        <div th:if="${action == 'details'}">
-            <div>
-                <p><strong>Review ID:</strong> <span th:text="${review.reviewId}"></span></p>
-                <p><strong>Class ID:</strong> <span th:text="${review.classId.className}"></span></p>
-                <p><strong>User ID:</strong> <span th:text="${review.userId}"></span></p>
-                <p><strong>Rating:</strong> <span th:text="${review.rating}"></span></p>
-                <p><strong>Details:</strong> <span th:text="${review.details}"></span></p>
-                <p><strong>Created At:</strong> <span th:text="${review.createdAt}"></span></p>
-                <p><strong>Updated At:</strong> <span th:text="${review.updatedAt}"></span></p>
-                <p><strong>Status:</strong> <span th:text="${review.status}"></span></p>
-            </div>
-            <a href="/reviews/all">Back to All Reviews</a>
-        </div>
+<!--        <div class="container">-->
+<!--            &lt;!&ndash; Loop Through Each Review &ndash;&gt;-->
+<!--            <div th:each="review : ${reviewList}" class="class-card">-->
+<!--                <div class="review-details">-->
+<!--                    <h3 th:text="'Review ID: ' + ${review.reviewId}"></h3>-->
+<!--                    <p th:text="'Class ID: ' + ${review.classId}"></p>-->
+<!--                    <p th:text="'User ID: ' + ${review.userId}"></p>-->
+<!--                    <p th:text="'Rating: ' + ${review.rating}"></p>-->
+<!--                    <p th:text="'Details: ' + ${review.details}"></p>-->
+<!--                    <p th:text="'Status: ' + ${review.status}"></p>-->
+<!--                    <div class="actions">-->
+<!--                        <a class="btn" th:href="@{/reviews/{reviewId}(reviewId=${review.reviewId})}">View</a>-->
+<!--                        <a class="btn" th:href="@{/reviews/update/status/{reviewId}(reviewId=${review.reviewId})}">Update</a>-->
+<!--                        <form th:action="@{/reviews/delete/{reviewId}(reviewId=${review.reviewId})}" method="post" style="display:inline;">-->
+<!--                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
+<!--                            <button type="submit" class="btn-delete">Delete</button>-->
+<!--                        </form>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
 
-        <!-- Update Review Status Section -->
-        <div th:if="${action == 'update'}">
-            <form th:action="@{'/reviews/update/status/' + ${review.reviewId}}" method="post">
-                <div class="form-group">
-                    <p><strong>Review ID:</strong> <span th:text="${review.reviewId}"></span></p>
-                    <p><strong>Current Status:</strong> <span th:text="${review.status}"></span></p>
-                    <label for="status">New Status:</label>
-                    <input type="text" id="status" name="status" required>
-                </div>
-                <button type="submit">Update</button>
-            </form>
-        </div>
-    </div>
+<!--        &lt;!&ndash; Add New Review Card &ndash;&gt;-->
+<!--        <div class="class-card">-->
+<!--            <div class="class-details">-->
+<!--                <h3>Add New Review</h3>-->
+<!--                <p>Click below to create a new review.</p>-->
+<!--                <a class="btn-add" href="/reviews/add">Add Review</a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--&lt;!&ndash; Footer &ndash;&gt;-->
+<!--<footer>-->
+<!--    <div th:replace="~{/fragments/_footer :: footer}"></div>-->
+<!--</footer>-->
+<!--</body>-->
+<!--</html>-->
+
+<!--    &lt;!&ndash; Main Content &ndash;&gt;-->
+<!--    <div class="column middle">-->
+<!--        &lt;!&ndash; Add Review Section &ndash;&gt;-->
+<!--        <div th:if="${action == 'add'}">-->
+<!--            <div class="form-container">-->
+<!--                <a id="cancel_button" href="/reviews/all">X</a>-->
+<!--                <h1>Add a New Review</h1>-->
+<!--                <form action="/reviews/add" method="POST">-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="classId">Class ID:</label>-->
+<!--                        <input type="text" id="classId" name="classId" required>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="userId">User ID:</label>-->
+<!--                        <input type="text" id="userId" name="userId" required>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="rating">Rating (1-5):</label>-->
+<!--                        <input type="number" id="rating" name="rating" min="1" max="5" required>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="details">Details:</label>-->
+<!--                        <textarea id="details" name="details" rows="4" required></textarea>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <button type="submit">Submit Review</button>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash; Review Details Section &ndash;&gt;-->
+<!--        <div th:if="${action == 'details'}">-->
+<!--            <div>-->
+<!--                <p><strong>Review ID:</strong> <span th:text="${review.reviewId}"></span></p>-->
+<!--                <p><strong>Class ID:</strong> <span th:text="${review.classId.className}"></span></p>-->
+<!--                <p><strong>User ID:</strong> <span th:text="${review.userId}"></span></p>-->
+<!--                <p><strong>Rating:</strong> <span th:text="${review.rating}"></span></p>-->
+<!--                <p><strong>Details:</strong> <span th:text="${review.details}"></span></p>-->
+<!--                <p><strong>Created At:</strong> <span th:text="${review.createdAt}"></span></p>-->
+<!--                <p><strong>Updated At:</strong> <span th:text="${review.updatedAt}"></span></p>-->
+<!--                <p><strong>Status:</strong> <span th:text="${review.status}"></span></p>-->
+<!--            </div>-->
+<!--            <a href="/reviews/all">Back to All Reviews</a>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash; Update Review Status Section &ndash;&gt;-->
+<!--        <div th:if="${action == 'update'}">-->
+<!--            <form th:action="@{'/reviews/update/status/' + ${review.reviewId}}" method="post">-->
+<!--                <div class="form-group">-->
+<!--                    <p><strong>Review ID:</strong> <span th:text="${review.reviewId}"></span></p>-->
+<!--                    <p><strong>Current Status:</strong> <span th:text="${review.status}"></span></p>-->
+<!--                    <label for="status">New Status:</label>-->
+<!--                    <input type="text" id="status" name="status" required>-->
+<!--                </div>-->
+<!--                <button type="submit">Update</button>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <div th:if="{action == 'list'}">-->
+<!--        <table>-->
+<!--            <thead>-->
+<!--            <tr>-->
+<!--                <th> Review ID</th>-->
+<!--                <th> Class</th>-->
+<!--                <th> User </th>-->
+<!--                <th> Rating</th>-->
+<!--                <th> Status </th>-->
+<!--                <th> Actions </th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--            <tr th:each="review : ${reviews}">-->
+<!--                <td th:text="${review.reviewId}"><</td>-->
+<!--                <td th:text="${review.classId.className}"></td>-->
+<!--                <td th:text="${review.userId}"></td>-->
+<!--                <td th:text="${review.rating}"></td>-->
+<!--                <td th:text="${review.status}"></td>-->
+<!--                <td>-->
+<!--                    <a th:href="@{'/reviews/details/' + ${review.reviewId}}">View</a>-->
+<!--                    <a th:href="@{'/reviews/update/' + ${review.reviewId}}">Update</a>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
+<!--    </div>-->
+<!--    </div>-->
+<!--    </div>-->
 
 <!-- Footer -->
-<footer>
-    <div th:replace="~{/fragments/_footer :: footer}"></div>
-</footer>
+<!--<footer>-->
+<!--    <div th:replace="~{/fragments/_footer :: footer}"></div>-->
+<!--</footer>-->
 
-<style>
-    .column_middle{
-        width: 100%;
-        margin-right: 5%;
-    }
-</style>
+<!--<style>-->
+<!--    .column_middle{-->
+<!--        width: 100%;-->
+<!--        margin-right: 5%;-->
+<!--    }-->
+<!--</style>-->
 
-</body>
-</html>
+<!--</body>-->
+<!--</html>-->

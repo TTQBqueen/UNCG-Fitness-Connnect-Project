@@ -1,5 +1,6 @@
 package com.UNCG_Fitness.UNCG_Fitness_Connect.fitnessClass;
 
+import com.UNCG_Fitness.UNCG_Fitness_Connect.review.Review;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

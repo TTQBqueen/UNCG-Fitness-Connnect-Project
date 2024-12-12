@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 
 import java.sql.Date;
 
+import java.sql.Timestamp;
 import java.time.LocalTime;
 
 @Entity

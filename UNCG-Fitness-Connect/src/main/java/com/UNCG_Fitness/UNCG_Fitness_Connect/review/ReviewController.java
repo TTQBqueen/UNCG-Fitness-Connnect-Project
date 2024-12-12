@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
+import java.util.List;
 
 @Controller
 @RequestMapping("/reviews")
@@ -16,7 +17,7 @@ public class ReviewController {
     @GetMapping("/all")
     public String getAllReviews(Model model) {
         model.addAttribute("reviewList", reviewService.getAllReviews());
-        return "/Admin/review";
+        return "/Admin/review-list";
         //return reviewService.getAllReviews();
     } 
 
@@ -32,7 +33,7 @@ public class ReviewController {
     @PostMapping("/add")
     public String addReview(@ModelAttribute Review review) {
         reviewService.createReview(review);
-        return "redirect:/reviews/all";
+        return "/Admin/review-add";
 
         //return reviewService.createReview(review);
     }  
@@ -49,7 +50,7 @@ public class ReviewController {
     @DeleteMapping("/delete/{reviewId}")
     public String deleteReviewById(@PathVariable int reviewId){ 
         reviewService.deleteReviewById(reviewId);
-        return "redirect:/reviews/all";
+        return "/Admin/review-update";
         //reviewService.deleteReviewById(reviewId);
     }
 }

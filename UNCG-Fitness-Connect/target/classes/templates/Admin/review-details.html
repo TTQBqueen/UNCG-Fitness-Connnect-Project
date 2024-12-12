@@ -7,20 +7,58 @@
     <link data-th-href="@{/Styles/template.css}" type="text/css" rel="stylesheet">
     <title>Review Details</title>
 </head>
-<body>
-    <div class="header">
-        <h2>Review Details</h2>
+<body><!-- Header -->
+<div class="header">
+    <!-- Profile & Login Section -->
+    <div class="user-options">
+        <div id="profile-container"><a href="/profile">Profile</a></div>
+        <div id="login-container"><a href="/login">Sign Out</a></div>
     </div>
-    <div>
-        <p><strong>Review ID:</strong> <span th:text="${review.reviewId}"></span></p>
-        <p><strong>Class ID:</strong> <span th:text="${review.classId.className}"></span></p>
-        <p><strong>User ID:</strong> <span th:text="${review.userId}"></span></p>
-        <p><strong>Rating:</strong> <span th:text="${review.rating}"></span></p>
-        <p><strong>Details:</strong> <span th:text="${review.details}"></span></p>
-        <p><strong>Created At:</strong> <span th:text="${review.createdAt}"></span></p>
-        <p><strong>Updated At:</strong> <span th:text="${review.updatedAt}"></span></p>
-        <p><strong>Status:</strong> <span th:text="${review.status}"></span></p>
+    <!-- Logo Section -->
+    <h2 class="logo">Spartan Motion</h2>
+
+    <!-- Search Section -->
+    <div class="search-container">
+        <form>
+            <input type="text" placeholder="Search.." name="search">
+            <button type="submit"><i class="fa fa-search">Search</i></button>
+        </form>
     </div>
-    <a href="/reviews/all">Back to All Reviews</a>
+</div>
+
+<!-- Main Content -->
+<div class="row">
+    <!-- Navigation column -->
+    <div id="nav" class="column_side">
+        <ul id="links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/reviews/all">All Reviews</a></li>
+        </ul>
+    </div>
+
+    <!-- Middle Section -->
+    <div class="column_middle">
+        <div id="text">
+            <div class="review-details">
+                <h1>Review Details</h1>
+                <p><strong>Review ID:</strong> <span th:text="${review.reviewId}"></span></p>
+                <p><strong>Class ID:</strong> <span th:text="${review.classId.className}"></span></p>
+                <p><strong>User ID:</strong> <span th:text="${review.userId}"></span></p>
+                <p><strong>Rating:</strong> <span th:text="${review.rating}"></span></p>
+                <p><strong>Details:</strong> <span th:text="${review.details}"></span></p>
+                <p><strong>Created At:</strong> <span th:text="${#dates.format(review.createdAt, 'yyyy-MM-dd HH:mm:ss')}"></span></p>
+                <p><strong>Updated At:</strong> <span th:text="${#dates.format(review.updatedAt, 'yyyy-MM-dd HH:mm:ss')}"></span></p>
+                <p><strong>Status:</strong> <span th:text="${review.status}"></span></p>
+                <a href="/reviews/all" class="btn-back">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <div th:replace="~{/fragments/_footer :: footer}"></div>
+</footer>
+
 </body>
 </html>

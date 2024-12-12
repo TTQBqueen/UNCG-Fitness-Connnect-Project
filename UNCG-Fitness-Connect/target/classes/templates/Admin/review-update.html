@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,15 +29,38 @@
 
 <!-- Main Content -->
 <div class="column middle">
-    <form th:action="@{'/reviews/update/status/' + ${review.reviewId}}" method="post">
+    <form th:action="@{/reviews/update/status/{id}(id=${review.reviewId})}" method="post">
         <div class="form-group">
             <p><strong>Review ID:</strong> <span th:text="${review.reviewId}"></span></p>
             <p><strong>Current Status:</strong> <span th:text="${review.status}"></span></p>
 
             <label for="status">New Status:</label>
-            <input type="text" id="status" name="status" required>
+            <select id="status" name="status">
+                <option value="Pending" th:selected="${review.status == 'Pending'}">Pending</option>
+                <option value="Approved" th:selected="${review.status == 'Approved'}">Approved</option>
+                <option value="Rejected" th:selected="${review.status == 'Rejected'}">Rejected</option>
+            </select>
         </div>
 
         <button type="submit">Update</button>
     </form>
+    <a href="/reviews" class="btn-cancel">Cancel</a>
 </div>
+
+</body>
+</html>
+
+<!--&lt;!&ndash; Main Content &ndash;&gt;-->
+<!--<div class="column middle">-->
+<!--    <form th:action="@{'/reviews/update/status/' + ${review.reviewId}}" method="post">-->
+<!--        <div class="form-group">-->
+<!--            <p><strong>Review ID:</strong> <span th:text="${review.reviewId}"></span></p>-->
+<!--            <p><strong>Current Status:</strong> <span th:text="${review.status}"></span></p>-->
+
+<!--            <label for="status">New Status:</label>-->
+<!--            <input type="text" id="status" name="status" required>-->
+<!--        </div>-->
+
+<!--        <button type="submit">Update</button>-->
+<!--    </form>-->
+<!--</div>-->
