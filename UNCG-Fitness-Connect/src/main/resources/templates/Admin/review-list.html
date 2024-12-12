@@ -18,7 +18,6 @@
   <div th:each="review : ${reviewList}" class="class-card">
     <div class="review-details">
       <h3 th:text="'Review ID: ' + ${review.reviewId}"></h3>
-      <p th:text="'Class ID: ' + ${review.classId}"></p>
       <p th:text="'User ID: ' + ${review.userId}"></p>
       <p th:text="'Rating: ' + ${review.rating}"></p>
       <p th:text="'Details: ' + ${review.details}"></p>

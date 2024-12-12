@@ -59,7 +59,7 @@ public class ReviewController {
     } 
 
     // this will delete the review by its name/ID
-    @DeleteMapping("/delete/{reviewId}")
+    @PostMapping("/delete/{reviewId}")
     public String deleteReviewById(@PathVariable int reviewId){ 
         reviewService.deleteReviewById(reviewId);
         return "redirect:reviews/all";
