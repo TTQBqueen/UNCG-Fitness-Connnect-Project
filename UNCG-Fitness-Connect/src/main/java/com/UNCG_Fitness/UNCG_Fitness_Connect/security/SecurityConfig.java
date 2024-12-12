@@ -26,10 +26,9 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authorize) -> authorize
                         .dispatcherTypeMatchers(DispatcherType.FORWARD, DispatcherType.ERROR).permitAll()
-                        .requestMatchers("/static/**", "/Styles/**", "/Class/**", "/User/**").permitAll()
-                        .requestMatchers("/users/**").permitAll()// Allow access to static files
+                        .requestMatchers("/static/**", "/Styles/**", "/Class/**", "/User/**", "/Subs/**").permitAll()
+                        .requestMatchers("/users/**", "subs/**").permitAll()// Allow access to static files
                         .requestMatchers("/INSTRUCTOR/**").hasAuthority("INSTRUCTOR")
-
                         .requestMatchers("/STUDENT/**").hasAuthority("STUDENT")
                         .anyRequest().authenticated()
                 )

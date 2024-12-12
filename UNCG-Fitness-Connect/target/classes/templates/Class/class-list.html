@@ -79,7 +79,7 @@
     <!-- Middle Section -->
     <div class="column middle">
 
-        <h1> Welcome to Spartan Motion INSTRUCTOR</h1>
+        <h1> Welcome to Spartan Motion!</h1>
         <div id="text">
             <p>Here you can view and create classes for UNCG students. </p>
             <p>Click on the "Classes" tab to view all the classes available for students to sign up for.</p>
@@ -104,6 +104,9 @@
             <p class="instructor" th:text="'Instructor: ' + ${class.instructorName}"></p>
             <a class="btn-signup" th:href="@{/classes/{classId}(classId=${class.classId})}">View More</a>
             <a class="btn-signup" th:href="@{/subs/add/{classId}(classId=${class.classId})}">Sign Up</a>
+<!--            <form th:action="@{/subs/add/{classId}(classId=${class.classId})}" method="post" style="display: inline;">-->
+<!--                <button type="submit" class="btn-signup">Sign Up</button>-->
+<!--            </form>-->
         </div>
 
     </div>
