@@ -42,91 +42,82 @@
         <div class="column middle">
             <div id = "text">
                 <h1> Manage Reviews</h1>
-                <p> Here the Sys Admin will have access to the review page and its functionalities.</p>
+                <p> Here the Admin will have access to the review page and its functionalities.</p>
             </div>
         </div> 
-    </div>   
-
-    
-<!-- CONTENT 
-    <div class="reviews">
-        <p><span>Reviews:</span></p>
-        <p><span class="rating">★★★★★</span> - "Loved the intensity!"</p>
-        <p><span class="rating">★★★★☆</span> - "Would recommend to a friend."</p> 
-        <p class = "flagged"><span class="rating">★★☆☆☆</span> - "Too crowded and noisy!" <span class="flag">[Flagged]</span></p>
     </div>
 
-   
-       <div class="column-bottom">
-       <img src="/SysAdmin/Sys_Admin_Images/Fitness_girl_image.jpg" alt="running" style="width:100%">
-      </div> 
+    <!-- Main Content -->
+    <div class="column middle">
+        <!-- Add Review Section -->
+        <div th:if="${action == 'add'}">
+            <div class="form-container">
+                <a id="cancel_button" href="/reviews/all">X</a>
+                <h1>Add a New Review</h1>
+                <form action="/reviews/add" method="POST">
+                    <div class="form-group">
+                        <label for="classId">Class ID:</label>
+                        <input type="text" id="classId" name="classId" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="userId">User ID:</label>
+                        <input type="text" id="userId" name="userId" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="rating">Rating (1-5):</label>
+                        <input type="number" id="rating" name="rating" min="1" max="5" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="details">Details:</label>
+                        <textarea id="details" name="details" rows="4" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit">Submit Review</button>
+                    </div>
+                </form>
+            </div>
+        </div>
 
-    -->
-      
-    
-<!-- Footer --> 
+        <!-- Review Details Section -->
+        <div th:if="${action == 'details'}">
+            <div>
+                <p><strong>Review ID:</strong> <span th:text="${review.reviewId}"></span></p>
+                <p><strong>Class ID:</strong> <span th:text="${review.classId.className}"></span></p>
+                <p><strong>User ID:</strong> <span th:text="${review.userId}"></span></p>
+                <p><strong>Rating:</strong> <span th:text="${review.rating}"></span></p>
+                <p><strong>Details:</strong> <span th:text="${review.details}"></span></p>
+                <p><strong>Created At:</strong> <span th:text="${review.createdAt}"></span></p>
+                <p><strong>Updated At:</strong> <span th:text="${review.updatedAt}"></span></p>
+                <p><strong>Status:</strong> <span th:text="${review.status}"></span></p>
+            </div>
+            <a href="/reviews/all">Back to All Reviews</a>
+        </div>
+
+        <!-- Update Review Status Section -->
+        <div th:if="${action == 'update'}">
+            <form th:action="@{'/reviews/update/status/' + ${review.reviewId}}" method="post">
+                <div class="form-group">
+                    <p><strong>Review ID:</strong> <span th:text="${review.reviewId}"></span></p>
+                    <p><strong>Current Status:</strong> <span th:text="${review.status}"></span></p>
+                    <label for="status">New Status:</label>
+                    <input type="text" id="status" name="status" required>
+                </div>
+                <button type="submit">Update</button>
+            </form>
+        </div>
+    </div>
+
 <!-- Footer -->
 <footer>
     <div th:replace="~{/fragments/_footer :: footer}"></div>
 </footer>
 
-
-</body>
 <style>
     .column_middle{
         width: 100%;
-      margin-right: 5%;
+        margin-right: 5%;
     }
 </style>
-</html>
 
-<!-- Footer 
-   <footer> 
-    <div class="footer">
-        <div class="footer-content">
-            <div class="footer-section about">
-                <h3>About Us</h3>
-                <p>We are dedicated to providing the best services and products for our customers. Stay connected for updates and special offers.</p>
-            </div>
-            
-            <div class="footer-section links">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-section contact">
-                <h3>Contact Us</h3>
-                <p><i class="fas fa-phone"></i> +1 (234) 567-890</p>
-                <p><i class="fas fa-envelope"></i> info@example.com</p>
-                <p><i class="fas fa-map-marker-alt"></i> 1234 Street Name, City, Country</p>
-            </div>
-            
-            <div class="footer-section social">
-                <h3>Follow Us</h3>
-                <a href="#"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-            </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <p>&copy; 2024 Your Website. All Rights Reserved.</p>
-        </div>
-    </div>
-   </footer> 
-   -->
-   
-
-</body>
-
-
-</html>
 </body>
 </html>

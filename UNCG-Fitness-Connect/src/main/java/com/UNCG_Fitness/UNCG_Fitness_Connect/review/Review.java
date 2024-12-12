@@ -1,10 +1,10 @@
 package com.UNCG_Fitness.UNCG_Fitness_Connect.review;
 
+
 import com.UNCG_Fitness.UNCG_Fitness_Connect.fitnessClass.Class;
 import java.util.Date;
 
 import jakarta.persistence.*;
-
 
 @Entity
 @Table(name = "review")
