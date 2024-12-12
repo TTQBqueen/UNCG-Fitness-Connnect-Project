@@ -14,9 +14,15 @@ The motivation for this app is to encourage UNCG students to improve their healt
 The UNCG Group Fitness App will help to solve the issue of availability issues. Therefore, individuals will now have the opportunity to schedule a fitness course based on their availability, intensity of the fitness course, and comfortability with the instructor.
 ﻿
 ---
-## User
+## Directions
 
 > A user is a person who signs up for the site and can enroll in classes. Each user can have one of three roles: Customer, Instructor, or Admin.
+- Open XAMPP Control Panel Dashboard
+- Start Apache
+- Start MySQL
+- Click on MySQL admin, to open the database dashboard on your browser.
+- create a database with the name "uncg-fitness-connect"
+- import "uncg-fitness-connect.sql"
 
 
 
