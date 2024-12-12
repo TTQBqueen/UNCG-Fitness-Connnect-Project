@@ -24,7 +24,6 @@ public class UserController {
     public String showSignupForm() {
         return "signup.html";
     }
-
     @PostMapping("/new")
     public String addNewUser(User user) {
         userService.addNewUser(user);
