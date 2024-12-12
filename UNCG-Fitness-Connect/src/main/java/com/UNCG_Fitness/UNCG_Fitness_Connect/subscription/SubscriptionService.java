@@ -51,4 +51,7 @@ public class SubscriptionService {
         subscribedRepository.deleteById(subs_id);
     }
 
+    public Subscription getOneSubscription(int classId, int userId) {
+        return subscribedRepository.getOneSubscription(classId, userId);
+    }
 }
