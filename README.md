@@ -16,7 +16,7 @@ The UNCG Group Fitness App will help to solve the issue of availability issues. 
 ---
 
 
-![Alt text](images/example.png)
+![Alt text](FitnessULMFinal.png)
 
 ---
 > Clone the repo and make sure you have a database named UNCG-Fitness-Connect and upload the UNCG-Connect-SQL file to the database.
