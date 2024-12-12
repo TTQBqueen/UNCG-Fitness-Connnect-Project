@@ -32,6 +32,7 @@
     <!-- Logo Section -->
     <h2 class="logo">Spartan Motion</h2>
 
+
     <!-- Search Section -->
     <div class="search-container">
         <div class="search-item">
@@ -81,6 +82,7 @@
 
         <h1> Welcome to Spartan Motion INSTRUCTOR</h1>
         <div id="text">
+
             <p>Here you can view and create classes for UNCG students. </p>
             <p>Click on the "Classes" tab to view all the classes available for students to sign up for.</p>
             <p>Click on the "Create" tab to create a new class.</p>
@@ -92,6 +94,7 @@
 <!-- CONTENT -->
 <!--Bottom  Section  -->
 <div class="container">
+
     <div th:each="class: ${classList}" class="class-card">
 
         <img th:src="@{${class.imagePath}}" alt="${class.title}" class="class-img">
@@ -103,8 +106,7 @@
             <p th:text="'Level: ' + ${class.level}"></p>
             <p class="instructor" th:text="'Instructor: ' + ${class.instructorName}"></p>
             <a class="btn-signup" th:href="@{/classes/{classId}(classId=${class.classId})}">View More</a>
-
-
+            <a class="btn-signup" >SignUp</a>
         </div>
 
 

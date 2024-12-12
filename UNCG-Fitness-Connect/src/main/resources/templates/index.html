@@ -48,6 +48,11 @@ xmlns:form="http://www.w3.org/1999/xhtml">
     <div class="column_middle">
         <div id = "text">
 
+            <h1>Motivational Quote</h1>
+            <p th:text="${quote}">Loading motivational quote...</p>
+            <a th:href="@{/motivational-quotes}">Get Another Quote</a>
+
+
             <h1> Welcome to Spartan Motion</h1>
             <p> Spartan Motion is a platform that allows users to track their physical activity and set goals for themselves. Users can track their progress and see how they are improving over time. </p>
             <p> Users can also connect with other users and see how they are doing. </p>

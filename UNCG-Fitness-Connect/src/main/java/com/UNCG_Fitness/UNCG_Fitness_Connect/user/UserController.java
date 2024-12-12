@@ -3,6 +3,7 @@ package com.UNCG_Fitness.UNCG_Fitness_Connect.user;
 import com.UNCG_Fitness.UNCG_Fitness_Connect.fitnessClass.Class;
 import com.UNCG_Fitness.UNCG_Fitness_Connect.fitnessClass.ClassService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -98,4 +99,13 @@ public class UserController {
         model.addAttribute("user", userService.getUserById(userId));
         return "/User/user-details";
     }
+
+    @PostMapping("/profile/{userId}")
+    public String updateProfile(User user) {
+        String name = SecurityContextHolder.getContext().getAuthentication().getName();
+        userService.saveUser(user);
+        return "redirect:/profile/" + user.getId();
+    }
+
+
 }

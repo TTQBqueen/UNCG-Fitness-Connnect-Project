@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Motivational Quotes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-color: #f9f9f9;
+        }
+        .quote-container {
+            display: inline-block;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+        }
+        .quote-container p {
+            font-size: 1.5rem;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+<div class="quote-container">
+    <h1>Motivational Quote</h1>
+    <p th:text="${quote}">Loading motivational quote...</p>
+    <a th:href="@{/motivational-quotes}">Get Another Quote</a>
+</div>
+</body>
+</html>
