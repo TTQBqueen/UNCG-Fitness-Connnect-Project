@@ -103,8 +103,7 @@
             <p th:text="'Level: ' + ${class.level}"></p>
             <p class="instructor" th:text="'Instructor: ' + ${class.instructorName}"></p>
             <a class="btn-signup" th:href="@{/classes/{classId}(classId=${class.classId})}">View More</a>
-
-
+            <button type="submit" th:action="@{/subs/add/{classId}(classId=${class.classId})}" class="btn btn-outline-primary">Sign Up</button>
         </div>
 
 
