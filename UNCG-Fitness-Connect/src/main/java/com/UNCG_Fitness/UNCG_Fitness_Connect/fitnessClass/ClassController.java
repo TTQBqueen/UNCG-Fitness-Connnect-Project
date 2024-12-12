@@ -61,14 +61,20 @@ public class ClassController {
 
 
 
-    //  Look up User class based on UserId
-    @GetMapping("/INSTRUCTOR/{creatorId}")
-    public String getClassesByCreatorId(@PathVariable int creatorId, Model model) {
+    @GetMapping("/INSTRUCTOR/")
+    public String getClassesByLoggedInUser(Model model) {
+        // Get the currently logged-in user's ID
+        String name = SecurityContextHolder.getContext().getAuthentication().getName();
+        int currentUserId = userService.getUserByUserName(name).getId();
 
+        // Fetch all classes created by the logged-in user
+        List<Class> fitnessClasses = classService.getClassesByCreatorId(currentUserId);
 
-        model.addAttribute("classList", classService.getClassesByCreatorId(creatorId));
-        model.addAttribute("title", "Your Classes: " + creatorId);
-        model.addAttribute("creatorId",  creatorId);
+        // Add attributes to the model
+        model.addAttribute("isOwner", true); // Always true for the logged-in user
+        model.addAttribute("classList", fitnessClasses);
+        model.addAttribute("title", "Your Classes");
+        model.addAttribute("creatorId", currentUserId);
 
         return "/Class/class-list";
     }
@@ -113,10 +119,7 @@ public class ClassController {
     }
 
 
-
-
 //Update
-
 
     @GetMapping("/update/{classId}")
     public String showUpdateForm(@PathVariable int classId, Model model) {
@@ -148,7 +151,6 @@ public class ClassController {
 
 
 
-    //    Extra methods
 //    getting all users that have the instructor role
 
     @GetMapping("/instructors")
@@ -160,8 +162,20 @@ public class ClassController {
 
 
     @GetMapping("/INSTRUCTOR/fitnessClass/createForm")
-    public String showCreateClassForm() {
+    public String showCreateClassForm(Model model) {
+
+        // Get the currently logged-in user's name
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        User currentUser = userService.getUserByUserName(username);
+
+        // Add an empty Class object and the current user to the model
+        model.addAttribute("class", new Class());
+        model.addAttribute("instructorName", currentUser.getUserName());
+
         return "Class/create-class";
+
+
+
     }
 
     @PostMapping("/INSTRUCTOR/fitnessClass/new")
@@ -171,38 +185,5 @@ public class ClassController {
         classService.saveClass(fitnessClass);
         return "redirect:/classes/all";
     }
-
-
-
-
-//    @GetMapping("/createForm/{creatorId}")
-//    public String showCreateClassForm(@PathVariable int creatorId, Model model) {
-//        // Fetch the user to verify the userId is valid
-//        User creator = userService.getUserById(creatorId);
-//        if (creator == null) {
-//            throw new IllegalArgumentException("Invalid user ID: " + creatorId);
-//        }
-//
-//        // Pass the userId and an empty class object to the model
-//        model.addAttribute("creator", creatorId);
-//        model.addAttribute("class", new Class());
-//        return "Class/create-class";
-//    }
-
-
-//    @PostMapping("/createForm/{creatorId}")
-//    public String createClass(@ModelAttribute Class fitnessClass, @PathVariable int creatorId) {
-//        // Fetch the user to associate with the class
-//        User creator = userService.getUserById(creatorId);
-//        if (creator == null) {
-//            throw new IllegalArgumentException("Invalid user ID: " + creatorId);
-//        }
-//        //  the user with the class
-//        fitnessClass.setCreator(creator);
-//        // Save the class
-//        classService.saveClass(fitnessClass);
-//        // Redirect to the instructor's class list
-//        return "redirect:/classes/INSTRUCTOR/" + creatorId;
-//    }
 
 }

@@ -17,6 +17,6 @@ public interface ReviewRepository extends JpaRepository<Review, Integer> {
     @Query(value = "select * from review where class_id = :classId", nativeQuery = true)
     public List<Review> getReviewByClassId(@Param("classId") int classId);
 
-
+    List<Review> findByStatus(boolean status);
 
 }

@@ -68,6 +68,9 @@ public class ReviewService {
         return reviewRepository.save(review);
     }
 
+    public List<Review> getUnflaggedReviews() {
+        return reviewRepository.findByStatus(false);
+    }
 
 
 }

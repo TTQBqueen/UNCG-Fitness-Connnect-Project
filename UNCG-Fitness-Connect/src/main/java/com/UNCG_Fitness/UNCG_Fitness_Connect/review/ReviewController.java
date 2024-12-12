@@ -5,6 +5,7 @@ import com.UNCG_Fitness.UNCG_Fitness_Connect.user.User;
 import com.UNCG_Fitness.UNCG_Fitness_Connect.user.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,31 +44,22 @@ public class ReviewController {
         //return reviewService.getReviewById(reviewId);
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<String> addReview(
-            @RequestParam int classId,
-            @RequestParam int userId,
-            @RequestParam int rating,
-            @RequestParam String details
-    ) {
-        try {
-            // Call the service to create a new review
-            Review review = reviewService.createReview(classId, userId, rating, details);
-            return ResponseEntity.ok("Review added successfully with ID: " + review.getReviewId());
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("Error creating review: " + e.getMessage());
-        }
-    }
+    @PostMapping("/STUDENT/add")
+    public String createReview(@ModelAttribute Review review, @RequestParam int classId) {
+        // Fetch the currently logged-in user's username
+        String name = SecurityContextHolder.getContext().getAuthentication().getName();
+        // Set the user (creator) of the review
+        User user = userService.getUserByUserName(name);
+        review.setUserId(user);
+        // Fetch the associated class and set it in the review
+        Class fitnessClass = classService.getClassById(classId);
+        review.setClassId(fitnessClass);
 
+        // Save the review
+        reviewService.createReview(review);
 
-
-    //This will update the status of a review
-    @PutMapping("/update/status/{reviewId}")
-    public String updateReviewStatus(@PathVariable int reviewId, @RequestBody boolean status, Model model){
-        model.addAttribute("review", reviewService.getReviewById(reviewId));
-        return "review-update";
-        //return re viewService.updateReviewStatus(reviewId, status);
+        // Redirect to the class details or all classes page
+        return "redirect:/classes/" + classId;
     }
 
     // this will delete the review by its name/ID
@@ -90,5 +82,25 @@ public class ReviewController {
         return "redirect:/classes/" + review.getClassId().getClassId();
     }
 
+    //This will update the status of a review
+    @PostMapping("/update/status/{reviewId}")
+    public String updateReviewStatus(@PathVariable int reviewId, @RequestParam boolean status) {
+        Review review = reviewRepository.findById(reviewId)
+                .orElseThrow(() -> new IllegalArgumentException("Review not found"));
+
+        // Update the status field
+        review.setStatus(status);
+        reviewRepository.save(review);
+
+        // Redirect back to the class details page
+        return "redirect:/classes/" + review.getClassId().getClassId();
+    }
+
+    @GetMapping("/reviews/unflagged")
+    public String getUnflaggedReviews(Model model) {
+        List<Review> unflaggedReviews = reviewService.getUnflaggedReviews();
+        model.addAttribute("reviews", unflaggedReviews);
+        return "reviews/list";
+    }
 
 }
