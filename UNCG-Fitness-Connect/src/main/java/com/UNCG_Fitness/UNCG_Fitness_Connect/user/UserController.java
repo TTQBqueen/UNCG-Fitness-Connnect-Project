@@ -42,7 +42,7 @@ public class UserController {
      *
      * @return a list of User objects.
      */
-    @GetMapping("admin/users/all")
+    @GetMapping("ADMIN/users/all")
     public String getAllUsers(Model model) {
         model.addAttribute("userList", userService.getAllUsers());
         model.addAttribute("title", "All Users");
@@ -58,7 +58,7 @@ public class UserController {
      * @param model the Model object to pass data to the view.
      * @return the view displaying the user's details.
      */
-    @GetMapping("/admin/users/{userId}")
+    @GetMapping("/ADMIN/users/{userId}")
     public String getUser(@PathVariable int userId, Model model) {
         User user = userService.getUserById(userId);
         model.addAttribute("user", user);
@@ -103,7 +103,7 @@ public class UserController {
      * @param model the Model object to pass data to the view.
      * @return the view displaying the updated user's details.
      */
-    @PostMapping("admin/update/{userId}")
+    @PostMapping("ADMIN/update/{userId}")
     public String updateUser(@PathVariable int userId, @ModelAttribute User user, Model model) {
         userService.updateUser(userId, user);
         model.addAttribute("user", userService.getUserById(userId));

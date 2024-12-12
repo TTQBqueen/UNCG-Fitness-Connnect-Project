@@ -20,7 +20,7 @@ public class CustomAuthenticationSuccessHandler implements org.springframework.s
         String redirectURL = request.getContextPath();
 
         if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ADMIN"))) {
-            redirectURL = "/users/all";
+            redirectURL = "/ADMIN/users/all";
         } else if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("INSTRUCTOR"))) {
             redirectURL = "/classes/all";
         } else {
