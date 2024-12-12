@@ -21,7 +21,7 @@ public class SubscriptionController {
     @Autowired
     private ClassService classService;
 
-    @PostMapping("/subs/add/{classId}")
+    @GetMapping("/subs/add/{classId}")
     public String createNewSubscription(@PathVariable int classId) {
         String name = SecurityContextHolder.getContext().getAuthentication().getName();
         int currentUserId = userService.getUserByUserName(name).getId();
